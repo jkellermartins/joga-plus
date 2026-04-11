@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Session | Joga+</title>
+  <meta name="description" content="Book a training session with Joga+. Soccer and Futvolley. Elite sports development in the DMV.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9917;</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Program Selector ── */
+    .program-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .program-option {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .program-option input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .program-option-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.75rem 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--black);
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+
+    .program-option-label:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .program-option input:checked + .program-option-label {
+      border-color: var(--accent);
+      background: rgba(200, 255, 0, 0.04);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .program-option.fv-option input:checked + .program-option-label {
+      border-color: var(--fv);
+      background: rgba(0, 229, 255, 0.04);
+      box-shadow: 0 0 0 1px var(--fv);
+    }
+
+    .program-option-tag {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-soccer {
+      color: var(--accent);
+      border: 1px solid rgba(200, 255, 0, 0.25);
+    }
+
+    .tag-fv {
+      color: var(--fv);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+    }
+
+    .tag-open {
+      color: var(--gray-300);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .program-option-label h4 {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.375rem;
+    }
+
+    .program-option-label p {
+      font-size: 0.75rem;
+      color: var(--gray-700);
+      line-height: 1.4;
+    }
+
+    /* Conditional sections */
+    .conditional-section {
+      display: none;
+    }
+
+    .conditional-section.active {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .program-selector {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Joga<span>+</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#soccer">Soccer</a></li>
+        <li><a href="index.html#futvolley">Futvolley</a></li>
+        <li><a href="index.html#coaches">Coaches</a></li>
+        <li><a href="index.html#testimonials">Athletes</a></li>
+      </ul>
+      <a href="tel:+12025551234" class="nav-contact">(202) 555-1234</a>
+      <a href="booking.html" class="btn btn-primary nav-cta">Book a Session</a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#soccer" class="mobile-nav-link">Soccer</a>
+    <a href="index.html#futvolley" class="mobile-nav-link">Futvolley</a>
+    <a href="index.html#coaches" class="mobile-nav-link">Coaches</a>
+    <a href="index.html#testimonials" class="mobile-nav-link">Athletes</a>
+    <a href="booking.html" class="btn btn-primary">Book a Session</a>
+    <a href="tel:+12025551234" class="mobile-phone">(202) 555-1234</a>
+  </div>
+
+  <!-- Booking -->
+  <section class="booking-section">
+    <div class="container">
+
+      <div class="booking-header fade-up">
+        <span class="section-label">Start Your Journey</span>
+        <h2 class="section-title">Book Your<br><span class="accent">Session.</span></h2>
+        <p class="section-subtitle" style="margin: 1rem auto 0;">
+          Choose your program, tell us about yourself, and we'll match you with
+          the right coach and schedule. First session is on us.
+        </p>
+      </div>
+
+      <form class="booking-form fade-up" action="https://formsubmit.co/skysightvisual@gmail.com" method="POST">
+
+        <!-- FormSubmit Config -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Joga+ Application">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="thankyou.html">
+
+        <!-- Step 1: Program Selection -->
+        <div class="form-section-title">Choose Your Program</div>
+
+        <div class="program-selector">
+          <label class="program-option">
+            <input type="radio" name="program" value="Soccer Private Training" required>
+            <div class="program-option-label">
+              <span class="program-option-tag tag-soccer">Soccer</span>
+              <h4>Private Training</h4>
+              <p>1-on-1 sessions tailored to your position and goals</p>
+            </div>
+          </label>
+
+          <label class="program-option fv-option">
+            <input type="radio" name="program" value="Futvolley Private Training">
+            <div class="program-option-label">
+              <span class="program-option-tag tag-fv">Futvolley</span>
+              <h4>Private Training</h4>
+              <p>Personalized technique and skill development on the sand</p>
+            </div>
+          </label>
+
+          <label class="program-option fv-option">
+            <input type="radio" name="program" value="Futvolley Group Session">
+            <div class="program-option-label">
+              <span class="program-option-tag tag-fv">Futvolley</span>
+              <h4>Group Session</h4>
+              <p>Train with others, compete, and build your game together</p>
+            </div>
+          </label>
+
+          <label class="program-option fv-option">
+            <input type="radio" name="program" value="Open Play / Sand Sessions">
+            <div class="program-option-label">
+              <span class="program-option-tag tag-open">Open</span>
+              <h4>Open Play / Sand</h4>
+              <p>Casual sessions for all levels &mdash; just show up and play</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- Step 2: Contact Info -->
+        <div class="form-section-title">Contact Information</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="full_name">Full Name (Parent or Athlete)</label>
+            <input type="text" id="full_name" name="full_name" required>
+          </div>
+          <div class="form-group">
+            <label for="athlete_name">Athlete Name</label>
+            <input type="text" id="athlete_name" name="athlete_name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+        </div>
+
+        <!-- Step 3: Athlete Profile -->
+        <div class="form-section-title">Athlete Profile</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" min="4" max="40" required>
+          </div>
+          <div class="form-group">
+            <label for="level">Experience Level</label>
+            <select id="level" name="level" required>
+              <option value="">Select level</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Soccer-specific fields -->
+        <div class="conditional-section" id="soccerFields">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="position">Position</label>
+              <select id="position" name="position">
+                <option value="">Select position</option>
+                <option>Defender</option>
+                <option>Midfielder</option>
+                <option>Forward</option>
+                <option>Goalkeeper</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="team">Current Team (if any)</label>
+              <input type="text" id="team" name="team">
+            </div>
+          </div>
+        </div>
+
+        <!-- Futvolley-specific fields -->
+        <div class="conditional-section" id="futvolleyFields">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fv_experience">Have you played futvolley before?</label>
+              <select id="fv_experience" name="futvolley_experience">
+                <option value="">Select</option>
+                <option>Never &mdash; first time</option>
+                <option>A few times casually</option>
+                <option>Regularly (6+ months)</option>
+                <option>Competitively</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fv_background">Background in related sports?</label>
+              <select id="fv_background" name="sports_background">
+                <option value="">Select</option>
+                <option>Soccer</option>
+                <option>Volleyball / Beach Volleyball</option>
+                <option>Both Soccer and Volleyball</option>
+                <option>None of the above</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fv_goal">What's your main futvolley goal?</label>
+              <select id="fv_goal" name="futvolley_goal">
+                <option value="">Select goal</option>
+                <option>Learn the basics and have fun</option>
+                <option>Improve technique and consistency</option>
+                <option>Train for competition</option>
+                <option>Fitness and cross-training</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fv_session_type">Preferred session type</label>
+              <select id="fv_session_type" name="futvolley_session_type">
+                <option value="">Select</option>
+                <option>Private (1-on-1)</option>
+                <option>Small Group (3-5 people)</option>
+                <option>Open Play</option>
+                <option>No preference</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Goals & Notes -->
+        <div class="form-section-title">Goals & Availability</div>
+
+        <div class="form-row" id="soccerGoalRow">
+          <div class="form-group">
+            <label for="goal">Main Goal</label>
+            <select id="goal" name="goal">
+              <option value="">Select goal</option>
+              <option>Improve Skills</option>
+              <option>Make Team</option>
+              <option>College Soccer</option>
+              <option>Professional Path</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="type">Training Type</label>
+            <select id="type" name="type">
+              <option value="">Select</option>
+              <option>Private</option>
+              <option>Group</option>
+              <option>Both</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Anything else we should know?</label>
+          <textarea id="notes" name="notes" placeholder="Injuries, preferred days/times, specific areas to improve..."></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Submit & Book Session &#8594;</button>
+        </div>
+
+        <p class="form-note">Only accepting 8 new athletes this month &mdash; DMV area only</p>
+
+      </form>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <span>&copy; 2026 Joga+. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+
+    // Mobile menu
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      mobileMenu.classList.toggle("open");
+      document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menuToggle.classList.remove("active");
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+
+    // Program selection logic
+    const programInputs = document.querySelectorAll('input[name="program"]');
+    const soccerFields = document.getElementById("soccerFields");
+    const futvolleyFields = document.getElementById("futvolleyFields");
+    const soccerGoalRow = document.getElementById("soccerGoalRow");
+    const submitBtn = document.getElementById("submitBtn");
+    const subjectField = document.querySelector('input[name="_subject"]');
+
+    function isFutvolley(value) {
+      return value.includes("Futvolley") || value.includes("Open Play");
+    }
+
+    programInputs.forEach((input) => {
+      input.addEventListener("change", (e) => {
+        const val = e.target.value;
+        const fv = isFutvolley(val);
+
+        // Show/hide conditional sections
+        soccerFields.classList.toggle("active", !fv);
+        futvolleyFields.classList.toggle("active", fv);
+        soccerGoalRow.style.display = fv ? "none" : "";
+
+        // Update email subject
+        if (val.includes("Soccer")) {
+          subjectField.value = "New Joga+ Soccer Application";
+        } else if (val.includes("Futvolley")) {
+          subjectField.value = "New Joga+ Futvolley Application";
+        } else {
+          subjectField.value = "New Joga+ Open Play Application";
+        }
+
+        // Update submit button text
+        if (fv) {
+          submitBtn.innerHTML = "Submit & Book Futvolley Session &#8594;";
+        } else {
+          submitBtn.innerHTML = "Submit & Book Soccer Session &#8594;";
+        }
+      });
+    });
+
+    // Pre-select from URL param (e.g., booking.html?sport=futvolley)
+    const params = new URLSearchParams(window.location.search);
+    const sportParam = params.get("sport");
+    if (sportParam) {
+      let target = null;
+      if (sportParam === "soccer") {
+        target = document.querySelector('input[value="Soccer Private Training"]');
+      } else if (sportParam === "futvolley") {
+        target = document.querySelector('input[value="Futvolley Private Training"]');
+      }
+      if (target) {
+        target.checked = true;
+        target.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+    }
+  </script>
+
+</body>
+</html>
