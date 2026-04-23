@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve a Kids Pickup | Joga+</title>
+  <meta name="description" content="Reserve your kid's spot at the next Joga+ pickup — organized soccer and futvolley for youth athletes across the DMV.">
+  <link rel="canonical" href="https://jogaplus.com/pickup-booking-kids.html">
+  <meta property="og:title" content="Reserve a Kids Pickup | Joga+">
+  <meta property="og:description" content="Reserve your kid's spot at the next Joga+ pickup — soccer and futvolley for youth athletes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jogaplus.com/pickup-booking-kids.html">
+  <meta property="og:image" content="https://jogaplus.com/images/og-joga-plus.jpg">
+  <meta name="robots" content="noindex,follow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9917;</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ════ Navigation ════ -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Joga<span>+</span></a>
+      <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="soccer.html" class="nav-dropdown-trigger">Methods <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="soccer.html">Soccer</a>
+            <a href="footvolley.html">Footvolley</a>
+            <a href="tennis.html">Tennis</a>
+          </div>
+        </li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="pickups.html">Pickups</a></li>
+        <!-- Coaches nav hidden — preserved for future reuse. Do not delete.
+        <li><a href="coaches.html">Coaches</a></li>
+        -->
+        <li><a href="results.html">Results</a></li>
+      </ul>
+      <a href="tel:+15745361983" class="nav-contact">(574) 536-1983</a>
+      <a href="booking.html" class="btn btn-primary nav-cta">Start Training</a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ════ Mobile Menu ════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="mobile-nav-label">Methods</span>
+    <a href="soccer.html" class="mobile-nav-link mobile-nav-sub">Soccer</a>
+    <a href="footvolley.html" class="mobile-nav-link mobile-nav-sub">Footvolley</a>
+    <a href="tennis.html" class="mobile-nav-link mobile-nav-sub">Tennis</a>
+    <a href="index.html#how-it-works" class="mobile-nav-link">How It Works</a>
+    <a href="pickups.html" class="mobile-nav-link">Pickups</a>
+    <!-- Coaches mobile nav hidden — preserved for future reuse.
+    <a href="coaches.html" class="mobile-nav-link">Coaches</a>
+    -->
+    <a href="results.html" class="mobile-nav-link">Results</a>
+    <a href="booking.html" class="btn btn-primary">Start Training</a>
+    <a href="tel:+15745361983" class="mobile-phone">(574) 536-1983</a>
+  </div>
+
+  <!-- ════ Pickup Booking Shell ════ -->
+  <section class="pb-shell">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-label">Kids Pickup Booking</span>
+        <h1 class="section-title">Reserve Your Kid&rsquo;s <span class="accent">Spot.</span></h1>
+      </div>
+
+      <!-- Progress -->
+      <div class="pb-progress" id="pbProgress" role="list">
+        <div class="pb-step active" data-step="1" role="listitem"><div class="pb-step-dot"><span class="pb-step-num">1</span></div><div class="pb-step-label">Details</div></div>
+        <div class="pb-step" data-step="2" role="listitem"><div class="pb-step-dot"><span class="pb-step-num">2</span></div><div class="pb-step-label">Pick a Session</div></div>
+        <div class="pb-step" data-step="3" role="listitem"><div class="pb-step-dot"><span class="pb-step-num">3</span></div><div class="pb-step-label">About the Player</div></div>
+        <div class="pb-step" data-step="4" role="listitem"><div class="pb-step-dot"><span class="pb-step-num">4</span></div><div class="pb-step-label">Confirm</div></div>
+      </div>
+
+      <form id="pbForm" action="https://formsubmit.co/skysightvisual@gmail.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New Kids Pickup Reservation">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="flow" value="kids">
+        <input type="hidden" name="sessionId" id="fSessionId">
+        <input type="hidden" name="sessionSport" id="fSessionSport">
+        <input type="hidden" name="sessionLocation" id="fSessionLocation">
+        <input type="hidden" name="sessionDate" id="fSessionDate">
+        <input type="hidden" name="sessionTime" id="fSessionTime">
+        <input type="hidden" name="sessionPrice" id="fSessionPrice">
+
+        <!-- ── Step 1: Details ── -->
+        <div class="pb-panel active" data-panel="1">
+          <div class="pb-panel-header">
+            <h2>Kids Pickups at Joga+</h2>
+            <p>Structured, coach-run pickups built for young athletes. Balanced teams, real reps, and more time on the ball &mdash; every session.</p>
+          </div>
+
+          <div class="pb-detail-grid">
+            <div class="pb-detail-card">
+              <h4><span class="pb-sport-tag">Soccer</span> Kids Soccer Pickup</h4>
+              <ul>
+                <li>Organized pickup format</li>
+                <li>Games are 5 minutes or 2 goals</li>
+                <li>Winners stay on, losers rotate</li>
+                <li>Up to 40 players per session</li>
+                <li>Matched by age and level</li>
+              </ul>
+            </div>
+            <div class="pb-detail-card">
+              <h4><span class="pb-sport-tag fv">Futvolley</span> Kids Futvolley Pickup</h4>
+              <ul>
+                <li>Organized duo matches</li>
+                <li>Games up to 10 points</li>
+                <li>Usually more than one court running</li>
+                <li>Up to 14 players per session</li>
+                <li>Every kid gets real reps</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pb-detail-note">
+            <strong style="color: var(--white);">Pricing:</strong> All kids pickups run <span class="accent">$10–$15 per session</span>, depending on format and location. Drop-in only &mdash; no contracts.
+          </div>
+
+          <div class="pb-nav">
+            <span></span>
+            <button type="button" class="btn btn-primary pb-nav-right" data-next="2">Continue &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ── Step 2: Pick a session ── -->
+        <div class="pb-panel" data-panel="2">
+          <div class="pb-panel-header">
+            <h2>Pick Your Session</h2>
+            <p>Tap the session that fits your family&rsquo;s schedule. You can change your pick before confirming.</p>
+          </div>
+
+          <div class="pb-sessions" id="pbSessions"><!-- sessions injected by JS --></div>
+
+          <div class="pb-nav">
+            <button type="button" class="btn btn-outline" data-prev="1">&larr; Back</button>
+            <button type="button" class="btn btn-primary pb-nav-right" data-next="3" id="pbStep2Continue" disabled style="opacity: 0.4; pointer-events: none;">Continue &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ── Step 3: Tell us about the player ── -->
+        <div class="pb-panel" data-panel="3">
+          <div class="pb-panel-header">
+            <h2>Tell Us About the Player</h2>
+            <p>Parent/guardian first, then a quick profile for your athlete. Takes under a minute.</p>
+          </div>
+
+          <div class="pb-form">
+            <div class="pb-summary-chip" id="pbSummary3">Selected: <strong id="pbSummaryText3">&mdash;</strong></div>
+
+            <div class="pb-form-section">
+              <div class="pb-form-section-title">Parent / Guardian</div>
+              <div class="pb-form-row">
+                <div class="pb-form-group">
+                  <label for="parentFirst">First name</label>
+                  <input type="text" id="parentFirst" name="parentFirst" required>
+                </div>
+                <div class="pb-form-group">
+                  <label for="parentLast">Last name</label>
+                  <input type="text" id="parentLast" name="parentLast" required>
+                </div>
+              </div>
+              <div class="pb-form-row">
+                <div class="pb-form-group">
+                  <label for="parentEmail">Email</label>
+                  <input type="email" id="parentEmail" name="parentEmail" required>
+                </div>
+                <div class="pb-form-group">
+                  <label for="parentPhone">Phone</label>
+                  <input type="tel" id="parentPhone" name="parentPhone" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="pb-form-section">
+              <div class="pb-form-section-title">Athlete</div>
+              <div class="pb-form-row">
+                <div class="pb-form-group">
+                  <label for="childFirst">Child&rsquo;s first name</label>
+                  <input type="text" id="childFirst" name="childFirst" required>
+                </div>
+                <div class="pb-form-group">
+                  <label for="childLast">Child&rsquo;s last name</label>
+                  <input type="text" id="childLast" name="childLast" required>
+                </div>
+              </div>
+              <div class="pb-form-row">
+                <div class="pb-form-group">
+                  <label for="childAge">Child&rsquo;s age</label>
+                  <input type="number" id="childAge" name="childAge" min="4" max="17" required>
+                </div>
+                <div class="pb-form-group">
+                  <label>Sport selected</label>
+                  <input type="text" id="sportSelected" name="sportSelected" readonly style="background: var(--dark); color: var(--gray-300);">
+                </div>
+              </div>
+
+              <div class="pb-form-group">
+                <label>Child&rsquo;s skill level</label>
+                <div class="pb-level-group">
+                  <div class="pb-level-option">
+                    <input type="radio" id="lvlBeg" name="level" value="Beginner" required>
+                    <label for="lvlBeg">Beginner</label>
+                  </div>
+                  <div class="pb-level-option">
+                    <input type="radio" id="lvlInt" name="level" value="Intermediate">
+                    <label for="lvlInt">Intermediate</label>
+                  </div>
+                  <div class="pb-level-option">
+                    <input type="radio" id="lvlAdv" name="level" value="Advanced">
+                    <label for="lvlAdv">Advanced</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pb-form-group">
+                <label for="notes">Medical or additional notes <span style="color: var(--gray-500); font-weight: 400;">(optional)</span></label>
+                <textarea id="notes" name="notes" placeholder="Allergies, injuries, or anything your coach should know"></textarea>
+              </div>
+            </div>
+
+            <div class="pb-nav">
+              <button type="button" class="btn btn-outline" data-prev="2">&larr; Back</button>
+              <button type="button" class="btn btn-primary pb-nav-right" id="pbStep3Continue">Confirm Reservation &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 4: Confirmation ── -->
+        <div class="pb-panel" data-panel="4">
+          <div class="pb-confirm">
+            <div class="pb-confirm-badge">&#10003;</div>
+            <h2>Your kid&rsquo;s spot is almost confirmed.</h2>
+            <p class="pb-confirm-lead">We&rsquo;ll be in touch shortly with full confirmation, payment instructions, and session details. Kids pickups fill quickly &mdash; message us on WhatsApp to lock your spot in faster.</p>
+
+            <div class="pb-confirm-summary">
+              <div class="pb-confirm-summary-row"><span>Sport</span><span id="sumSport">&mdash;</span></div>
+              <div class="pb-confirm-summary-row"><span>Location</span><span id="sumLocation">&mdash;</span></div>
+              <div class="pb-confirm-summary-row"><span>Date</span><span id="sumDate">&mdash;</span></div>
+              <div class="pb-confirm-summary-row"><span>Time</span><span id="sumTime">&mdash;</span></div>
+              <div class="pb-confirm-summary-row"><span>Price</span><span id="sumPrice">&mdash;</span></div>
+              <div class="pb-confirm-summary-row"><span>Athlete</span><span id="sumPlayer">&mdash;</span></div>
+              <div class="pb-confirm-summary-row"><span>Parent</span><span id="sumParent">&mdash;</span></div>
+            </div>
+
+            <div class="pb-next-steps">
+              <h4>What happens next</h4>
+              <ul>
+                <li>A Joga+ coach will reach out within a few hours to confirm the spot.</li>
+                <li>You&rsquo;ll receive payment instructions ($10–$15) and the exact meeting point.</li>
+                <li>Drop your athlete off 10 minutes early &mdash; teams are matched by age and level on arrival.</li>
+                <li>If plans change, a quick WhatsApp message is all we need.</li>
+              </ul>
+            </div>
+
+            <div class="pb-confirm-actions">
+              <a href="#" id="pbWaConfirm" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Confirm Faster on WhatsApp</a>
+              <a href="pickups.html" class="btn btn-outline">Back to Pickups</a>
+            </div>
+
+            <!-- STRIPE_INTEGRATION_POINT
+                 Future: mount Stripe Payment Element / Checkout here.
+                 On success, the form below already has sessionId + flow + contact fields.
+            -->
+            <div id="payment-root"></div>
+
+            <p class="pb-confirm-footer-note">Reservation reference sent to your email. No charge today.</p>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ════ Footer ════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Joga<span>+</span></a>
+          <p>Private soccer training, footvolley lessons, and tennis coaching for youth athletes in Washington DC, Virginia, and Maryland. Trusted by 500+ athletes and families in the DMV.</p>
+          <div class="footer-contact-line"><a href="tel:+15745361983">(574) 536-1983</a></div>
+          <div class="footer-contact-line"><a href="mailto:info@jogaplus.com">info@jogaplus.com</a></div>
+          <div class="footer-contact-line"><a href="https://wa.me/15745361983" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+        </div>
+        <div class="footer-col">
+          <h4>Training Programs</h4>
+          <ul>
+            <li><a href="soccer.html">Soccer</a></li>
+            <li><a href="footvolley.html">Footvolley</a></li>
+            <li><a href="tennis.html">Tennis</a></li>
+            <li><a href="pickups.html">Pickups</a></li>
+            <li><a href="booking.html">Book a Free Session</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>The Academy</h4>
+          <ul>
+            <!-- Coaches footer link hidden — preserved for future reuse.
+            <li><a href="coaches.html">Our Coaches</a></li>
+            -->
+            <li><a href="results.html">Reviews &amp; Results</a></li>
+            <li><a href="booking.html">Free Athletic Assessment</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Joga+. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════ Scripts ════ -->
+  <script>
+    // ── Session data (edit freely; swap to fetch() later) ──
+    const SESSIONS = [
+      { id: "kd-sc-01", sport: "Soccer",    location: "Rockville, MD",    day: "Saturday",  date: "May 3",  time: "10:00 AM – 11:30 AM", price: 12, spots: "12 spots left" },
+      { id: "kd-sc-02", sport: "Soccer",    location: "Arlington, VA",    day: "Sunday",    date: "May 4",  time: "9:00 AM – 10:30 AM",  price: 10, spots: "Filling fast" },
+      { id: "kd-fv-01", sport: "Futvolley", location: "Rockville, MD",    day: "Saturday",  date: "May 3",  time: "12:00 PM – 1:30 PM",  price: 15, spots: "5 spots left" },
+      { id: "kd-fv-02", sport: "Futvolley", location: "Washington DC",    day: "Sunday",    date: "May 4",  time: "11:00 AM – 12:30 PM", price: 12, spots: "8 spots left" },
+      { id: "kd-sc-03", sport: "Soccer",    location: "Bethesda, MD",     day: "Saturday",  date: "May 10", time: "10:00 AM – 11:30 AM", price: 12, spots: "20 spots left" },
+      { id: "kd-fv-03", sport: "Futvolley", location: "Falls Church, VA", day: "Saturday",  date: "May 10", time: "1:00 PM – 2:30 PM",   price: 15, spots: "Filling fast" }
+    ];
+
+    // ── Menu toggle ──
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      mobileMenu.classList.toggle("open");
+      document.body.style.overflow = mobileMenu.classList.contains("open") ? "hidden" : "";
+    });
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menuToggle.classList.remove("active");
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+
+    // ── Render sessions ──
+    const sessionsEl = document.getElementById("pbSessions");
+    sessionsEl.innerHTML = SESSIONS.map((s) => `
+      <article class="pb-session-card" data-session-id="${s.id}">
+        <div class="pb-session-top">
+          <span class="pb-sport-tag${s.sport === "Futvolley" ? " fv" : ""}">${s.sport}</span>
+          <span class="pb-session-meta${s.spots.toLowerCase().includes("filling") || s.spots.startsWith("5") ? " filling" : ""}">${s.spots}</span>
+        </div>
+        <h3 class="pb-session-location">${s.location}</h3>
+        <div class="pb-session-datetime">
+          <span class="pb-session-day">${s.day} &middot; ${s.date}</span>
+          <span class="pb-session-time">${s.time}</span>
+        </div>
+        <div class="pb-session-bottom">
+          <div class="pb-session-price">$${s.price}<small>/ session</small></div>
+          <button type="button" class="pb-reserve-btn" data-reserve="${s.id}">Reserve</button>
+        </div>
+      </article>
+    `).join("");
+
+    // ── State + step navigation ──
+    let currentStep = 1;
+    let selectedSession = null;
+    const panels = document.querySelectorAll(".pb-panel");
+    const stepDots = document.querySelectorAll(".pb-step");
+
+    function goToStep(n) {
+      currentStep = n;
+      panels.forEach((p) => p.classList.toggle("active", parseInt(p.dataset.panel) === n));
+      stepDots.forEach((d) => {
+        const step = parseInt(d.dataset.step);
+        d.classList.toggle("active", step === n);
+        d.classList.toggle("done", step < n);
+      });
+      window.scrollTo({ top: document.querySelector(".pb-shell").offsetTop - 40, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-next]").forEach((btn) => {
+      btn.addEventListener("click", () => goToStep(parseInt(btn.dataset.next)));
+    });
+    document.querySelectorAll("[data-prev]").forEach((btn) => {
+      btn.addEventListener("click", () => goToStep(parseInt(btn.dataset.prev)));
+    });
+
+    // ── Session selection ──
+    const step2Continue = document.getElementById("pbStep2Continue");
+    document.querySelectorAll("[data-reserve]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.reserve;
+        const session = SESSIONS.find((s) => s.id === id);
+        if (!session) return;
+        selectedSession = session;
+
+        document.querySelectorAll(".pb-session-card").forEach((c) => {
+          c.classList.toggle("selected", c.dataset.sessionId === id);
+        });
+        document.querySelectorAll(".pb-reserve-btn").forEach((b) => {
+          b.textContent = b.dataset.reserve === id ? "Selected" : "Reserve";
+        });
+
+        document.getElementById("fSessionId").value = session.id;
+        document.getElementById("fSessionSport").value = session.sport;
+        document.getElementById("fSessionLocation").value = session.location;
+        document.getElementById("fSessionDate").value = session.day + ", " + session.date;
+        document.getElementById("fSessionTime").value = session.time;
+        document.getElementById("fSessionPrice").value = "$" + session.price;
+        document.getElementById("sportSelected").value = session.sport;
+
+        step2Continue.disabled = false;
+        step2Continue.style.opacity = "1";
+        step2Continue.style.pointerEvents = "auto";
+
+        setTimeout(() => goToStep(3), 550);
+      });
+    });
+
+    // ── Step 3 → Step 4: validate + submit ──
+    const form = document.getElementById("pbForm");
+    document.getElementById("pbStep3Continue").addEventListener("click", () => {
+      const required = ["parentFirst", "parentLast", "parentEmail", "parentPhone", "childFirst", "childLast", "childAge"];
+      for (const field of required) {
+        const el = document.getElementById(field);
+        if (!el.value.trim()) {
+          el.focus();
+          el.style.borderColor = "var(--orange)";
+          setTimeout(() => { el.style.borderColor = ""; }, 2000);
+          return;
+        }
+      }
+      const level = document.querySelector('input[name="level"]:checked');
+      if (!level) {
+        document.querySelector(".pb-level-group").style.outline = "1px solid var(--orange)";
+        setTimeout(() => { document.querySelector(".pb-level-group").style.outline = ""; }, 2000);
+        return;
+      }
+
+      // Fill summary
+      document.getElementById("sumSport").textContent = selectedSession.sport;
+      document.getElementById("sumLocation").textContent = selectedSession.location;
+      document.getElementById("sumDate").textContent = selectedSession.day + ", " + selectedSession.date;
+      document.getElementById("sumTime").textContent = selectedSession.time;
+      document.getElementById("sumPrice").textContent = "$" + selectedSession.price;
+      document.getElementById("sumPlayer").textContent =
+        document.getElementById("childFirst").value + " " + document.getElementById("childLast").value;
+      document.getElementById("sumParent").textContent =
+        document.getElementById("parentFirst").value + " " + document.getElementById("parentLast").value;
+
+      // WhatsApp CTA
+      const waMsg = `Hi Joga+ — I just reserved the ${selectedSession.sport} pickup for my kid in ${selectedSession.location} on ${selectedSession.day}, ${selectedSession.date} at ${selectedSession.time}. Parent: ${document.getElementById("parentFirst").value} ${document.getElementById("parentLast").value}. Athlete: ${document.getElementById("childFirst").value}.`;
+      document.getElementById("pbWaConfirm").href = "https://wa.me/15745361983?text=" + encodeURIComponent(waMsg);
+
+      document.getElementById("pbSummaryText3").textContent =
+        `${selectedSession.sport} · ${selectedSession.location} · ${selectedSession.day} ${selectedSession.date}`;
+
+      const fd = new FormData(form);
+      fetch(form.action, { method: "POST", body: fd, mode: "no-cors" }).catch(() => {});
+
+      goToStep(4);
+    });
+
+    const observer3 = new MutationObserver(() => {
+      if (document.querySelector('[data-panel="3"]').classList.contains("active") && selectedSession) {
+        document.getElementById("pbSummaryText3").textContent =
+          `${selectedSession.sport} · ${selectedSession.location} · ${selectedSession.day} ${selectedSession.date} · $${selectedSession.price}`;
+      }
+    });
+    observer3.observe(document.querySelector('[data-panel="3"]'), { attributes: true, attributeFilter: ["class"] });
+  </script>
+
+</body>
+</html>

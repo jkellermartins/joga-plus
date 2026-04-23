@@ -4075,3 +4075,701 @@ div[id="lead-capture"] {
   fill: #25d366;
   flex-shrink: 0;
 }
+
+/* ════════════════════════════════════════════════
+   Pickup Booking Flow
+   Multi-step reservation experience for adult and
+   kids pickups. Uses existing tokens only.
+   ════════════════════════════════════════════════ */
+.pb-shell {
+  padding: 8rem 0 5rem;
+  min-height: 80vh;
+}
+
+.pb-shell .section-label {
+  margin-bottom: 1rem;
+}
+
+.pb-shell .section-title {
+  margin-bottom: 1rem;
+}
+
+.pb-shell .section-subtitle {
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  color: var(--gray-300);
+  text-align: center;
+}
+
+/* ── Progress bar ── */
+.pb-progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 720px;
+  margin: 0 auto 3.5rem;
+  position: relative;
+  gap: 0;
+}
+
+.pb-progress::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: var(--gray-900);
+  z-index: 0;
+}
+
+.pb-step {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: default;
+}
+
+.pb-step-dot {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--off-black);
+  border: 2px solid var(--gray-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.pb-step.active .pb-step-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+  transform: scale(1.08);
+}
+
+.pb-step.done .pb-step-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+}
+
+.pb-step.done .pb-step-dot::before {
+  content: "\2713";
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.pb-step.done .pb-step-num {
+  display: none;
+}
+
+.pb-step-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  font-weight: 600;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.pb-step.active .pb-step-label,
+.pb-step.done .pb-step-label {
+  color: var(--white);
+}
+
+/* ── Step panels ── */
+.pb-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.pb-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pb-panel-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.pb-panel-header h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+
+.pb-panel-header p {
+  color: var(--gray-300);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ── Step 1: Details cards ── */
+.pb-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+}
+
+.pb-detail-card {
+  background: var(--off-black);
+  border: 1px solid var(--gray-900);
+  padding: 1.75rem 1.5rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.pb-detail-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.pb-detail-card h4 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+.pb-detail-card h4 .pb-sport-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  background: var(--accent);
+  color: var(--black);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  font-weight: 700;
+}
+
+.pb-detail-card h4 .pb-sport-tag.fv {
+  background: var(--fv);
+}
+
+.pb-detail-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pb-detail-card li {
+  color: var(--gray-300);
+  font-size: 0.9rem;
+  padding: 0.35rem 0;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.pb-detail-card li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pb-detail-note {
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--off-black);
+  border-left: 3px solid var(--accent);
+  color: var(--gray-300);
+  font-size: 0.9rem;
+}
+
+/* ── Step 2: Session cards ── */
+.pb-sessions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 880px;
+  margin: 0 auto 2rem;
+}
+
+.pb-session-card {
+  background: var(--off-black);
+  border: 1px solid var(--gray-900);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  position: relative;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-session-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.pb-session-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent), 0 18px 32px -18px rgba(200, 255, 0, 0.35);
+}
+
+.pb-session-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.pb-sport-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  background: var(--accent);
+  color: var(--black);
+  font-weight: 700;
+}
+
+.pb-sport-tag.fv {
+  background: var(--fv);
+  color: var(--black);
+}
+
+.pb-session-meta {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  font-weight: 600;
+  text-align: right;
+}
+
+.pb-session-meta.filling {
+  color: var(--orange);
+}
+
+.pb-session-location {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.pb-session-datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.pb-session-day {
+  font-size: 0.95rem;
+  color: var(--gray-300);
+  font-weight: 600;
+}
+
+.pb-session-time {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+}
+
+.pb-session-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--gray-900);
+}
+
+.pb-session-price {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.pb-session-price small {
+  font-size: 0.7rem;
+  color: var(--gray-500);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-left: 0.25rem;
+}
+
+.pb-reserve-btn {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.3rem;
+  background: var(--accent);
+  color: var(--black);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pb-reserve-btn:hover {
+  background: var(--accent-dim);
+}
+
+.pb-session-card.selected .pb-reserve-btn {
+  background: var(--black);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  padding: 0.58rem 1.18rem;
+}
+
+.pb-session-card.selected .pb-reserve-btn::before {
+  content: "\2713\00a0";
+  font-weight: 800;
+}
+
+/* ── Step 3: Form ── */
+.pb-form {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.pb-form-section {
+  margin-bottom: 2rem;
+}
+
+.pb-form-section-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--gray-900);
+}
+
+.pb-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pb-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.pb-form-group label {
+  font-size: 0.8rem;
+  color: var(--gray-300);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.pb-form-group input,
+.pb-form-group textarea,
+.pb-form-group select {
+  background: var(--off-black);
+  border: 1px solid var(--gray-900);
+  padding: 0.85rem 1rem;
+  color: var(--white);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.pb-form-group input:focus,
+.pb-form-group textarea:focus,
+.pb-form-group select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.pb-form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.pb-level-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.pb-level-option {
+  position: relative;
+}
+
+.pb-level-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pb-level-option label {
+  display: block;
+  padding: 0.85rem 0.5rem;
+  background: var(--off-black);
+  border: 1px solid var(--gray-900);
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray-300);
+  transition: all 0.2s ease;
+}
+
+.pb-level-option input:checked + label {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+}
+
+.pb-summary-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: var(--off-black);
+  border: 1px solid var(--gray-900);
+  border-left: 3px solid var(--accent);
+  font-size: 0.9rem;
+  color: var(--gray-300);
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.pb-summary-chip strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* ── Step navigation ── */
+.pb-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--gray-900);
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pb-nav-right {
+  margin-left: auto;
+}
+
+/* ── Step 4: Confirmation ── */
+.pb-confirm {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pb-confirm-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.pb-confirm h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.pb-confirm-lead {
+  color: var(--gray-300);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto 2rem;
+}
+
+.pb-confirm-summary {
+  background: var(--off-black);
+  border: 1px solid var(--gray-900);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.pb-confirm-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--gray-900);
+  font-size: 0.92rem;
+}
+
+.pb-confirm-summary-row:last-child {
+  border-bottom: none;
+}
+
+.pb-confirm-summary-row span:first-child {
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.pb-confirm-summary-row span:last-child {
+  color: var(--white);
+  font-weight: 600;
+  text-align: right;
+}
+
+.pb-next-steps {
+  background: var(--off-black);
+  border: 1px solid var(--gray-900);
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.pb-next-steps h4 {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+}
+
+.pb-next-steps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pb-next-steps li {
+  color: var(--gray-300);
+  font-size: 0.95rem;
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.pb-next-steps li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.pb-confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pb-confirm-footer-note {
+  color: var(--gray-500);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+/* ── Mobile ── */
+@media (max-width: 720px) {
+  .pb-shell {
+    padding: 7rem 0 4rem;
+  }
+
+  .pb-progress {
+    margin-bottom: 2.5rem;
+  }
+
+  .pb-step-label {
+    display: none;
+  }
+
+  .pb-step-dot {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .pb-progress::before {
+    top: 15px;
+  }
+
+  .pb-detail-grid,
+  .pb-sessions {
+    grid-template-columns: 1fr;
+  }
+
+  .pb-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .pb-level-group {
+    grid-template-columns: 1fr;
+  }
+
+  .pb-nav {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .pb-nav .btn,
+  .pb-nav-right {
+    width: 100%;
+    margin: 0;
+  }
+
+  .pb-session-bottom {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .pb-reserve-btn {
+    width: 100%;
+  }
+
+  .pb-confirm-actions .btn {
+    width: 100%;
+  }
+}
