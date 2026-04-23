@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>You're In | Joga+</title>
-  <meta name="description" content="Your Joga+ application has been received. We'll be in touch soon.">
+  <title>Application Received | Joga+ Soccer, Footvolley & Tennis Training DMV</title>
+  <meta name="description" content="Your Joga+ training application has been received. A coach will contact you within 24 hours to schedule your free soccer, footvolley, or tennis session in the DMV.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9917;</text></svg>">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,13 +16,20 @@
     <div class="container nav-inner">
       <a href="index.html" class="nav-logo">Joga<span>+</span></a>
       <ul class="nav-links">
-        <li><a href="index.html#programs">Programs</a></li>
-        <li><a href="index.html#differentials">Why Us</a></li>
-        <li><a href="index.html#coaches">Coaches</a></li>
-        <li><a href="index.html#testimonials">Athletes</a></li>
+        <li class="nav-dropdown">
+          <a href="soccer.html" class="nav-dropdown-trigger">Methods <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="soccer.html">Soccer</a>
+            <a href="footvolley.html">Footvolley</a>
+            <a href="tennis.html">Tennis</a>
+          </div>
+        </li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="results.html">Results</a></li>
       </ul>
-      <a href="tel:+12025551234" class="nav-contact">(202) 555-1234</a>
-      <a href="booking.html" class="btn btn-primary nav-cta">Book a Session</a>
+      <a href="tel:+15745361983" class="nav-contact">(574) 536-1983</a>
+      <a href="booking.html" class="btn btn-primary nav-cta">Start Training</a>
       <button class="menu-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -30,12 +38,15 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#programs" class="mobile-nav-link">Programs</a>
-    <a href="index.html#differentials" class="mobile-nav-link">Why Us</a>
-    <a href="index.html#coaches" class="mobile-nav-link">Coaches</a>
-    <a href="index.html#testimonials" class="mobile-nav-link">Athletes</a>
-    <a href="booking.html" class="btn btn-primary">Book a Session</a>
-    <a href="tel:+12025551234" class="mobile-phone">(202) 555-1234</a>
+    <span class="mobile-nav-label">Methods</span>
+    <a href="soccer.html" class="mobile-nav-link mobile-nav-sub">Soccer</a>
+    <a href="footvolley.html" class="mobile-nav-link mobile-nav-sub">Footvolley</a>
+    <a href="tennis.html" class="mobile-nav-link mobile-nav-sub">Tennis</a>
+    <a href="index.html#how-it-works" class="mobile-nav-link">How It Works</a>
+    <a href="coaches.html" class="mobile-nav-link">Coaches</a>
+    <a href="results.html" class="mobile-nav-link">Results</a>
+    <a href="booking.html" class="btn btn-primary">Start Training</a>
+    <a href="tel:+15745361983" class="mobile-phone">(574) 536-1983</a>
   </div>
 
   <!-- Thank You -->
@@ -50,8 +61,8 @@
         <h1>You're <span class="accent">In.</span></h1>
 
         <p class="hero-sub">
-          Your application has been received. A Joga+ coach will reach out
-          within 24 hours to schedule your first session.
+          A Joga+ coach will personally reach out within 24 hours
+          to confirm your schedule and lock in your first session.
         </p>
 
         <ul class="thankyou-steps">
@@ -61,17 +72,29 @@
           </li>
           <li>
             <span class="step-num">2</span>
-            <span>A coach contacts you within 24 hours to confirm your schedule.</span>
+            <span>Your coach reaches out within 24 hours to confirm details.</span>
           </li>
           <li>
             <span class="step-num">3</span>
-            <span>Show up to your first session ready to work. That's it.</span>
+            <span>Show up ready to work. Development starts day one.</span>
           </li>
         </ul>
 
         <div class="hero-actions" style="justify-content: center;">
-          <a href="index.html" class="btn btn-primary">Back to Home</a>
-          <a href="https://instagram.com/jogaplus" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Follow Us on Instagram</a>
+          <a href="https://instagram.com/jogaplustraining" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Follow @jogaplustraining</a>
+          <a href="index.html" class="btn btn-outline">See the Method</a>
+        </div>
+
+        <div class="referral-box">
+          <h3>Give a Free Session, Get One</h3>
+          <p>Share Joga+ with a teammate or friend. If they sign up, you both get an extra free session.</p>
+          <div class="referral-actions">
+            <a href="https://wa.me/?text=I%20just%20signed%20up%20for%20Joga%2B%20%E2%80%94%20soccer%2C%20footvolley%2C%20and%20tennis%20performance%20training%20in%20the%20DMV.%20First%20session%20is%20free%3A%20jogaplus.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary referral-wa-btn">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Share via WhatsApp
+            </a>
+            <button class="btn btn-outline referral-copy-btn" onclick="navigator.clipboard.writeText('I just signed up for Joga+ — soccer, footvolley, and tennis performance training in the DMV. First session is free: jogaplus.com');this.textContent='Copied!';">Copy Link</button>
+          </div>
         </div>
 
       </div>
@@ -81,7 +104,49 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Joga<span>+</span></a>
+          <p>The DMV's only three-surface performance academy &mdash; soccer, footvolley, and tennis. Pro coaches, filmed sessions, real development.</p>
+          <div class="footer-contact-line">
+            <a href="tel:+15745361983">(574) 536-1983</a>
+          </div>
+          <div class="footer-contact-line">
+            <a href="mailto:info@jogaplus.com">info@jogaplus.com</a>
+          </div>
+          <div class="footer-contact-line">
+            <a href="https://wa.me/15745361983" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Training Methods</h4>
+          <ul>
+            <li><a href="soccer.html">Soccer</a></li>
+            <li><a href="footvolley.html">Footvolley</a></li>
+            <li><a href="tennis.html">Tennis</a></li>
+            <li><a href="booking.html">Start Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>The Academy</h4>
+          <ul>
+            <li><a href="coaches.html">Our Coaches</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="booking.html">Free Assessment</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://instagram.com/jogaplustraining" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="booking.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-locations">
+        <p>Serving youth athletes in Washington DC &bull; Arlington &bull; McLean &bull; Falls Church &bull; Fairfax &bull; Loudoun County &bull; Bethesda &bull; Rockville &bull; Silver Spring</p>
+      </div>
+      <div class="footer-bottom">
         <span>&copy; 2026 Joga+. All rights reserved.</span>
         <div class="footer-legal">
           <a href="#">Privacy Policy</a>
@@ -90,6 +155,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/15745361983?text=Hi%20Joga%2B%20%E2%80%94%20I%20just%20submitted%20my%20application%20and%20had%20a%20quick%20question." target="_blank" rel="noopener noreferrer" class="fab-whatsapp" aria-label="Message us on WhatsApp">
+    <span class="fab-whatsapp-tooltip show">Want to get started faster? Message us</span>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 
   <script>
     const observer = new IntersectionObserver(

@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Your Session | Joga+</title>
-  <meta name="description" content="Book a training session with Joga+. Soccer and Futvolley. Elite sports development in the DMV.">
+  <title>Book a Free Soccer, Footvolley, or Tennis Session in the DMV | Joga+</title>
+  <meta name="description" content="Book your free training session at Joga+ — private soccer coaching, footvolley lessons, and tennis training for youth athletes in Washington DC, Virginia, and Maryland. Brazilian-trained professional coaches. No commitment required.">
+  <link rel="canonical" href="https://jogaplus.com/booking.html">
+  <meta property="og:title" content="Book a Free Training Session | Joga+ Academy">
+  <meta property="og:description" content="Private soccer, footvolley, and tennis training for youth athletes in the DMV. First session free. No commitment.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jogaplus.com/booking.html">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9917;</text></svg>">
   <link rel="stylesheet" href="styles.css">
   <style>
@@ -80,12 +85,76 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
+    .tag-elite {
+      color: var(--accent);
+      border: 1px solid rgba(200, 255, 0, 0.4);
+      background: rgba(200, 255, 0, 0.08);
+    }
+
+    .tag-bundle {
+      color: var(--accent);
+      border: 1px solid rgba(200, 255, 0, 0.4);
+      background: rgba(200, 255, 0, 0.08);
+    }
+
+    .premium-option input:checked + .program-option-label {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 0 20px rgba(200, 255, 0, 0.1);
+    }
+
+    .premium-option .program-option-price {
+      color: var(--accent);
+    }
+
+    .tn-option input:checked + .program-option-label {
+      border-color: var(--tn);
+      background: rgba(255, 149, 0, 0.04);
+      box-shadow: 0 0 0 1px var(--tn);
+    }
+
+    .tn-option .program-option-price {
+      color: var(--tn);
+    }
+
+    .tag-tn {
+      color: var(--tn);
+      border: 1px solid rgba(255, 149, 0, 0.25);
+    }
+
+    .tag-tn-elite {
+      color: var(--tn);
+      border: 1px solid rgba(255, 149, 0, 0.4);
+      background: rgba(255, 149, 0, 0.08);
+    }
+
+    .tn-premium input:checked + .program-option-label {
+      border-color: var(--tn);
+      box-shadow: 0 0 0 1px var(--tn), 0 0 20px rgba(255, 149, 0, 0.1);
+    }
+
+    .tn-premium .program-option-price {
+      color: var(--tn);
+    }
+
     .program-option-label h4 {
       font-size: 0.9375rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.01em;
       margin-bottom: 0.375rem;
+    }
+
+    .program-option-price {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.375rem;
+      display: block;
+    }
+
+    .fv-option .program-option-price {
+      color: var(--fv);
     }
 
     .program-option-label p {
@@ -103,6 +172,34 @@
       display: block;
     }
 
+    /* Booking social proof */
+    .booking-proof {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .booking-proof-stat {
+      text-align: center;
+    }
+
+    .booking-proof-stat h4 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .booking-proof-stat p {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-500);
+      margin-top: 0.125rem;
+    }
+
     @media (max-width: 600px) {
       .program-selector {
         grid-template-columns: 1fr;
@@ -117,13 +214,20 @@
     <div class="container nav-inner">
       <a href="index.html" class="nav-logo">Joga<span>+</span></a>
       <ul class="nav-links">
-        <li><a href="index.html#soccer">Soccer</a></li>
-        <li><a href="index.html#futvolley">Futvolley</a></li>
-        <li><a href="index.html#coaches">Coaches</a></li>
-        <li><a href="index.html#testimonials">Athletes</a></li>
+        <li class="nav-dropdown">
+          <a href="soccer.html" class="nav-dropdown-trigger">Methods <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="soccer.html">Soccer</a>
+            <a href="footvolley.html">Footvolley</a>
+            <a href="tennis.html">Tennis</a>
+          </div>
+        </li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="coaches.html">Coaches</a></li>
+        <li><a href="results.html">Results</a></li>
       </ul>
-      <a href="tel:+12025551234" class="nav-contact">(202) 555-1234</a>
-      <a href="booking.html" class="btn btn-primary nav-cta">Book a Session</a>
+      <a href="tel:+15745361983" class="nav-contact">(574) 536-1983</a>
+      <a href="tel:+15745361983" class="btn btn-primary nav-cta">Call Us</a>
       <button class="menu-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -132,12 +236,14 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#soccer" class="mobile-nav-link">Soccer</a>
-    <a href="index.html#futvolley" class="mobile-nav-link">Futvolley</a>
-    <a href="index.html#coaches" class="mobile-nav-link">Coaches</a>
-    <a href="index.html#testimonials" class="mobile-nav-link">Athletes</a>
-    <a href="booking.html" class="btn btn-primary">Book a Session</a>
-    <a href="tel:+12025551234" class="mobile-phone">(202) 555-1234</a>
+    <span class="mobile-nav-label">Methods</span>
+    <a href="soccer.html" class="mobile-nav-link mobile-nav-sub">Soccer</a>
+    <a href="footvolley.html" class="mobile-nav-link mobile-nav-sub">Footvolley</a>
+    <a href="tennis.html" class="mobile-nav-link mobile-nav-sub">Tennis</a>
+    <a href="index.html#how-it-works" class="mobile-nav-link">How It Works</a>
+    <a href="coaches.html" class="mobile-nav-link">Coaches</a>
+    <a href="results.html" class="mobile-nav-link">Results</a>
+    <a href="tel:+15745361983" class="btn btn-primary">Call (574) 536-1983</a>
   </div>
 
   <!-- Booking -->
@@ -145,12 +251,31 @@
     <div class="container">
 
       <div class="booking-header fade-up">
-        <span class="section-label">Start Your Journey</span>
-        <h2 class="section-title">Book Your<br><span class="accent">Session.</span></h2>
+        <span class="section-label">Start Training</span>
+        <h2 class="section-title">Begin Your<br><span class="accent">Assessment.</span></h2>
         <p class="section-subtitle" style="margin: 1rem auto 0;">
-          Choose your program, tell us about yourself, and we'll match you with
-          the right coach and schedule. First session is on us.
+          Select your training method, tell us about the athlete, and we'll match you
+          with the right coach and development plan.
         </p>
+        <p class="free-session-badge">First Session Free</p>
+        <div class="booking-proof">
+          <div class="booking-proof-stat">
+            <h4>500+</h4>
+            <p>Athletes Since 2019</p>
+          </div>
+          <div class="booking-proof-stat">
+            <h4>3</h4>
+            <p>D1 Commits Last Year</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-capture fade-up">
+        <p>Prefer to skip the form?</p>
+        <a href="https://wa.me/15745361983?text=Hi%20Joga%2B%20%E2%80%94%20I%27d%20like%20to%20book%20a%20free%20session.%20Can%20you%20help%20me%20get%20started%3F" target="_blank" rel="noopener noreferrer" class="btn btn-outline quick-capture-btn">
+          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Message Us on WhatsApp
+        </a>
       </div>
 
       <form class="booking-form fade-up" action="https://formsubmit.co/skysightvisual@gmail.com" method="POST">
@@ -159,51 +284,57 @@
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="New Joga+ Application">
         <input type="hidden" name="_template" value="table">
+        <!-- TODO: Replace with absolute URL once hosted (e.g., https://jogaplus.com/thankyou.html) -->
         <input type="hidden" name="_next" value="thankyou.html">
 
         <!-- Step 1: Program Selection -->
-        <div class="form-section-title">Choose Your Program</div>
+        <div class="form-section-title"><span class="step-label">Step 1</span> Choose Your Method</div>
+        <p class="form-hint">Not sure which surface? Start with any &mdash; your coach will guide you from there.</p>
 
         <div class="program-selector">
           <label class="program-option">
-            <input type="radio" name="program" value="Soccer Private Training" required>
+            <input type="radio" name="program" value="Soccer" required>
             <div class="program-option-label">
               <span class="program-option-tag tag-soccer">Soccer</span>
-              <h4>Private Training</h4>
-              <p>1-on-1 sessions tailored to your position and goals</p>
+              <h4>Soccer Training</h4>
+              <span class="program-option-price">From $159/mo</span>
+              <p>Grass sessions &mdash; private or small group</p>
             </div>
           </label>
 
           <label class="program-option fv-option">
-            <input type="radio" name="program" value="Futvolley Private Training">
+            <input type="radio" name="program" value="Footvolley">
             <div class="program-option-label">
-              <span class="program-option-tag tag-fv">Futvolley</span>
-              <h4>Private Training</h4>
-              <p>Personalized technique and skill development on the sand</p>
+              <span class="program-option-tag tag-fv">Footvolley</span>
+              <h4>Footvolley Training</h4>
+              <span class="program-option-price">From $159/mo</span>
+              <p>Sand sessions &mdash; private or group</p>
             </div>
           </label>
 
-          <label class="program-option fv-option">
-            <input type="radio" name="program" value="Futvolley Group Session">
+          <label class="program-option tn-option">
+            <input type="radio" name="program" value="Tennis">
             <div class="program-option-label">
-              <span class="program-option-tag tag-fv">Futvolley</span>
-              <h4>Group Session</h4>
-              <p>Train with others, compete, and build your game together</p>
+              <span class="program-option-tag tag-tn">Tennis</span>
+              <h4>Tennis Training</h4>
+              <span class="program-option-price">From $159/mo</span>
+              <p>Court sessions &mdash; private or group</p>
             </div>
           </label>
 
-          <label class="program-option fv-option">
-            <input type="radio" name="program" value="Open Play / Sand Sessions">
+          <label class="program-option premium-option">
+            <input type="radio" name="program" value="Joga+ Complete">
             <div class="program-option-label">
-              <span class="program-option-tag tag-open">Open</span>
-              <h4>Open Play / Sand</h4>
-              <p>Casual sessions for all levels &mdash; just show up and play</p>
+              <span class="program-option-tag tag-bundle">Best Value</span>
+              <h4>Joga+ Complete</h4>
+              <span class="program-option-price">$499/mo</span>
+              <p>All three surfaces &mdash; save $157/mo vs. separate</p>
             </div>
           </label>
         </div>
 
         <!-- Step 2: Contact Info -->
-        <div class="form-section-title">Contact Information</div>
+        <div class="form-section-title"><span class="step-label">Step 2</span> Contact Information</div>
 
         <div class="form-row">
           <div class="form-group">
@@ -228,7 +359,7 @@
         </div>
 
         <!-- Step 3: Athlete Profile -->
-        <div class="form-section-title">Athlete Profile</div>
+        <div class="form-section-title"><span class="step-label">Step 3</span> Athlete Profile</div>
 
         <div class="form-row">
           <div class="form-group">
@@ -266,12 +397,12 @@
           </div>
         </div>
 
-        <!-- Futvolley-specific fields -->
-        <div class="conditional-section" id="futvolleyFields">
+        <!-- Footvolley-specific fields -->
+        <div class="conditional-section" id="footvolleyFields">
           <div class="form-row">
             <div class="form-group">
-              <label for="fv_experience">Have you played futvolley before?</label>
-              <select id="fv_experience" name="futvolley_experience">
+              <label for="fv_experience">Have you played footvolley before?</label>
+              <select id="fv_experience" name="footvolley_experience">
                 <option value="">Select</option>
                 <option>Never &mdash; first time</option>
                 <option>A few times casually</option>
@@ -290,33 +421,35 @@
               </select>
             </div>
           </div>
+        </div>
 
+        <!-- Tennis-specific fields -->
+        <div class="conditional-section" id="tennisFields">
           <div class="form-row">
             <div class="form-group">
-              <label for="fv_goal">What's your main futvolley goal?</label>
-              <select id="fv_goal" name="futvolley_goal">
-                <option value="">Select goal</option>
-                <option>Learn the basics and have fun</option>
-                <option>Improve technique and consistency</option>
-                <option>Train for competition</option>
-                <option>Fitness and cross-training</option>
+              <label for="tn_experience">Court Experience Level</label>
+              <select id="tn_experience" name="tennis_experience">
+                <option value="">Select level</option>
+                <option>Beginner &mdash; new to the court</option>
+                <option>Intermediate &mdash; comfortable rallying</option>
+                <option>Advanced &mdash; competitive play</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="fv_session_type">Preferred session type</label>
-              <select id="fv_session_type" name="futvolley_session_type">
-                <option value="">Select</option>
-                <option>Private (1-on-1)</option>
-                <option>Small Group (3-5 people)</option>
-                <option>Open Play</option>
-                <option>No preference</option>
+              <label for="tn_goal">Primary Training Focus</label>
+              <select id="tn_goal" name="tennis_goal">
+                <option value="">Select focus</option>
+                <option>Reaction Speed</option>
+                <option>Fitness &amp; Movement</option>
+                <option>Technique Development</option>
+                <option>Competition Prep</option>
               </select>
             </div>
           </div>
         </div>
 
-        <!-- Step 4: Goals & Notes -->
-        <div class="form-section-title">Goals & Availability</div>
+        <!-- Step 4: Goals & Notes (optional) -->
+        <div class="form-section-title" id="goalsTitle"><span class="step-label">Step 4</span> Goals &amp; Availability <span class="form-optional">(Optional)</span></div>
 
         <div class="form-row" id="soccerGoalRow">
           <div class="form-group">
@@ -342,12 +475,13 @@
 
         <div class="form-group">
           <label for="notes">Anything else we should know?</label>
-          <textarea id="notes" name="notes" placeholder="Injuries, preferred days/times, specific areas to improve..."></textarea>
+          <textarea id="notes" name="notes" placeholder="Injuries, availability, specific goals..."></textarea>
         </div>
 
         <!-- Submit -->
+        <p class="form-reassurance">No payment. No commitment. A coach personally follows up within 24 hours.</p>
         <div class="form-submit">
-          <button type="submit" class="btn btn-primary" id="submitBtn">Submit & Book Session &#8594;</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Start Your Free Assessment &#8594;</button>
         </div>
 
         <p class="form-note">Only accepting 8 new athletes this month &mdash; DMV area only</p>
@@ -360,7 +494,49 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Joga<span>+</span></a>
+          <p>Private soccer training, footvolley lessons, and tennis coaching for youth athletes in Washington DC, Virginia, and Maryland. Trusted by 500+ athletes and families in the DMV.</p>
+          <div class="footer-contact-line">
+            <a href="tel:+15745361983">(574) 536-1983</a>
+          </div>
+          <div class="footer-contact-line">
+            <a href="mailto:info@jogaplus.com">info@jogaplus.com</a>
+          </div>
+          <div class="footer-contact-line">
+            <a href="https://wa.me/15745361983" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Training Methods</h4>
+          <ul>
+            <li><a href="soccer.html">Soccer</a></li>
+            <li><a href="footvolley.html">Footvolley</a></li>
+            <li><a href="tennis.html">Tennis</a></li>
+            <li><a href="booking.html">Start Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>The Academy</h4>
+          <ul>
+            <li><a href="coaches.html">Our Coaches</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="booking.html">Free Assessment</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://instagram.com/jogaplustraining" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="booking.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-locations">
+        <p>Serving youth athletes in Washington DC &bull; Arlington &bull; McLean &bull; Falls Church &bull; Fairfax &bull; Loudoun County &bull; Bethesda &bull; Rockville &bull; Silver Spring</p>
+      </div>
+      <div class="footer-bottom">
         <span>&copy; 2026 Joga+. All rights reserved.</span>
         <div class="footer-legal">
           <a href="#">Privacy Policy</a>
@@ -370,8 +546,13 @@
     </div>
   </footer>
 
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/15745361983?text=Hi%20Joga%2B%20%E2%80%94%20I%27m%20filling%20out%20the%20application%20and%20have%20a%20quick%20question." target="_blank" rel="noopener noreferrer" class="fab-whatsapp" aria-label="Message us on WhatsApp">
+    <span class="fab-whatsapp-tooltip" id="waTooltip">Need help choosing? Ask us</span>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
   <script>
-    // Scroll animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -382,7 +563,6 @@
     );
     document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
 
-    // Mobile menu
     const menuToggle = document.querySelector(".menu-toggle");
     const mobileMenu = document.getElementById("mobileMenu");
     menuToggle.addEventListener("click", () => {
@@ -398,59 +578,92 @@
       });
     });
 
-    // Program selection logic
+    // WhatsApp tooltip: flash once after 6 seconds on booking page
+    setTimeout(() => {
+      const tip = document.getElementById("waTooltip");
+      if (!tip || sessionStorage.getItem("wa-tip-book")) return;
+      tip.classList.add("show");
+      sessionStorage.setItem("wa-tip-book", "1");
+      setTimeout(() => tip.classList.remove("show"), 4000);
+    }, 6000);
+
     const programInputs = document.querySelectorAll('input[name="program"]');
     const soccerFields = document.getElementById("soccerFields");
-    const futvolleyFields = document.getElementById("futvolleyFields");
+    const footvolleyFields = document.getElementById("footvolleyFields");
+    const tennisFields = document.getElementById("tennisFields");
     const soccerGoalRow = document.getElementById("soccerGoalRow");
+    const goalsTitle = document.getElementById("goalsTitle");
     const submitBtn = document.getElementById("submitBtn");
     const subjectField = document.querySelector('input[name="_subject"]');
 
-    function isFutvolley(value) {
-      return value.includes("Futvolley") || value.includes("Open Play");
+    function isFootvolley(value) {
+      return value.includes("Footvolley") || value.includes("Open Play");
+    }
+
+    function isTennis(value) {
+      return value.includes("Tennis") || value.includes("Court Drop-In");
     }
 
     programInputs.forEach((input) => {
       input.addEventListener("change", (e) => {
         const val = e.target.value;
-        const fv = isFutvolley(val);
+        const fv = isFootvolley(val);
+        const tn = isTennis(val);
+        const isComplete = val.includes("Complete");
 
-        // Show/hide conditional sections
-        soccerFields.classList.toggle("active", !fv);
-        futvolleyFields.classList.toggle("active", fv);
-        soccerGoalRow.style.display = fv ? "none" : "";
+        soccerFields.classList.toggle("active", !fv && !tn && !isComplete);
+        footvolleyFields.classList.toggle("active", fv);
+        tennisFields.classList.toggle("active", tn);
+        soccerGoalRow.style.display = (fv || tn || isComplete) ? "none" : "";
+        goalsTitle.innerHTML = (fv || tn || isComplete)
+          ? '<span class="step-label">Step 4</span> Notes <span class="form-optional">(Optional)</span>'
+          : '<span class="step-label">Step 4</span> Goals &amp; Availability <span class="form-optional">(Optional)</span>';
 
-        // Update email subject
-        if (val.includes("Soccer")) {
+        if (isComplete) {
+          subjectField.value = "New Joga+ Complete Application";
+        } else if (val.includes("Soccer")) {
           subjectField.value = "New Joga+ Soccer Application";
-        } else if (val.includes("Futvolley")) {
-          subjectField.value = "New Joga+ Futvolley Application";
+        } else if (val.includes("Footvolley")) {
+          subjectField.value = "New Joga+ Footvolley Application";
+        } else if (tn) {
+          subjectField.value = "New Joga+ Tennis Application";
         } else {
           subjectField.value = "New Joga+ Open Play Application";
         }
 
-        // Update submit button text
-        if (fv) {
-          submitBtn.innerHTML = "Submit & Book Futvolley Session &#8594;";
+        if (isComplete) {
+          submitBtn.innerHTML = "Start Your Full Assessment &#8594;";
+        } else if (val.includes("Open Play")) {
+          submitBtn.innerHTML = "Start Your Free Sand Session &#8594;";
+        } else if (fv) {
+          submitBtn.innerHTML = "Start Your Free Sand Assessment &#8594;";
+        } else if (tn) {
+          submitBtn.innerHTML = "Start Your Free Court Assessment &#8594;";
         } else {
-          submitBtn.innerHTML = "Submit & Book Soccer Session &#8594;";
+          submitBtn.innerHTML = "Start Your Free Grass Assessment &#8594;";
         }
       });
     });
 
-    // Pre-select from URL param (e.g., booking.html?sport=futvolley)
+    soccerGoalRow.style.display = "none";
+
     const params = new URLSearchParams(window.location.search);
     const sportParam = params.get("sport");
     if (sportParam) {
       let target = null;
       if (sportParam === "soccer") {
         target = document.querySelector('input[value="Soccer Private Training"]');
-      } else if (sportParam === "futvolley") {
-        target = document.querySelector('input[value="Futvolley Private Training"]');
+      } else if (sportParam === "footvolley") {
+        target = document.querySelector('input[value="Footvolley Private Training"]');
+      } else if (sportParam === "tennis") {
+        target = document.querySelector('input[value="Tennis Performance Training"]');
       }
       if (target) {
         target.checked = true;
         target.dispatchEvent(new Event("change", { bubbles: true }));
+        setTimeout(() => {
+          document.querySelector(".booking-form").scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
       }
     }
   </script>

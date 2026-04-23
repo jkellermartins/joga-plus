@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#000;}
+  .logo{width:1200px;height:450px;background:#000;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Montserrat',system-ui,sans-serif;}
+  .bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .mark{position:relative;z-index:2;display:flex;align-items:center;gap:14px;}
+  .word{font-weight:900;font-size:220px;color:#fff;letter-spacing:-6px;line-height:1;}
+  .plus{font-weight:900;font-size:220px;color:#9EFF38;line-height:1;margin-left:-4px;}
+</style>
+</head>
+<body>
+<div class="logo">
+  <svg class="bg" viewBox="0 0 1200 450" preserveAspectRatio="xMidYMid slice">
+    <!-- Net posts with net span across middle-bottom, big volleyball top-right, sand wave -->
+    <!-- Net diagonal mesh band (dense, visible) -->
+    <defs>
+      <pattern id="vnet" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="16" y2="0" stroke="#ffffff" stroke-width="1" opacity="0.22"/>
+        <line x1="0" y1="0" x2="0" y2="16" stroke="#ffffff" stroke-width="1" opacity="0.22"/>
+      </pattern>
+    </defs>
+    <!-- net band at bottom -->
+    <rect x="120" y="340" width="960" height="58" fill="url(#vnet)"/>
+    <!-- net top and bottom cable -->
+    <line x1="120" y1="340" x2="1080" y2="340" stroke="#ffffff" stroke-width="2.5" opacity="0.35"/>
+    <line x1="120" y1="398" x2="1080" y2="398" stroke="#ffffff" stroke-width="2" opacity="0.28"/>
+    <!-- posts -->
+    <line x1="120" y1="335" x2="120" y2="420" stroke="#ffffff" stroke-width="3" opacity="0.32"/>
+    <line x1="1080" y1="335" x2="1080" y2="420" stroke="#ffffff" stroke-width="3" opacity="0.32"/>
+    <!-- sand wave line below net -->
+    <path d="M 0,425 Q 200,418 400,425 T 800,425 T 1200,425"
+          fill="none" stroke="#ffffff" stroke-width="2" opacity="0.25"/>
+    <!-- Big classic volleyball top-right, partial off-canvas -->
+    <g transform="translate(1090,90)" opacity="0.35">
+      <circle r="195" fill="#ffffff"/>
+      <!-- 3 classic panel curves -->
+      <path d="M -195,0 C -120,-80 40,-150 130,-160" fill="none" stroke="#000" stroke-width="4"/>
+      <path d="M -195,0 C -120,80 40,150 130,160" fill="none" stroke="#000" stroke-width="4"/>
+      <path d="M 0,-195 C -60,-110 -60,110 0,195" fill="none" stroke="#000" stroke-width="4"/>
+      <path d="M 195,0 C 110,-60 90,-150 130,-160" fill="none" stroke="#000" stroke-width="4"/>
+      <path d="M 195,0 C 110,60 90,150 130,160" fill="none" stroke="#000" stroke-width="4"/>
+      <circle r="195" fill="none" stroke="#000" stroke-width="3.5"/>
+    </g>
+    <!-- Sun (green) bottom-left for beach vibe -->
+    <g transform="translate(110,280)" opacity="0.75">
+      <circle r="34" fill="none" stroke="#9EFF38" stroke-width="3"/>
+      <circle r="18" fill="#9EFF38" opacity="0.55"/>
+    </g>
+  </svg>
+  <div class="mark">
+    <span class="word">JOGA</span>
+    <span class="plus">+</span>
+  </div>
+</div>
+</body>
+</html>

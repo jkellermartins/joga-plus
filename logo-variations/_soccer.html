@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#000;}
+  .logo{width:1200px;height:450px;background:#000;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Montserrat',system-ui,sans-serif;}
+  .bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .mark{position:relative;z-index:2;display:flex;align-items:center;gap:14px;}
+  .word{font-weight:900;font-size:220px;color:#fff;letter-spacing:-6px;line-height:1;}
+  .plus{font-weight:900;font-size:220px;color:#9EFF38;line-height:1;margin-left:-4px;}
+</style>
+</head>
+<body>
+<div class="logo">
+  <svg class="bg" viewBox="0 0 1200 450" preserveAspectRatio="xMidYMid slice">
+    <!-- Big corner-hugging soccer ball behind the plus, left side ball partial -->
+    <!-- Right ball: larger, partially off-canvas, clear panels -->
+    <g transform="translate(1070,120)" opacity="0.32">
+      <circle r="190" fill="#ffffff" stroke="#ffffff" stroke-width="0"/>
+      <!-- center pentagon -->
+      <polygon points="0,-52 50,-16 30,44 -30,44 -50,-16" fill="#000"/>
+      <!-- surrounding hex panel outlines -->
+      <polygon points="0,-52 -50,-16 -120,-50 -130,-120 -60,-160 10,-140" fill="none" stroke="#000" stroke-width="3"/>
+      <polygon points="0,-52 50,-16 120,-50 130,-120 60,-160 -10,-140" fill="none" stroke="#000" stroke-width="3"/>
+      <polygon points="-50,-16 -30,44 -90,90 -160,60 -160,-20 -120,-50" fill="none" stroke="#000" stroke-width="3"/>
+      <polygon points="50,-16 30,44 90,90 160,60 160,-20 120,-50" fill="none" stroke="#000" stroke-width="3"/>
+      <polygon points="-30,44 30,44 60,110 0,160 -60,110" fill="none" stroke="#000" stroke-width="3"/>
+      <!-- outer circle edge -->
+      <circle r="190" fill="none" stroke="#000" stroke-width="4"/>
+    </g>
+    <!-- Left ball: smaller, partial, echoing the corner motif -->
+    <g transform="translate(100,340)" opacity="0.22">
+      <circle r="95" fill="#ffffff"/>
+      <polygon points="0,-26 25,-8 15,22 -15,22 -25,-8" fill="#000"/>
+      <circle r="95" fill="none" stroke="#000" stroke-width="2.5"/>
+      <line x1="0" y1="-26" x2="0" y2="-78" stroke="#000" stroke-width="2"/>
+      <line x1="25" y1="-8" x2="72" y2="-26" stroke="#000" stroke-width="2"/>
+      <line x1="-25" y1="-8" x2="-72" y2="-26" stroke="#000" stroke-width="2"/>
+      <line x1="15" y1="22" x2="45" y2="67" stroke="#000" stroke-width="2"/>
+      <line x1="-15" y1="22" x2="-45" y2="67" stroke="#000" stroke-width="2"/>
+    </g>
+    <!-- subtle field chalk line across bottom -->
+    <line x1="60" y1="420" x2="1140" y2="420" stroke="#ffffff" stroke-width="1.5" opacity="0.18"/>
+  </svg>
+  <div class="mark">
+    <span class="word">JOGA</span>
+    <span class="plus">+</span>
+  </div>
+</div>
+</body>
+</html>
