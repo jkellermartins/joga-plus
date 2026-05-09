@@ -1,0 +1,8 @@
+.DS_Store
+.vercel/
+node_modules/
+*.log
+
+# Olist analysis dataset (large, unrelated to live site)
+data/
+analysis.py

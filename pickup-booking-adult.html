@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://jogaplus.com/pickup-booking-adult.html">
   <meta property="og:image" content="https://jogaplus.com/images/og-joga-plus.jpg">
   <meta name="robots" content="noindex,follow">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9917;</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23000'/><path d='M44 22h12v22h22v12H56v22H44V56H22V44h22z' fill='%23C5F73A'/></svg>">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -77,11 +77,9 @@
         <div class="pb-step" data-step="4" role="listitem"><div class="pb-step-dot"><span class="pb-step-num">4</span></div><div class="pb-step-label">Confirm</div></div>
       </div>
 
-      <form id="pbForm" action="https://formsubmit.co/skysightvisual@gmail.com" method="POST" novalidate>
-        <input type="hidden" name="_subject" value="New Adult Pickup Reservation">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
+      <form id="pbForm" novalidate>
         <input type="hidden" name="flow" value="adult">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
         <input type="hidden" name="sessionId" id="fSessionId">
         <input type="hidden" name="sessionSport" id="fSessionSport">
         <input type="hidden" name="sessionLocation" id="fSessionLocation">
@@ -306,6 +304,7 @@
   </footer>
 
   <!-- ════ Scripts ════ -->
+  <script src="js/joga-leads.js"></script>
   <script>
     // ── Session data (edit freely; swap to fetch() later) ──
     const SESSIONS = [
@@ -449,9 +448,10 @@
       document.getElementById("pbSummaryText3").textContent =
         `${selectedSession.sport} · ${selectedSession.location} · ${selectedSession.day} ${selectedSession.date}`;
 
-      // Submit to formsubmit (no redirect, silent background)
       const fd = new FormData(form);
-      fetch(form.action, { method: "POST", body: fd, mode: "no-cors" }).catch(() => {});
+      const data = { formType: 'pickup' };
+      fd.forEach((v, k) => { data[k] = v; });
+      JogaSubmit(data).catch(() => {});
 
       goToStep(4);
     });

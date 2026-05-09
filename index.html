@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Private Soccer, Footvolley & Tennis Training in the DMV | Joga+">
   <meta name="twitter:description" content="The DMV's only three-surface performance academy. Brazilian-trained coaches. First session free.">
   <meta name="twitter:image" content="https://jogaplus.com/images/og-joga-plus.jpg">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9917;</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23000'/><path d='M44 22h12v22h22v12H56v22H44V56H22V44h22z' fill='%23C5F73A'/></svg>">
   <link rel="stylesheet" href="styles.css">
   <!-- Structured Data: Local Business -->
   <script type="application/ld+json">
@@ -300,7 +300,7 @@
           Filmed sessions. Measurable development. First session free.
         </p>
         <div class="hero-actions fade-up">
-          <a href="#lead-capture" class="btn btn-primary">Get Your Free Training Plan</a>
+          <a href="apply.html" class="btn btn-primary">Apply to Train</a>
           <a href="#method" class="btn btn-outline">See How It Works</a>
         </div>
         <p class="hero-reassurance fade-up">First session free. No contracts. Cancel anytime.</p>
@@ -331,11 +331,8 @@
         <h2 class="lead-capture-title">Get Your Free <span class="accent">Training Plan</span></h2>
         <p class="lead-capture-sub">Tell us about the athlete. A coach will personally reach out within 24 hours.</p>
 
-        <form class="lead-form" id="leadForm" action="https://formsubmit.co/skysightvisual@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New Joga+ Training Plan Request">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://jogaplus.com/thankyou.html">
-          <input type="text" name="_honey" style="display:none">
+        <form class="lead-form" id="leadForm" novalidate>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
 
           <!-- Step 1: About the Athlete -->
           <div class="lead-form-step active" id="leadStep1">
@@ -464,19 +461,28 @@
           <div class="program-number">01</div>
           <h3>Soccer</h3>
           <p>Private and group soccer coaching for youth athletes ages 8&ndash;18. Position-specific development, filmed sessions, and monthly benchmarks.</p>
-          <a href="soccer.html" class="btn btn-primary btn-sm">Explore Soccer</a>
+          <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+            <a href="soccer.html" class="btn btn-primary btn-sm">Explore Soccer</a>
+            <a href="apply.html?sport=soccer" class="btn btn-outline btn-sm">Apply to Train</a>
+          </div>
         </div>
         <div class="program-card fade-up">
           <div class="program-number">02</div>
           <h3>Footvolley</h3>
           <p>Brazilian footvolley lessons with CBFV-certified coaches. Explosive power, touch, and creative coordination for all levels.</p>
-          <a href="footvolley.html" class="btn btn-primary btn-sm">Explore Footvolley</a>
+          <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+            <a href="footvolley.html" class="btn btn-primary btn-sm">Explore Footvolley</a>
+            <a href="apply.html?sport=footvolley" class="btn btn-outline btn-sm">Apply to Train</a>
+          </div>
         </div>
         <div class="program-card fade-up">
           <div class="program-number">03</div>
           <h3>Tennis</h3>
           <p>Private and group tennis lessons with a USPTA-certified coach trained at the Guga Kuerten Academy. Performance and fundamentals.</p>
-          <a href="tennis.html" class="btn btn-primary btn-sm">Explore Tennis</a>
+          <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+            <a href="tennis.html" class="btn btn-primary btn-sm">Explore Tennis</a>
+            <a href="apply.html?sport=tennis" class="btn btn-outline btn-sm">Apply to Train</a>
+          </div>
         </div>
       </div>
     </div>
@@ -749,6 +755,7 @@
             <li><a href="footvolley.html">Footvolley Lessons</a></li>
             <li><a href="tennis.html">Tennis Lessons</a></li>
             <li><a href="pickups.html">Pickups</a></li>
+            <li><a href="apply.html">Apply to Train</a></li>
             <li><a href="booking.html">Book a Free Session</a></li>
           </ul>
         </div>
@@ -840,6 +847,7 @@
   </div>
 
   <!-- ════ Scripts ════ -->
+  <script src="js/joga-leads.js"></script>
   <script>
     const observer = new IntersectionObserver(
       (entries) => {
@@ -885,6 +893,31 @@
       document.getElementById("leadStep2").classList.remove("active");
       document.getElementById("leadStep1").classList.add("active");
     }
+
+    document.getElementById("leadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const submitBtn = f.querySelector('button[type="submit"]');
+      const orig = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      const data = {
+        formType:    'training_plan',
+        name:        f.name.value.trim(),
+        athlete_age: f.athlete_age.value.trim(),
+        sport:       f.sport.value,
+        skill_level: f.skill_level.value,
+        goal:        f.goal.value,
+        phone:       f.phone.value.trim(),
+        website:     f.website.value,
+      };
+      const result = await JogaSubmit(data);
+      if (result.ok) {
+        window.location.href = 'thankyou.html';
+      } else if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = orig || 'Get My Plan';
+      }
+    });
 
     // WhatsApp tooltip: flash once after 4 seconds on first visit
     setTimeout(() => {

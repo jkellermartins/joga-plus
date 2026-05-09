@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/apply.html", "destination": "/apply", "permanent": true }
+  ]
+}

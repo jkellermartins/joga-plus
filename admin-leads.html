@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Joga+ Leads — Local Archive</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23000'/><path d='M44 22h12v22h22v12H56v22H44V56H22V44h22z' fill='%23C5F73A'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000; --panel: #0e0e0e; --line: rgba(255,255,255,.08);
+    --line-strong: rgba(255,255,255,.18); --text: #fff;
+    --muted: rgba(255,255,255,.55); --dim: rgba(255,255,255,.35);
+    --neon: #C5F73A; --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', sans-serif; min-height: 100vh; padding: 32px 22px 80px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; gap: 14px; flex-wrap: wrap;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h1 em { font-style: normal; color: var(--neon); }
+  .meta { color: var(--muted); font-size: 13px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 16px; border-radius: 100px; font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--line-strong); background: transparent;
+    color: var(--text); text-decoration: none;
+  }
+  .btn:hover { border-color: var(--text); }
+  .btn-primary { background: var(--neon); color: #000; border-color: var(--neon); }
+  .btn-danger { color: #ff6b6b; border-color: rgba(255,107,107,.4); }
+  .btn-danger:hover { background: rgba(255,107,107,.08); }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px;
+  }
+  .stat-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; }
+  .stat-value { font-size: 22px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.01em; }
+  .stat-value.neon { color: var(--neon); }
+
+  table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  thead th {
+    text-align: left; padding: 12px 14px;
+    background: rgba(255,255,255,.03); border-bottom: 1px solid var(--line);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+  }
+  tbody td { padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 13px; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,.02); }
+  .pill {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    background: rgba(197,247,58,.12); color: var(--neon);
+    border: 1px solid rgba(197,247,58,.3);
+  }
+  .ts { color: var(--dim); font-size: 12px; }
+  .empty {
+    background: var(--panel); border: 1px dashed var(--line-strong); border-radius: var(--radius);
+    padding: 60px 20px; text-align: center; color: var(--muted);
+  }
+  .empty b { color: var(--text); display: block; font-size: 17px; margin-bottom: 8px; font-family: 'Space Grotesk', sans-serif; }
+  .note {
+    margin-top: 18px; padding: 14px 16px;
+    background: rgba(197,247,58,.05); border: 1px solid rgba(197,247,58,.18);
+    border-radius: 10px; color: var(--muted); font-size: 13px; line-height: 1.55;
+  }
+  .note b { color: var(--neon); font-weight: 600; }
+  details > summary { cursor: pointer; color: var(--neon); font-size: 12px; }
+  details pre {
+    margin-top: 8px; padding: 10px; background: #000; border: 1px solid var(--line);
+    border-radius: 8px; font-size: 11px; color: var(--muted); overflow-x: auto;
+    font-family: ui-monospace, Menlo, monospace;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>Joga+ <em>Leads</em></h1>
+      <div class="meta">Local archive of submissions captured on this device.</div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" id="exportCsv">Export CSV</button>
+      <button class="btn" id="exportJson">Export JSON</button>
+      <button class="btn btn-danger" id="clearAll">Clear Archive</button>
+    </div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+  <div id="content"></div>
+
+  <div class="note">
+    <b>How this works.</b> Every submission to <code>/apply</code> is archived to this browser's
+    <code>localStorage</code> (last 50 entries) — independent of the live backend. This page is a
+    sanity check so you can verify the form is capturing data even before a backend is wired.
+    Lead data only lives on the device that submitted it; production leads must still flow to
+    your real backend (email, Google Sheets, Airtable, Supabase). Page is <code>noindex</code>.
+  </div>
+</div>
+
+<script>
+(function () {
+  const KEY = 'joga_apply_submissions';
+  const $ = sel => document.querySelector(sel);
+
+  function read() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; }
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    try {
+      const d = new Date(iso);
+      return d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+    } catch (e) { return iso; }
+  }
+
+  function csvCell(v) {
+    if (v == null) return '';
+    if (Array.isArray(v)) v = v.join('; ');
+    const s = String(v).replace(/"/g, '""');
+    return /[",\n]/.test(s) ? `"${s}"` : s;
+  }
+
+  function toCsv(rows) {
+    const cols = ['submittedAt','sport','level','athleteName','parentName','age','phone','email','location','goals','availability','consent','notes','source','referrer','utm'];
+    const head = cols.join(',');
+    const body = rows.map(r => cols.map(c => csvCell(r[c])).join(',')).join('\n');
+    return head + '\n' + body;
+  }
+
+  function download(filename, content, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function renderStats(rows) {
+    const total = rows.length;
+    const last  = rows[0]?.submittedAt;
+    const counts = rows.reduce((m, r) => { const k = r.sport || 'Unknown'; m[k] = (m[k]||0)+1; return m; }, {});
+    const top = Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+    $('#stats').innerHTML = `
+      <div class="stat"><div class="stat-label">Total Captured</div><div class="stat-value neon">${total}</div></div>
+      <div class="stat"><div class="stat-label">Last Submission</div><div class="stat-value">${fmtDate(last)}</div></div>
+      <div class="stat"><div class="stat-label">Top Sport</div><div class="stat-value">${top ? top[0] : '—'}</div></div>
+      <div class="stat"><div class="stat-label">Storage Key</div><div class="stat-value" style="font-size:13px; font-family:ui-monospace,monospace;">${KEY}</div></div>
+    `;
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function render() {
+    const rows = read();
+    renderStats(rows);
+
+    if (!rows.length) {
+      $('#content').innerHTML = `
+        <div class="empty">
+          <b>No leads captured yet.</b>
+          Submit a test application from <a href="apply.html" style="color:var(--neon);">/apply</a>
+          to see it appear here.
+        </div>`;
+      return;
+    }
+
+    const tbody = rows.map(r => `
+      <tr>
+        <td><span class="ts">${fmtDate(r.submittedAt)}</span></td>
+        <td><span class="pill">${escapeHtml(r.sport || '—')}</span></td>
+        <td><b>${escapeHtml(r.athleteName || '—')}</b>${r.parentName ? `<div class="ts">parent: ${escapeHtml(r.parentName)}</div>` : ''}</td>
+        <td>${escapeHtml(r.age || '—')}</td>
+        <td>${escapeHtml(r.level || '—')}</td>
+        <td>${escapeHtml(r.location || '—')}</td>
+        <td>
+          <div>${escapeHtml(r.email || '—')}</div>
+          <div class="ts">${escapeHtml(r.phone || '')}</div>
+        </td>
+        <td>${escapeHtml((r.goals || []).join(', ') || '—')}</td>
+        <td>${escapeHtml((r.availability || []).join(', ') || '—')}</td>
+        <td>
+          <details><summary>view</summary><pre>${escapeHtml(JSON.stringify(r, null, 2))}</pre></details>
+        </td>
+      </tr>
+    `).join('');
+
+    $('#content').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>When</th><th>Sport</th><th>Athlete</th><th>Age</th><th>Level</th>
+          <th>Location</th><th>Contact</th><th>Goals</th><th>Availability</th><th>Raw</th>
+        </tr></thead>
+        <tbody>${tbody}</tbody>
+      </table>`;
+  }
+
+  $('#exportCsv').addEventListener('click', () => {
+    const rows = read();
+    if (!rows.length) return alert('No leads to export.');
+    download(`joga-leads-${new Date().toISOString().slice(0,10)}.csv`, toCsv(rows), 'text/csv;charset=utf-8');
+  });
+  $('#exportJson').addEventListener('click', () => {
+    const rows = read();
+    if (!rows.length) return alert('No leads to export.');
+    download(`joga-leads-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(rows, null, 2), 'application/json');
+  });
+  $('#clearAll').addEventListener('click', () => {
+    if (!confirm('Clear all locally archived leads on this device? This cannot be undone.')) return;
+    localStorage.removeItem(KEY);
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

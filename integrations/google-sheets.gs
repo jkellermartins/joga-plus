@@ -1,0 +1,183 @@
+/**
+ * JOGA+ — Unified Google Sheets webhook
+ *
+ * One Apps Script Web App handles ALL lead-capture forms on the site.
+ * Each submission carries a `formType` that routes it to the correct sheet tab:
+ *
+ *   formType: 'application'    → "Applications"            (apply.html)
+ *   formType: 'training_plan'  → "Training Plan Requests"  (index.html homepage form)
+ *   formType: 'booking'        → "Bookings"                (booking.html)
+ *   formType: 'pickup'         → "Pickups"                 (pickup-booking-adult/kids.html)
+ *
+ * SETUP — bind this script to a Google Sheet (one time):
+ *   1. Open the JOGA+ Applications sheet → Extensions → Apps Script.
+ *   2. Replace ALL existing code with this file. Save (💾).
+ *   3. Deploy → Manage deployments → ✏️ on the existing deployment →
+ *      Version: "New version" → Deploy. (Don't create a new deployment — the URL would change.)
+ *   4. Right-click the existing "Applications" tab → Delete (so new headers regenerate cleanly).
+ *
+ * IMPORTANT: every form on the site posts JSON with Content-Type: text/plain;charset=utf-8.
+ * That's deliberate — it skips the CORS preflight Apps Script Web Apps reject.
+ */
+
+const NOTIFY_EMAIL = 'jogaplusacademy@gmail.com';
+
+// One row of metadata per form type: tab name, ordered headers, row builder, alert subject builder.
+const FORM_TYPES = {
+  application: {
+    sheet: 'Applications',
+    headers: [
+      'Submitted At', 'Athlete Name', 'Parent / Guardian', 'Phone', 'Email',
+      'Age', 'Sport', 'Level', 'Goals', 'Location', 'Availability', 'Notes',
+      'Consent', 'Source', 'Referrer', 'UTM',
+    ],
+    row: (d, t) => [
+      t, d.athleteName || '', d.parentName || '', d.phone || '', d.email || '',
+      d.age || '', d.sport || '', d.level || '', (d.goals || []).join(', '),
+      d.location || '', (d.availability || []).join(', '), d.notes || '',
+      d.consent ? 'Yes' : 'No', d.source || '', d.referrer || '', d.utm || '',
+    ],
+    subject: d => `New JOGA+ application — ${d.athleteName || 'Athlete'} (${d.sport || 'sport TBD'})`,
+  },
+
+  training_plan: {
+    sheet: 'Training Plan Requests',
+    headers: [
+      'Submitted At', 'Name', 'Athlete Age', 'Sport', 'Skill Level',
+      'Goal', 'Phone', 'Source', 'Referrer',
+    ],
+    row: (d, t) => [
+      t, d.name || '', d.athlete_age || '', d.sport || '', d.skill_level || '',
+      d.goal || '', d.phone || '', d.source || '', d.referrer || '',
+    ],
+    subject: d => `New Training Plan Request — ${d.name || 'Lead'} (${d.sport || 'sport TBD'})`,
+  },
+
+  booking: {
+    sheet: 'Bookings',
+    headers: [
+      'Submitted At', 'Program', 'Full Name', 'Athlete Name', 'Email', 'Phone',
+      'Age', 'Level', 'Position', 'Team',
+      'Footvolley Experience', 'Sports Background',
+      'Tennis Experience', 'Tennis Goal',
+      'Goal', 'Type', 'Notes', 'Source',
+    ],
+    row: (d, t) => [
+      t, d.program || '', d.full_name || '', d.athlete_name || '', d.email || '', d.phone || '',
+      d.age || '', d.level || '', d.position || '', d.team || '',
+      d.footvolley_experience || '', d.sports_background || '',
+      d.tennis_experience || '', d.tennis_goal || '',
+      d.goal || '', d.type || '', d.notes || '', d.source || '',
+    ],
+    subject: d => `New Booking — ${d.full_name || d.athlete_name || 'Lead'} (${d.program || 'program TBD'})`,
+  },
+
+  pickup: {
+    sheet: 'Pickups',
+    headers: [
+      'Submitted At', 'Flow', 'Session ID', 'Sport', 'Location',
+      'Date', 'Time', 'Price',
+      'Athlete First', 'Athlete Last', 'Athlete Age', 'Skill Level',
+      'Email', 'Phone',
+      'Parent First', 'Parent Last', 'Parent Email', 'Parent Phone',
+      'Notes', 'Source',
+    ],
+    row: (d, t) => {
+      const isKids = d.flow === 'kids';
+      return [
+        t, d.flow || '', d.sessionId || '', d.sessionSport || d.sportSelected || '',
+        d.sessionLocation || '', d.sessionDate || '', d.sessionTime || '', d.sessionPrice || '',
+        isKids ? (d.childFirst || '') : (d.firstName || ''),
+        isKids ? (d.childLast  || '') : (d.lastName  || ''),
+        isKids ? (d.childAge   || '') : (d.age       || ''),
+        d.level || '',
+        isKids ? (d.parentEmail || '') : (d.email || ''),
+        isKids ? (d.parentPhone || '') : (d.phone || ''),
+        isKids ? (d.parentFirst || '') : '',
+        isKids ? (d.parentLast  || '') : '',
+        isKids ? (d.parentEmail || '') : '',
+        isKids ? (d.parentPhone || '') : '',
+        d.notes || '', d.source || '',
+      ];
+    },
+    subject: d => {
+      const who = d.flow === 'kids'
+        ? (d.childFirst ? `${d.childFirst} ${d.childLast || ''}`.trim() : 'Kids pickup')
+        : (d.firstName  ? `${d.firstName}  ${d.lastName  || ''}`.trim() : 'Adult pickup');
+      const when = [d.sessionDate, d.sessionTime].filter(Boolean).join(' ');
+      return `New Pickup Reservation — ${who} (${d.sessionSport || d.sportSelected || 'sport TBD'}${when ? ', ' + when : ''})`;
+    },
+  },
+};
+
+function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+
+    if (data.website) {
+      return jsonOut_({ ok: true, spam: true });
+    }
+
+    const formType = data.formType || 'application';
+    const meta = FORM_TYPES[formType];
+    if (!meta) {
+      return jsonOut_({ ok: false, error: 'Unknown formType: ' + formType });
+    }
+
+    const submittedAt = data.submittedAt ? new Date(data.submittedAt) : new Date();
+
+    const sheet = getOrCreateSheet_(meta.sheet, meta.headers);
+    sheet.appendRow(meta.row(data, submittedAt));
+
+    sendOwnerAlert_(meta, data, submittedAt);
+
+    return jsonOut_({ ok: true, formType: formType });
+  } catch (err) {
+    console.error(err);
+    return jsonOut_({ ok: false, error: String(err) });
+  }
+}
+
+function doGet() {
+  return ContentService
+    .createTextOutput('JOGA+ application endpoint is live.')
+    .setMimeType(ContentService.MimeType.TEXT);
+}
+
+function sendOwnerAlert_(meta, data, submittedAt) {
+  try {
+    const subject = meta.subject(data);
+    const lines = [`Submitted: ${submittedAt}`, `Form: ${meta.sheet}`, ''];
+    Object.keys(data).forEach(k => {
+      if (k === 'website' || k === 'submittedAt' || k === 'formType') return;
+      const v = data[k];
+      const printable = Array.isArray(v) ? v.join(', ') : (v === null || v === undefined ? '' : String(v));
+      lines.push(`${k.padEnd(18)}: ${printable}`);
+    });
+    MailApp.sendEmail({ to: NOTIFY_EMAIL, subject: subject, body: lines.join('\n') });
+  } catch (err) {
+    console.error('Email alert failed: ' + err);
+  }
+}
+
+function getOrCreateSheet_(name, headers) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    sheet = ss.insertSheet(name);
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight('bold')
+      .setBackground('#000000')
+      .setFontColor('#C5F73A');
+    sheet.setFrozenRows(1);
+    sheet.setColumnWidths(1, headers.length, 160);
+  }
+  return sheet;
+}
+
+function jsonOut_(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}

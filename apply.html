@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Apply to Train with Joga+ — Soccer, Footvolley, Tennis</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23000'/><path d='M44 22h12v22h22v12H56v22H44V56H22V44h22z' fill='%23C5F73A'/></svg>">
+<meta name="description" content="Apply to train with Joga+ Academy. Premium soccer, footvolley, and tennis training in the DMV area. Tell us about the athlete and we'll recommend the best program." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000000;
+    --bg-elev: #0a0a0a;
+    --bg-card: #111111;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.18);
+    --text: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.55);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --neon: #C5F73A;
+    --neon-dim: rgba(197, 247, 58, 0.15);
+    --neon-glow: rgba(197, 247, 58, 0.45);
+    --error: #ff4d4d;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --transition: 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(197, 247, 58, 0.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 100%, rgba(197, 247, 58, 0.05), transparent 60%),
+      var(--bg);
+  }
+
+  .shell { max-width: 760px; margin: 0 auto; padding: 32px 22px 80px; min-height: 100vh; display: flex; flex-direction: column; }
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .brand { display: flex; align-items: center; text-decoration: none; color: var(--text); }
+  .brand img { height: 38px; width: auto; display: block; filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.35)); }
+
+  .step-tag { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.18em; color: var(--text-muted); text-transform: uppercase; }
+  .step-tag b { color: var(--neon); font-weight: 700; }
+
+  .hero { margin-bottom: 28px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--neon); padding: 6px 12px;
+    border: 1px solid rgba(197, 247, 58, 0.4); border-radius: 100px;
+    background: rgba(197, 247, 58, 0.06); margin-bottom: 18px;
+  }
+  .eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--neon); box-shadow: 0 0 10px var(--neon); }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 6.5vw, 48px);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+    margin-bottom: 14px;
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.18), 0 0 38px rgba(255, 255, 255, 0.08);
+  }
+  h1 em { font-style: normal; color: var(--neon); text-shadow: 0 0 12px rgba(197, 247, 58, 0.55), 0 0 32px rgba(197, 247, 58, 0.35); }
+  .lede { font-size: 15px; color: var(--text-muted); max-width: 580px; }
+
+  .progress { margin-bottom: 32px; }
+  .progress-bar { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.06); border-radius: 100px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--neon); width: 25%; transition: width var(--transition); box-shadow: 0 0 12px var(--neon-glow); }
+  .progress-meta { display: flex; justify-content: space-between; margin-top: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); }
+  .progress-meta b { color: var(--text); font-weight: 600; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 26px; flex: 1; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(600px 200px at 50% 0%, rgba(197, 247, 58, 0.05), transparent 70%); pointer-events: none; }
+
+  .step { display: none; animation: stepIn 420ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .step.active { display: block; }
+  @keyframes stepIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .step-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .step-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+
+  .field { margin-bottom: 22px; }
+  .field label.top { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; font-weight: 500; }
+  .field label.top .req { color: var(--neon); margin-left: 4px; }
+  .field label.top .opt { color: var(--text-dim); margin-left: 6px; font-size: 11px; letter-spacing: 0.1em; }
+
+  .field input[type="text"], .field input[type="email"], .field input[type="tel"], .field input[type="number"], .field textarea {
+    width: 100%; background: transparent; border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm); padding: 14px 16px; color: var(--text);
+    font-family: inherit; font-size: 16px;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-dim); }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--neon); background: rgba(197, 247, 58, 0.04); box-shadow: 0 0 0 4px rgba(197, 247, 58, 0.12); }
+  .field textarea { min-height: 110px; resize: vertical; }
+
+  .field.error input, .field.error textarea, .field.error .options, .field.error .options-stack { border-color: var(--error); }
+  .field-error { display: none; color: var(--error); font-size: 12px; margin-top: 8px; letter-spacing: 0.02em; }
+  .field.error .field-error { display: block; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 540px) { .row { grid-template-columns: 1fr; } }
+
+  .options { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill { position: relative; cursor: pointer; user-select: none; }
+  .pill input { position: absolute; opacity: 0; pointer-events: none; }
+  .pill-label { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border: 1px solid var(--line-strong); border-radius: 100px; font-size: 14px; color: var(--text); transition: all var(--transition); background: transparent; }
+  .pill:hover .pill-label { border-color: rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.03); }
+  .pill input:checked + .pill-label { background: var(--neon); color: #000; border-color: var(--neon); font-weight: 600; box-shadow: 0 0 24px var(--neon-glow); }
+
+  .options-stack { display: flex; flex-direction: column; gap: 10px; }
+  .opt-card { position: relative; cursor: pointer; }
+  .opt-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .opt-card-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); transition: all var(--transition); font-size: 15px; }
+  .opt-card-inner::after { content: ''; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--text-dim); transition: all var(--transition); }
+  .opt-card:hover .opt-card-inner { border-color: rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.02); }
+  .opt-card input:checked + .opt-card-inner { border-color: var(--neon); background: rgba(197, 247, 58, 0.07); }
+  .opt-card input:checked + .opt-card-inner::after { border-color: var(--neon); background: var(--neon); box-shadow: 0 0 0 4px rgba(197, 247, 58, 0.18); }
+
+  .consent { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); cursor: pointer; transition: all var(--transition); }
+  .consent:hover { border-color: rgba(255, 255, 255, 0.35); }
+  .consent input { width: 18px; height: 18px; accent-color: var(--neon); margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+  .consent span { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+  .field.error .consent { border-color: var(--error); }
+
+  .actions { display: flex; gap: 12px; margin-top: 32px; }
+  .btn { flex: 1; padding: 16px 22px; border-radius: 100px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; border: none; transition: all var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+  .btn-primary { background: var(--neon); color: #000; box-shadow: 0 0 0 0 var(--neon-glow); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(197, 247, 58, 0.3); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--text); background: rgba(255, 255, 255, 0.04); }
+  .btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+  .btn-arrow { display: inline-block; transition: transform var(--transition); }
+  .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+  .confirm { display: none; text-align: center; padding: 12px 0 8px; }
+  .confirm.active { display: block; animation: stepIn 500ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .confirm-icon { width: 72px; height: 72px; margin: 0 auto 24px; border-radius: 50%; background: rgba(197, 247, 58, 0.1); border: 1px solid rgba(197, 247, 58, 0.45); display: grid; place-items: center; color: var(--neon); box-shadow: 0 0 40px rgba(197, 247, 58, 0.3); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 40px rgba(197, 247, 58, 0.25); } 50% { box-shadow: 0 0 60px rgba(197, 247, 58, 0.55); } }
+  .confirm h2 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .confirm p { color: var(--text-muted); max-width: 460px; margin: 0 auto 28px; font-size: 15px; }
+  .confirm-actions { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 0 auto; }
+  .btn-whatsapp { background: #25D366; color: #000; width: 100%; }
+  .btn-whatsapp:hover { box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3); transform: translateY(-1px); }
+
+  .footer { text-align: center; margin-top: 28px; color: var(--text-dim); font-size: 12px; letter-spacing: 0.06em; }
+
+  @media (max-width: 540px) {
+    .shell { padding: 22px 16px 60px; }
+    .card { padding: 26px 20px; border-radius: 12px; }
+    .actions { flex-direction: column-reverse; }
+    .btn { width: 100%; }
+    .pill-label { padding: 10px 16px; font-size: 13.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="header">
+    <a href="index.html" class="brand" aria-label="Joga+">
+      <img src="images/joga-plus-logo.png" alt="Joga+" />
+    </a>
+    <div class="step-tag" id="stepTag">Step <b id="stepNum">1</b> / 4</div>
+  </div>
+
+  <div class="hero" id="hero">
+    <div class="eyebrow">Athlete Application</div>
+    <h1>Start Your Development with <em>Joga+.</em></h1>
+    <p class="lede">Tell us about the athlete so we can recommend the best training option based on sport, level, goals, and location.</p>
+  </div>
+
+  <div class="progress" id="progressWrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-meta">
+      <span id="progressLabel">Athlete &amp; Contact</span>
+      <span><b id="progressPct">25</b>% Complete</span>
+    </div>
+  </div>
+
+  <form class="card" id="form" novalidate>
+
+    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;" />
+
+    <section class="step active" data-step="1">
+      <div class="step-title">Athlete &amp; Contact</div>
+      <div class="step-sub">How we'll reach out about training options.</div>
+
+      <div class="field" data-required>
+        <label class="top" for="athleteName">Athlete Full Name <span class="req">*</span></label>
+        <input id="athleteName" name="athleteName" type="text" placeholder="Athlete's full name" autocomplete="name" />
+        <div class="field-error">Please enter the athlete's full name.</div>
+      </div>
+
+      <div class="field" data-conditional-required="under18">
+        <label class="top" for="parentName">Parent / Guardian Name <span class="opt" id="parentOptLabel">(required if under 18)</span></label>
+        <input id="parentName" name="parentName" type="text" placeholder="Parent or guardian's full name" />
+        <div class="field-error">Parent/guardian name is required for athletes under 18.</div>
+      </div>
+
+      <div class="row">
+        <div class="field" data-required data-validate="phone">
+          <label class="top" for="phone">Phone <span class="req">*</span></label>
+          <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel" />
+          <div class="field-error">Please enter a valid phone number.</div>
+        </div>
+        <div class="field" data-required data-validate="email">
+          <label class="top" for="email">Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+          <div class="field-error">Please enter a valid email.</div>
+        </div>
+      </div>
+
+      <div class="field" data-required data-validate="age">
+        <label class="top" for="age">Athlete Age <span class="req">*</span></label>
+        <input id="age" name="age" type="number" min="3" max="99" inputmode="numeric" placeholder="e.g. 14" />
+        <div class="field-error">Please enter a valid age.</div>
+      </div>
+    </section>
+
+    <section class="step" data-step="2">
+      <div class="step-title">Sport &amp; Level</div>
+      <div class="step-sub">What does the athlete want to focus on?</div>
+
+      <div class="field" data-required data-group="sport">
+        <label class="top">Sport Interest <span class="req">*</span></label>
+        <div class="options">
+          <label class="pill"><input type="radio" name="sport" value="Soccer"><span class="pill-label">Soccer</span></label>
+          <label class="pill"><input type="radio" name="sport" value="Footvolley"><span class="pill-label">Footvolley</span></label>
+          <label class="pill"><input type="radio" name="sport" value="Tennis"><span class="pill-label">Tennis</span></label>
+          <label class="pill"><input type="radio" name="sport" value="Multi-sport"><span class="pill-label">Multi-sport</span></label>
+        </div>
+        <div class="field-error">Please choose a sport.</div>
+      </div>
+
+      <div class="field" data-required data-group="level">
+        <label class="top">Current Level <span class="req">*</span></label>
+        <div class="options">
+          <label class="pill"><input type="radio" name="level" value="Beginner"><span class="pill-label">Beginner</span></label>
+          <label class="pill"><input type="radio" name="level" value="Intermediate"><span class="pill-label">Intermediate</span></label>
+          <label class="pill"><input type="radio" name="level" value="Advanced"><span class="pill-label">Advanced</span></label>
+        </div>
+        <div class="field-error">Please select a level.</div>
+      </div>
+
+      <div class="field" data-required data-group="goals">
+        <label class="top">Training Goals <span class="req">*</span><span class="opt">(select all that apply)</span></label>
+        <div class="options">
+          <label class="pill"><input type="checkbox" name="goals" value="Improve technique"><span class="pill-label">Improve technique</span></label>
+          <label class="pill"><input type="checkbox" name="goals" value="Build confidence"><span class="pill-label">Build confidence</span></label>
+          <label class="pill"><input type="checkbox" name="goals" value="Prepare for competition"><span class="pill-label">Prepare for competition</span></label>
+          <label class="pill"><input type="checkbox" name="goals" value="Fitness and movement"><span class="pill-label">Fitness &amp; movement</span></label>
+          <label class="pill"><input type="checkbox" name="goals" value="Private coaching"><span class="pill-label">Private coaching</span></label>
+          <label class="pill"><input type="checkbox" name="goals" value="Join group training"><span class="pill-label">Join group training</span></label>
+        </div>
+        <div class="field-error">Choose at least one goal.</div>
+      </div>
+    </section>
+
+    <section class="step" data-step="3">
+      <div class="step-title">Location &amp; Availability</div>
+      <div class="step-sub">Where and when can the athlete train?</div>
+
+      <div class="field" data-required data-group="location">
+        <label class="top">Preferred Location <span class="req">*</span></label>
+        <div class="options">
+          <label class="pill"><input type="radio" name="location" value="Potomac"><span class="pill-label">Potomac</span></label>
+          <label class="pill"><input type="radio" name="location" value="Bethesda"><span class="pill-label">Bethesda</span></label>
+          <label class="pill"><input type="radio" name="location" value="Rockville"><span class="pill-label">Rockville</span></label>
+          <label class="pill"><input type="radio" name="location" value="Silver Spring"><span class="pill-label">Silver Spring</span></label>
+          <label class="pill"><input type="radio" name="location" value="Georgetown"><span class="pill-label">Georgetown</span></label>
+          <label class="pill"><input type="radio" name="location" value="Other"><span class="pill-label">Other</span></label>
+        </div>
+        <div class="field-error">Please select a location.</div>
+      </div>
+
+      <div class="field" data-required data-group="availability">
+        <label class="top">Preferred Availability <span class="req">*</span><span class="opt">(select all that apply)</span></label>
+        <div class="options-stack">
+          <label class="opt-card"><input type="checkbox" name="availability" value="Weekday mornings"><span class="opt-card-inner">Weekday mornings</span></label>
+          <label class="opt-card"><input type="checkbox" name="availability" value="Weekday afternoons"><span class="opt-card-inner">Weekday afternoons</span></label>
+          <label class="opt-card"><input type="checkbox" name="availability" value="Weekday evenings"><span class="opt-card-inner">Weekday evenings</span></label>
+          <label class="opt-card"><input type="checkbox" name="availability" value="Weekend mornings"><span class="opt-card-inner">Weekend mornings</span></label>
+          <label class="opt-card"><input type="checkbox" name="availability" value="Weekend afternoons"><span class="opt-card-inner">Weekend afternoons</span></label>
+        </div>
+        <div class="field-error">Choose at least one availability window.</div>
+      </div>
+    </section>
+
+    <section class="step" data-step="4">
+      <div class="step-title">Final Details</div>
+      <div class="step-sub">Anything else we should know before we reach out?</div>
+
+      <div class="field">
+        <label class="top" for="notes">Anything else we should know? <span class="opt">(optional)</span></label>
+        <textarea id="notes" name="notes" placeholder="Injuries, schedule constraints, specific coach preference, prior experience, anything that helps us match you better."></textarea>
+      </div>
+
+      <div class="field" data-required data-group="consent">
+        <label class="consent">
+          <input type="checkbox" name="consent" value="yes" />
+          <span>I agree to be contacted by Joga+ about training opportunities.</span>
+        </label>
+        <div class="field-error">You must agree to be contacted to submit.</div>
+      </div>
+    </section>
+
+    <div class="actions" id="actions">
+      <button type="button" class="btn btn-ghost" id="backBtn" style="display:none;">&larr; Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn">Next <span class="btn-arrow">&rarr;</span></button>
+      <button type="submit" class="btn btn-primary" id="submitBtn" style="display:none;">Submit Application <span class="btn-arrow">&rarr;</span></button>
+    </div>
+  </form>
+
+  <div class="card confirm" id="confirm">
+    <div class="confirm-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Thank you for applying.</h2>
+    <p>The Joga+ team will review your information and contact you with the best training option.</p>
+    <div class="confirm-actions">
+      <a class="btn btn-primary" id="emailFallbackBtn" href="#" style="display:none;">Send via Email</a>
+      <a class="btn btn-whatsapp" id="waBtn" href="#" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Message us on WhatsApp
+      </a>
+      <a class="btn btn-ghost" href="index.html">Back to Joga+</a>
+    </div>
+  </div>
+
+  <div class="footer">Joga+ Academy &middot; Soccer &middot; Footvolley &middot; Tennis</div>
+</div>
+
+<script>
+(function () {
+  // ============================================================
+  // JOGA+ LEAD CAPTURE — submission pipeline
+  // ------------------------------------------------------------
+  // Order of attempts (each one is a real, working channel):
+  //   1. submitEndpoint  — Google Apps Script / Formspree / Supabase / etc.
+  //   2. mailto fallback — opens default mail client pre-filled to leadsEmail.
+  //   3. localStorage    — every submission is also archived locally for /admin.html.
+  // This guarantees no lead is ever lost, even with no backend wired up.
+  // ============================================================
+  const CONFIG = {
+    leadsEmail:      'jogaplusacademy@gmail.com',
+    whatsappNumber:  '15745361983',          // E.164 without +
+    submitEndpoint:  'https://script.google.com/macros/s/AKfycbyAeH6UsViMaJF42DrZnR_ebT4vgjhx0xAVX-KIsAji4LdpVj9aM-nGWipS2KRpb3XL/exec',
+    mailtoFallback:  true,                    // open mail client if endpoint fails / null
+    storageKey:      'joga_apply_draft_v2',
+    archiveKey:      'joga_apply_submissions', // local archive (rolling 50)
+  };
+
+  async function postToEndpoint(data) {
+    // text/plain avoids the CORS preflight that Apps Script Web Apps reject.
+    const res = await fetch(CONFIG.submitEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data),
+      redirect: 'follow',
+    });
+    if (!res.ok) throw new Error('Endpoint returned ' + res.status);
+  }
+
+  function buildMailtoLink(data) {
+    const subject = `New Joga+ application — ${data.athleteName || 'Athlete'} (${data.sport || 'sport TBD'})`;
+    const lines = [
+      'New athlete application from joga-plus.com/apply',
+      '----------------------------------------',
+      `Athlete:        ${data.athleteName || '—'}`,
+      `Parent/Guardian: ${data.parentName || '—'}`,
+      `Age:            ${data.age || '—'}`,
+      `Phone:          ${data.phone || '—'}`,
+      `Email:          ${data.email || '—'}`,
+      '',
+      `Sport:          ${data.sport || '—'}`,
+      `Level:          ${data.level || '—'}`,
+      `Goals:          ${(data.goals || []).join(', ') || '—'}`,
+      '',
+      `Location:       ${data.location || '—'}`,
+      `Availability:   ${(data.availability || []).join(', ') || '—'}`,
+      '',
+      `Notes:          ${data.notes || '—'}`,
+      `Consent:        ${data.consent ? 'Yes' : 'No'}`,
+      '',
+      '— meta —',
+      `Submitted:      ${data.submittedAt}`,
+      `Source page:    ${data.source}`,
+      `Referrer:       ${data.referrer || '—'}`,
+      `UTM:            ${data.utm || '—'}`,
+    ].join('\n');
+    return `mailto:${encodeURIComponent(CONFIG.leadsEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+  }
+
+  function archive(data) {
+    try {
+      const raw = localStorage.getItem(CONFIG.archiveKey);
+      const list = raw ? JSON.parse(raw) : [];
+      list.unshift(data);
+      localStorage.setItem(CONFIG.archiveKey, JSON.stringify(list.slice(0, 50)));
+    } catch (e) { /* quota / private mode — ignore */ }
+  }
+
+  // Returns { mode: 'endpoint' | 'mailto', mailtoHref?: string }
+  async function submitApplication(data) {
+    archive(data);
+    if (CONFIG.submitEndpoint && !/^PASTE_/.test(CONFIG.submitEndpoint)) {
+      try {
+        await postToEndpoint(data);
+        return { mode: 'endpoint' };
+      } catch (err) {
+        console.warn('[Joga+] endpoint failed, falling back to mailto', err);
+      }
+    }
+    if (CONFIG.mailtoFallback) {
+      return { mode: 'mailto', mailtoHref: buildMailtoLink(data) };
+    }
+    throw new Error('No submission channel available');
+  }
+
+  // ------------------------------------------------------------
+  // DOM
+  // ------------------------------------------------------------
+  const TOTAL = 4;
+  const STEP_LABELS = ['Athlete & Contact', 'Sport & Level', 'Location & Availability', 'Final Details'];
+  let current = 1;
+
+  const form         = document.getElementById('form');
+  const steps        = form.querySelectorAll('.step');
+  const nextBtn      = document.getElementById('nextBtn');
+  const backBtn      = document.getElementById('backBtn');
+  const submitBtn    = document.getElementById('submitBtn');
+  const progressFill = document.getElementById('progressFill');
+  const progressLbl  = document.getElementById('progressLabel');
+  const progressPct  = document.getElementById('progressPct');
+  const stepNum      = document.getElementById('stepNum');
+  const confirmEl    = document.getElementById('confirm');
+  const hero         = document.getElementById('hero');
+  const progressWrap = document.getElementById('progressWrap');
+  const ageInput     = document.getElementById('age');
+  const phoneInput   = document.getElementById('phone');
+  const parentField  = document.querySelector('.field[data-conditional-required="under18"]');
+
+  function render() {
+    steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === current));
+    const pct = Math.round((current / TOTAL) * 100);
+    progressFill.style.width = pct + '%';
+    progressPct.textContent = pct;
+    progressLbl.textContent = STEP_LABELS[current - 1];
+    stepNum.textContent = current;
+    backBtn.style.display = current > 1 ? '' : 'none';
+    nextBtn.style.display = current < TOTAL ? '' : 'none';
+    submitBtn.style.display = current === TOTAL ? '' : 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function isUnder18() {
+    const a = parseInt(ageInput.value, 10);
+    return Number.isFinite(a) && a > 0 && a < 18;
+  }
+
+  function validateStep(step) {
+    const stepEl = form.querySelector(`.step[data-step="${step}"]`);
+    let ok = true;
+    let firstInvalid = null;
+
+    stepEl.querySelectorAll('.field').forEach(field => {
+      field.classList.remove('error');
+      const required = field.hasAttribute('data-required');
+      const condReq  = field.dataset.conditionalRequired === 'under18' && isUnder18();
+      if (!required && !condReq) return;
+
+      const type = field.dataset.validate;
+      const isGroup = !!field.dataset.group;
+      let invalid = false;
+
+      if (isGroup) {
+        invalid = field.querySelectorAll('input:checked').length === 0;
+      } else {
+        const input = field.querySelector('input, textarea');
+        const v = (input.value || '').trim();
+        if (!v) invalid = true;
+        else if (type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) invalid = true;
+        else if (type === 'phone' && v.replace(/\D/g, '').length < 7)        invalid = true;
+        else if (type === 'age') {
+          const n = parseInt(v, 10);
+          if (!Number.isFinite(n) || n < 3 || n > 99) invalid = true;
+        }
+      }
+
+      if (invalid) {
+        field.classList.add('error');
+        if (!firstInvalid) firstInvalid = field;
+        ok = false;
+      }
+    });
+
+    if (!ok && firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return ok;
+  }
+
+  // Phone auto-format: (xxx) xxx-xxxx for US-style input
+  function formatPhone(raw) {
+    const d = (raw || '').replace(/\D/g, '').slice(0, 10);
+    if (d.length === 0) return '';
+    if (d.length < 4)  return `(${d}`;
+    if (d.length < 7)  return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+    return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+  }
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      const start = phoneInput.selectionStart;
+      const before = phoneInput.value.length;
+      phoneInput.value = formatPhone(phoneInput.value);
+      const after = phoneInput.value.length;
+      try { phoneInput.setSelectionRange(start + (after - before), start + (after - before)); } catch (e) {}
+    });
+  }
+
+  form.addEventListener('input', e => {
+    const field = e.target.closest('.field');
+    if (field) field.classList.remove('error');
+    if (e.target === ageInput) {
+      const optEl = parentField.querySelector('.opt');
+      if (optEl) optEl.style.color = isUnder18() ? 'var(--neon)' : 'var(--text-dim)';
+    }
+  });
+  form.addEventListener('change', e => {
+    const field = e.target.closest('.field');
+    if (field) field.classList.remove('error');
+    saveDraft();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (!validateStep(current)) return;
+    if (current < TOTAL) { current++; render(); saveDraft(); }
+  });
+  backBtn.addEventListener('click', () => {
+    if (current > 1) { current--; render(); }
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validateStep(current)) return;
+
+    const data = collectData();
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Submitting&hellip;';
+
+    try {
+      const result = await submitApplication(data);
+      onSuccess(data, result);
+    } catch (err) {
+      console.error(err);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Submit Application <span class="btn-arrow">&rarr;</span>';
+      alert('Something went wrong submitting your application. Please try again, or message us on WhatsApp.');
+    }
+  });
+
+  function onSuccess(data, result) {
+    form.style.display = 'none';
+    hero.style.display = 'none';
+    progressWrap.style.display = 'none';
+    document.getElementById('stepTag').style.display = 'none';
+    confirmEl.classList.add('active');
+
+    // WhatsApp deep link
+    const sport = data.sport || 'training';
+    const wmsg = encodeURIComponent(
+      `Hi Joga+, I just submitted an application for ${sport}.\n\n` +
+      `Athlete: ${data.athleteName}\n` +
+      `Age: ${data.age}\n` +
+      `Level: ${data.level || '—'}\n` +
+      `Location: ${data.location || '—'}\n\n` +
+      `Looking forward to hearing from you.`
+    );
+    document.getElementById('waBtn').href = `https://wa.me/${CONFIG.whatsappNumber}?text=${wmsg}`;
+
+    // If we used the mailto fallback, auto-open the user's email composer
+    // and reveal an explicit "Send via Email" button as backup.
+    if (result && result.mode === 'mailto' && result.mailtoHref) {
+      const emailBtn = document.getElementById('emailFallbackBtn');
+      if (emailBtn) {
+        emailBtn.href = result.mailtoHref;
+        emailBtn.style.display = '';
+      }
+      // Open the mail client immediately so the user can send the lead.
+      try { window.location.href = result.mailtoHref; } catch (e) {}
+    }
+
+    try { localStorage.removeItem(CONFIG.storageKey); } catch (e) {}
+  }
+
+  function collectData() {
+    const fd = new FormData(form);
+    const out = {};
+    ['athleteName','parentName','phone','email','age','sport','level','location','notes']
+      .forEach(k => { const v = fd.get(k); if (v) out[k] = v; });
+    out.goals        = fd.getAll('goals');
+    out.availability = fd.getAll('availability');
+    out.consent      = !!fd.get('consent');
+    out.website      = fd.get('website') || '';
+    out.submittedAt  = new Date().toISOString();
+
+    // Source / attribution context
+    const params = new URLSearchParams(window.location.search);
+    out.source     = window.location.origin + window.location.pathname;
+    out.referrer   = document.referrer || '';
+    const utm = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']
+      .map(k => params.get(k) ? `${k}=${params.get(k)}` : null)
+      .filter(Boolean).join('&');
+    out.utm = utm;
+    return out;
+  }
+
+  function saveDraft() {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(collectData())); } catch (e) {}
+  }
+  function loadDraft() {
+    try {
+      const raw = localStorage.getItem(CONFIG.storageKey);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(v)) {
+          v.forEach(val => {
+            const el = form.querySelector(`input[name="${k}"][value="${CSS.escape(val)}"]`);
+            if (el) el.checked = true;
+          });
+        } else if (typeof v === 'boolean') {
+          const el = form.querySelector(`input[name="${k}"]`);
+          if (el && el.type === 'checkbox') el.checked = v;
+        } else {
+          const els = form.querySelectorAll(`[name="${k}"]`);
+          if (!els.length) return;
+          if (els[0].type === 'radio') {
+            const r = form.querySelector(`input[name="${k}"][value="${CSS.escape(v)}"]`);
+            if (r) r.checked = true;
+          } else {
+            els[0].value = v;
+          }
+        }
+      });
+    } catch (e) {}
+  }
+
+  // URL param prefill — supports apply.html?sport=soccer&level=intermediate&location=bethesda
+  function prefillFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const norm = s => (s || '').toString().trim().toLowerCase();
+    const setRadio = (name, value) => {
+      const v = norm(value);
+      if (!v) return;
+      const radios = form.querySelectorAll(`input[name="${name}"]`);
+      radios.forEach(r => { if (norm(r.value) === v) r.checked = true; });
+    };
+    setRadio('sport',    params.get('sport'));
+    setRadio('level',    params.get('level'));
+    setRadio('location', params.get('location'));
+  }
+
+  loadDraft();
+  prefillFromUrl();
+  render();
+})();
+</script>
+</body>
+</html>
