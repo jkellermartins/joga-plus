@@ -456,16 +456,16 @@
         </div>
 
         <div class="field" data-required data-group="location">
-          <label class="field-label">Preferred Location <span class="req">*</span></label>
+          <label class="field-label">Preferred Locations <span class="req">*</span><span class="opt">(select all that apply)</span></label>
           <div class="options">
-            <label class="pill"><input type="radio" name="location" value="Potomac"><span class="pill-label">Potomac</span></label>
-            <label class="pill"><input type="radio" name="location" value="Bethesda"><span class="pill-label">Bethesda</span></label>
-            <label class="pill"><input type="radio" name="location" value="Rockville"><span class="pill-label">Rockville</span></label>
-            <label class="pill"><input type="radio" name="location" value="Silver Spring"><span class="pill-label">Silver Spring</span></label>
-            <label class="pill"><input type="radio" name="location" value="Georgetown"><span class="pill-label">Georgetown</span></label>
-            <label class="pill"><input type="radio" name="location" value="Other"><span class="pill-label">Other</span></label>
+            <label class="pill"><input type="checkbox" name="location" value="Potomac"><span class="pill-label">Potomac</span></label>
+            <label class="pill"><input type="checkbox" name="location" value="Bethesda"><span class="pill-label">Bethesda</span></label>
+            <label class="pill"><input type="checkbox" name="location" value="Rockville"><span class="pill-label">Rockville</span></label>
+            <label class="pill"><input type="checkbox" name="location" value="Silver Spring"><span class="pill-label">Silver Spring</span></label>
+            <label class="pill"><input type="checkbox" name="location" value="Georgetown"><span class="pill-label">Georgetown</span></label>
+            <label class="pill"><input type="checkbox" name="location" value="Other"><span class="pill-label">Other</span></label>
           </div>
-          <div class="field-error">Please pick a location.</div>
+          <div class="field-error">Pick at least one location.</div>
         </div>
 
         <div class="field" data-required data-group="availability">
@@ -541,7 +541,7 @@
           email:       fd.get('email'),
           playedBefore: fd.get('playedBefore'),
           skillLevel:   fd.get('skillLevel'),
-          location:    fd.get('location'),
+          location:    fd.getAll('location').join(', '),
           availability: fd.getAll('availability'),
           notes:       fd.get('notes') || '',
           website:     fd.get('website') || '',

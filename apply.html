@@ -277,16 +277,16 @@
       <div class="step-sub">Where and when can the athlete train?</div>
 
       <div class="field" data-required data-group="location">
-        <label class="top">Preferred Location <span class="req">*</span></label>
+        <label class="top">Preferred Locations <span class="req">*</span><span class="opt">(select all that apply)</span></label>
         <div class="options">
-          <label class="pill"><input type="radio" name="location" value="Potomac"><span class="pill-label">Potomac</span></label>
-          <label class="pill"><input type="radio" name="location" value="Bethesda"><span class="pill-label">Bethesda</span></label>
-          <label class="pill"><input type="radio" name="location" value="Rockville"><span class="pill-label">Rockville</span></label>
-          <label class="pill"><input type="radio" name="location" value="Silver Spring"><span class="pill-label">Silver Spring</span></label>
-          <label class="pill"><input type="radio" name="location" value="Georgetown"><span class="pill-label">Georgetown</span></label>
-          <label class="pill"><input type="radio" name="location" value="Other"><span class="pill-label">Other</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Potomac"><span class="pill-label">Potomac</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Bethesda"><span class="pill-label">Bethesda</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Rockville"><span class="pill-label">Rockville</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Silver Spring"><span class="pill-label">Silver Spring</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Georgetown"><span class="pill-label">Georgetown</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Other"><span class="pill-label">Other</span></label>
         </div>
-        <div class="field-error">Please select a location.</div>
+        <div class="field-error">Pick at least one location.</div>
       </div>
 
       <div class="field" data-required data-group="availability">
@@ -612,8 +612,9 @@
   function collectData() {
     const fd = new FormData(form);
     const out = {};
-    ['athleteName','parentName','phone','email','age','sport','level','location','notes']
+    ['athleteName','parentName','phone','email','age','sport','level','notes']
       .forEach(k => { const v = fd.get(k); if (v) out[k] = v; });
+    out.location     = fd.getAll('location').join(', ');
     out.goals        = fd.getAll('goals');
     out.availability = fd.getAll('availability');
     out.consent      = !!fd.get('consent');
