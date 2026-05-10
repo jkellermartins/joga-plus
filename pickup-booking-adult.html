@@ -306,15 +306,8 @@
   <!-- ════ Scripts ════ -->
   <script src="js/joga-leads.js"></script>
   <script>
-    // ── Session data (edit freely; swap to fetch() later) ──
-    const SESSIONS = [
-      { id: "ad-sc-01", sport: "Soccer",    location: "Rockville, MD",       day: "Saturday",  date: "May 3",   time: "9:00 AM – 11:00 AM", price: 12, spots: "8 spots left" },
-      { id: "ad-sc-02", sport: "Soccer",    location: "Arlington, VA",       day: "Sunday",    date: "May 4",   time: "10:00 AM – 12:00 PM", price: 15, spots: "Filling fast" },
-      { id: "ad-fv-01", sport: "Futvolley", location: "Rockville, MD",       day: "Saturday",  date: "May 3",   time: "1:00 PM – 3:00 PM",  price: 15, spots: "4 spots left" },
-      { id: "ad-fv-02", sport: "Futvolley", location: "Washington DC",       day: "Wednesday", date: "May 7",   time: "7:00 PM – 9:00 PM",  price: 10, spots: "10 spots left" },
-      { id: "ad-sc-03", sport: "Soccer",    location: "Bethesda, MD",        day: "Friday",    date: "May 9",   time: "6:30 PM – 8:30 PM",  price: 12, spots: "15 spots left" },
-      { id: "ad-fv-03", sport: "Futvolley", location: "Falls Church, VA",    day: "Saturday",  date: "May 10",  time: "11:00 AM – 1:00 PM", price: 15, spots: "Filling fast" }
-    ];
+    // Sessions are loaded live from the Sheet via Apps Script; see renderSessions() / loadSessions() below.
+    let SESSIONS = [];
 
     // ── Menu toggle ──
     const menuToggle = document.querySelector(".menu-toggle");
@@ -332,25 +325,42 @@
       });
     });
 
-    // ── Render sessions ──
     const sessionsEl = document.getElementById("pbSessions");
-    sessionsEl.innerHTML = SESSIONS.map((s) => `
-      <article class="pb-session-card" data-session-id="${s.id}">
-        <div class="pb-session-top">
-          <span class="pb-sport-tag${s.sport === "Futvolley" ? " fv" : ""}">${s.sport}</span>
-          <span class="pb-session-meta${s.spots.toLowerCase().includes("filling") || s.spots.startsWith("4") ? " filling" : ""}">${s.spots}</span>
-        </div>
-        <h3 class="pb-session-location">${s.location}</h3>
-        <div class="pb-session-datetime">
-          <span class="pb-session-day">${s.day} &middot; ${s.date}</span>
-          <span class="pb-session-time">${s.time}</span>
-        </div>
-        <div class="pb-session-bottom">
-          <div class="pb-session-price">$${s.price}<small>/ session</small></div>
-          <button type="button" class="pb-reserve-btn" data-reserve="${s.id}">Reserve</button>
-        </div>
-      </article>
-    `).join("");
+
+    function renderSessions() {
+      if (!SESSIONS.length) {
+        sessionsEl.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--gray-300);padding:2rem;">No upcoming pickups right now &mdash; new sessions are added each week. <a href="https://wa.me/15745361983" target="_blank" rel="noopener" style="color:var(--lime);">Message us on WhatsApp</a> and we&rsquo;ll let you know first.</p>`;
+        return;
+      }
+      sessionsEl.innerHTML = SESSIONS.map((s) => {
+        const spots = String(s.spots || "");
+        const filling = spots.toLowerCase().includes("filling") || spots.startsWith("4");
+        return `
+        <article class="pb-session-card" data-session-id="${s.id}">
+          <div class="pb-session-top">
+            <span class="pb-sport-tag${s.sport === "Futvolley" ? " fv" : ""}">${s.sport}</span>
+            <span class="pb-session-meta${filling ? " filling" : ""}">${spots}</span>
+          </div>
+          <h3 class="pb-session-location">${s.location}</h3>
+          <div class="pb-session-datetime">
+            <span class="pb-session-day">${s.day} &middot; ${s.date}</span>
+            <span class="pb-session-time">${s.time}</span>
+          </div>
+          <div class="pb-session-bottom">
+            <div class="pb-session-price">$${s.price}<small>/ session</small></div>
+            <button type="button" class="pb-reserve-btn" data-reserve="${s.id}">Reserve</button>
+          </div>
+        </article>`;
+      }).join("");
+    }
+
+    async function loadSessions() {
+      sessionsEl.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--gray-300);padding:2rem;">Loading upcoming sessions&hellip;</p>`;
+      SESSIONS = await (window.JogaFetchSessions ? window.JogaFetchSessions("adult") : Promise.resolve([]));
+      renderSessions();
+    }
+
+    loadSessions();
 
     // ── State + step navigation ──
     let currentStep = 1;
@@ -376,39 +386,36 @@
       btn.addEventListener("click", () => goToStep(parseInt(btn.dataset.prev)));
     });
 
-    // ── Session selection ──
+    // ── Session selection (event delegation — works after re-render) ──
     const step2Continue = document.getElementById("pbStep2Continue");
-    document.querySelectorAll("[data-reserve]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = btn.dataset.reserve;
-        const session = SESSIONS.find((s) => s.id === id);
-        if (!session) return;
-        selectedSession = session;
+    sessionsEl.addEventListener("click", (ev) => {
+      const btn = ev.target.closest("[data-reserve]");
+      if (!btn) return;
+      const id = btn.dataset.reserve;
+      const session = SESSIONS.find((s) => s.id === id);
+      if (!session) return;
+      selectedSession = session;
 
-        document.querySelectorAll(".pb-session-card").forEach((c) => {
-          c.classList.toggle("selected", c.dataset.sessionId === id);
-        });
-        document.querySelectorAll(".pb-reserve-btn").forEach((b) => {
-          b.textContent = b.dataset.reserve === id ? "Selected" : "Reserve";
-        });
-
-        // Hidden form fields
-        document.getElementById("fSessionId").value = session.id;
-        document.getElementById("fSessionSport").value = session.sport;
-        document.getElementById("fSessionLocation").value = session.location;
-        document.getElementById("fSessionDate").value = session.day + ", " + session.date;
-        document.getElementById("fSessionTime").value = session.time;
-        document.getElementById("fSessionPrice").value = "$" + session.price;
-        document.getElementById("sportSelected").value = session.sport;
-
-        // Enable continue
-        step2Continue.disabled = false;
-        step2Continue.style.opacity = "1";
-        step2Continue.style.pointerEvents = "auto";
-
-        // Short "Selected" moment, then advance
-        setTimeout(() => goToStep(3), 550);
+      document.querySelectorAll(".pb-session-card").forEach((c) => {
+        c.classList.toggle("selected", c.dataset.sessionId === id);
       });
+      document.querySelectorAll(".pb-reserve-btn").forEach((b) => {
+        b.textContent = b.dataset.reserve === id ? "Selected" : "Reserve";
+      });
+
+      document.getElementById("fSessionId").value = session.id;
+      document.getElementById("fSessionSport").value = session.sport;
+      document.getElementById("fSessionLocation").value = session.location;
+      document.getElementById("fSessionDate").value = session.day + ", " + session.date;
+      document.getElementById("fSessionTime").value = session.time;
+      document.getElementById("fSessionPrice").value = "$" + session.price;
+      document.getElementById("sportSelected").value = session.sport;
+
+      step2Continue.disabled = false;
+      step2Continue.style.opacity = "1";
+      step2Continue.style.pointerEvents = "auto";
+
+      setTimeout(() => goToStep(3), 550);
     });
 
     // ── Step 3 → Step 4: validate + submit ──
@@ -452,6 +459,26 @@
       const data = { formType: 'pickup' };
       fd.forEach((v, k) => { data[k] = v; });
       JogaSubmit(data).catch(() => {});
+
+      // Stripe Payment Link, if the session has one
+      const paymentRoot = document.getElementById("payment-root");
+      const footerNote  = document.querySelector(".pb-confirm-footer-note");
+      if (selectedSession.stripeUrl) {
+        const params = new URLSearchParams({
+          prefilled_email: data.email || '',
+          client_reference_id: `${selectedSession.id}|${data.email || ''}`,
+        }).toString();
+        const sep = selectedSession.stripeUrl.includes('?') ? '&' : '?';
+        const payHref = selectedSession.stripeUrl + sep + params;
+        paymentRoot.innerHTML = `
+          <a href="${payHref}" class="btn btn-primary" style="display:block;text-align:center;margin-top:1rem;">
+            Pay $${selectedSession.price} to Confirm Your Spot &rarr;
+          </a>`;
+        if (footerNote) footerNote.textContent = "Secure checkout via Stripe. You'll receive a receipt by email.";
+      } else {
+        paymentRoot.innerHTML = "";
+        if (footerNote) footerNote.textContent = "Reservation reference sent to your email. Payment instructions to follow.";
+      }
 
       goToStep(4);
     });

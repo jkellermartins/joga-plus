@@ -22,6 +22,25 @@
 
 const NOTIFY_EMAIL = 'jogaplusacademy@gmail.com';
 
+// Sessions tab — drives the live pickup schedule on /pickup-booking-*.html.
+// Owner edits this tab in the sheet; pages fetch via doGet({action:'sessions',audience:...}).
+const SESSIONS_TAB = 'Sessions';
+const SESSIONS_HEADERS = ['id','audience','sport','location','day','date','time','price','spots','stripeUrl','active'];
+const SESSIONS_SEED = [
+  { id:'ad-sc-01', audience:'adult', sport:'Soccer',    location:'Rockville, MD',    day:'Saturday',  date:'May 16', time:'9:00 AM – 11:00 AM',  price:12, spots:'8 spots left',   stripeUrl:'', active:'yes' },
+  { id:'ad-sc-02', audience:'adult', sport:'Soccer',    location:'Arlington, VA',    day:'Sunday',    date:'May 17', time:'10:00 AM – 12:00 PM', price:15, spots:'Filling fast',   stripeUrl:'', active:'yes' },
+  { id:'ad-fv-01', audience:'adult', sport:'Futvolley', location:'Rockville, MD',    day:'Saturday',  date:'May 16', time:'1:00 PM – 3:00 PM',   price:15, spots:'4 spots left',   stripeUrl:'', active:'yes' },
+  { id:'ad-fv-02', audience:'adult', sport:'Futvolley', location:'Washington DC',    day:'Wednesday', date:'May 20', time:'7:00 PM – 9:00 PM',   price:10, spots:'10 spots left',  stripeUrl:'', active:'yes' },
+  { id:'ad-sc-03', audience:'adult', sport:'Soccer',    location:'Bethesda, MD',     day:'Friday',    date:'May 22', time:'6:30 PM – 8:30 PM',   price:12, spots:'15 spots left',  stripeUrl:'', active:'yes' },
+  { id:'ad-fv-03', audience:'adult', sport:'Futvolley', location:'Falls Church, VA', day:'Saturday',  date:'May 23', time:'11:00 AM – 1:00 PM',  price:15, spots:'Filling fast',   stripeUrl:'', active:'yes' },
+  { id:'kd-sc-01', audience:'kids',  sport:'Soccer',    location:'Rockville, MD',    day:'Saturday',  date:'May 16', time:'10:00 AM – 11:30 AM', price:12, spots:'12 spots left',  stripeUrl:'', active:'yes' },
+  { id:'kd-sc-02', audience:'kids',  sport:'Soccer',    location:'Arlington, VA',    day:'Sunday',    date:'May 17', time:'9:00 AM – 10:30 AM',  price:10, spots:'Filling fast',   stripeUrl:'', active:'yes' },
+  { id:'kd-fv-01', audience:'kids',  sport:'Futvolley', location:'Rockville, MD',    day:'Saturday',  date:'May 16', time:'12:00 PM – 1:30 PM',  price:15, spots:'5 spots left',   stripeUrl:'', active:'yes' },
+  { id:'kd-fv-02', audience:'kids',  sport:'Futvolley', location:'Washington DC',    day:'Sunday',    date:'May 17', time:'11:00 AM – 12:30 PM', price:12, spots:'8 spots left',   stripeUrl:'', active:'yes' },
+  { id:'kd-sc-03', audience:'kids',  sport:'Soccer',    location:'Bethesda, MD',     day:'Saturday',  date:'May 23', time:'10:00 AM – 11:30 AM', price:12, spots:'20 spots left',  stripeUrl:'', active:'yes' },
+  { id:'kd-fv-03', audience:'kids',  sport:'Futvolley', location:'Falls Church, VA', day:'Saturday',  date:'May 23', time:'1:00 PM – 2:30 PM',   price:15, spots:'Filling fast',   stripeUrl:'', active:'yes' },
+];
+
 // One row of metadata per form type: tab name, ordered headers, row builder, alert subject builder.
 const FORM_TYPES = {
   application: {
@@ -138,10 +157,46 @@ function doPost(e) {
   }
 }
 
-function doGet() {
+function doGet(e) {
+  const action = (e && e.parameter && e.parameter.action) || '';
+  if (action === 'sessions') {
+    return jsonOut_(getSessions_(e.parameter.audience));
+  }
   return ContentService
     .createTextOutput('JOGA+ application endpoint is live.')
     .setMimeType(ContentService.MimeType.TEXT);
+}
+
+function getSessions_(audience) {
+  const sheet = getOrCreateSessionsSheet_();
+  const data = sheet.getDataRange().getValues();
+  if (data.length < 2) return [];
+  const headers = data[0].map(h => String(h));
+  return data.slice(1)
+    .map(row => {
+      const o = {};
+      headers.forEach((h, i) => { o[h] = row[i]; });
+      return o;
+    })
+    .filter(r => String(r.active || '').toLowerCase() === 'yes')
+    .filter(r => !audience || String(r.audience || '').toLowerCase() === String(audience).toLowerCase());
+}
+
+function getOrCreateSessionsSheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(SESSIONS_TAB);
+  if (!sheet) {
+    sheet = ss.insertSheet(SESSIONS_TAB);
+    sheet.appendRow(SESSIONS_HEADERS);
+    SESSIONS_SEED.forEach(s => sheet.appendRow(SESSIONS_HEADERS.map(h => s[h] !== undefined ? s[h] : '')));
+    sheet.getRange(1, 1, 1, SESSIONS_HEADERS.length)
+      .setFontWeight('bold')
+      .setBackground('#000000')
+      .setFontColor('#C5F73A');
+    sheet.setFrozenRows(1);
+    sheet.setColumnWidths(1, SESSIONS_HEADERS.length, 140);
+  }
+  return sheet;
 }
 
 function sendOwnerAlert_(meta, data, submittedAt) {

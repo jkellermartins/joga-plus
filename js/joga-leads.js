@@ -58,5 +58,39 @@
     }
   }
 
+  /**
+   * Fetches live pickup sessions from the Apps Script Web App.
+   * Normalizes the `date` field — when a sheet cell is typed as a date,
+   * Apps Script returns an ISO timestamp; we render it as e.g. "May 16".
+   * Returns [] on failure so pages can fall back to a friendly empty state.
+   */
+  async function fetchSessions(audience) {
+    try {
+      const url = ENDPOINT + '?action=sessions' + (audience ? '&audience=' + encodeURIComponent(audience) : '');
+      const res = await fetch(url, { method: 'GET', redirect: 'follow' });
+      if (!res.ok) throw new Error('Sessions fetch returned ' + res.status);
+      const list = await res.json();
+      return Array.isArray(list) ? list.map(normalizeSession) : [];
+    } catch (err) {
+      console.warn('[Joga+] fetchSessions failed', err);
+      return [];
+    }
+  }
+
+  function normalizeSession(s) {
+    return Object.assign({}, s, { date: prettyDate(s.date) });
+  }
+
+  function prettyDate(v) {
+    if (v == null || v === '') return '';
+    // Sheets-typed-as-date → ISO string like "2026-05-16T04:00:00.000Z"
+    if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v)) {
+      const d = new Date(v);
+      if (!isNaN(d)) return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+    }
+    return String(v);
+  }
+
   window.JogaSubmit = submit;
+  window.JogaFetchSessions = fetchSessions;
 })();
