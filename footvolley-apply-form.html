@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Apply for Joga+ Footvolley — Sessions Application</title>
+<meta name="description" content="Apply for Joga+ Footvolley sessions in the DMV. Tell us about your level, location, and availability — we'll match you with the right group." />
+<meta name="robots" content="noindex,follow" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23000'/><path d='M44 22h12v22h22v12H56v22H44V56H22V44h22z' fill='%23C5F73A'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000;
+    --bg-elev: #0a0a0a;
+    --bg-card: #111;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.18);
+    --text: #fff;
+    --text-muted: rgba(255,255,255,0.55);
+    --text-dim: rgba(255,255,255,0.35);
+    --neon: #C5F73A;
+    --neon-glow: rgba(197,247,58,0.45);
+    --error: #ff4d4d;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --transition: 320ms cubic-bezier(0.22,1,0.36,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(197,247,58,0.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 100%, rgba(197,247,58,0.05), transparent 60%),
+      var(--bg);
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .shell { max-width: 760px; margin: 0 auto; padding: 28px 22px 80px; }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .brand img {
+    height: 38px;
+    width: auto;
+    filter: drop-shadow(0 0 18px rgba(255,255,255,0.35));
+  }
+  .nav-back {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color var(--transition);
+  }
+  .nav-back:hover { color: var(--neon); }
+
+  /* Hero */
+  .form-hero { margin-bottom: 32px; }
+  .form-hero-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  .form-hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 6vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+  .form-hero h1 em { font-style: normal; color: var(--neon); }
+  .form-hero p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 560px;
+  }
+
+  /* Form card */
+  .apply-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(2rem, 5vw, 3rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .apply-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(700px 240px at 50% 0%, rgba(197,247,58,0.05), transparent 70%);
+    pointer-events: none;
+  }
+  .field { margin-bottom: 22px; }
+  .field-label {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .field-label .req { color: var(--neon); margin-left: 4px; }
+  .field-label .opt { color: var(--text-dim); margin-left: 6px; font-size: 11px; letter-spacing: 0.1em; }
+  .field-input,
+  .field-textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 16px;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  }
+  .field-input::placeholder, .field-textarea::placeholder { color: var(--text-dim); }
+  .field-input:focus, .field-textarea:focus {
+    outline: none;
+    border-color: var(--neon);
+    background: rgba(197,247,58,0.04);
+    box-shadow: 0 0 0 4px rgba(197,247,58,0.12);
+  }
+  .field-textarea { min-height: 100px; resize: vertical; }
+  .field.error .field-input,
+  .field.error .field-textarea,
+  .field.error .options { border-color: var(--error); }
+  .field-error { display: none; color: var(--error); font-size: 12px; margin-top: 8px; }
+  .field.error .field-error { display: block; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 540px) { .row { grid-template-columns: 1fr; } }
+  .options { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill { position: relative; cursor: pointer; user-select: none; }
+  .pill input { position: absolute; opacity: 0; pointer-events: none; }
+  .pill-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 18px;
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    font-size: 14px;
+    color: var(--text);
+    transition: all var(--transition);
+  }
+  .pill:hover .pill-label {
+    border-color: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.03);
+  }
+  .pill input:checked + .pill-label {
+    background: var(--neon);
+    color: #000;
+    border-color: var(--neon);
+    font-weight: 600;
+    box-shadow: 0 0 24px var(--neon-glow);
+  }
+  .submit-row { margin-top: 28px; }
+  .submit-btn {
+    width: 100%;
+    padding: 18px 24px;
+    border-radius: 100px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--neon);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(197,247,58,0.3); }
+  .submit-btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .form-trust {
+    margin-top: 14px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color var(--transition);
+  }
+  .footer-link:hover { color: var(--neon); }
+  .footer-icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+  @media (max-width: 540px) {
+    .shell { padding: 22px 18px 60px; }
+    .header { margin-bottom: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ════ Header ════ -->
+  <header class="header">
+    <a href="index.html" class="brand" aria-label="Joga+">
+      <img src="images/joga-plus-logo.png" alt="Joga+" />
+    </a>
+    <a href="footvolley-apply.html" class="nav-back">&larr; Back</a>
+  </header>
+
+  <!-- ════ Form Hero ════ -->
+  <div class="form-hero">
+    <div class="form-hero-eyebrow">Apply Now</div>
+    <h1>Apply for <em>Joga+</em> Footvolley.</h1>
+    <p>Tell us about your level, location, and availability — we'll match you with the right group within 24 hours.</p>
+  </div>
+
+  <!-- ════ Form ════ -->
+  <div class="apply-card">
+    <form id="fvForm" novalidate>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
+
+      <div class="row">
+        <div class="field" data-required>
+          <label class="field-label" for="fvName">Full Name <span class="req">*</span></label>
+          <input class="field-input" id="fvName" name="name" type="text" placeholder="Your full name" autocomplete="name">
+          <div class="field-error">Please enter your name.</div>
+        </div>
+        <div class="field" data-required data-validate="phone">
+          <label class="field-label" for="fvPhone">Phone <span class="req">*</span></label>
+          <input class="field-input" id="fvPhone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel">
+          <div class="field-error">Please enter a valid phone number.</div>
+        </div>
+      </div>
+
+      <div class="field" data-required data-validate="email">
+        <label class="field-label" for="fvEmail">Email <span class="req">*</span></label>
+        <input class="field-input" id="fvEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email">
+        <div class="field-error">Please enter a valid email.</div>
+      </div>
+
+      <div class="field" data-required data-group="playedBefore">
+        <label class="field-label">Have you trained with Joga+ before? <span class="req">*</span></label>
+        <div class="options">
+          <label class="pill"><input type="radio" name="playedBefore" value="Yes"><span class="pill-label">Yes</span></label>
+          <label class="pill"><input type="radio" name="playedBefore" value="No"><span class="pill-label">No, first time</span></label>
+          <label class="pill"><input type="radio" name="playedBefore" value="A while ago"><span class="pill-label">A while ago</span></label>
+        </div>
+        <div class="field-error">Please select an option.</div>
+      </div>
+
+      <div class="field" data-required data-group="skillLevel">
+        <label class="field-label">Skill Level <span class="req">*</span></label>
+        <div class="options">
+          <label class="pill"><input type="radio" name="skillLevel" value="Beginner"><span class="pill-label">Beginner</span></label>
+          <label class="pill"><input type="radio" name="skillLevel" value="Intermediate"><span class="pill-label">Intermediate</span></label>
+          <label class="pill"><input type="radio" name="skillLevel" value="Advanced"><span class="pill-label">Advanced</span></label>
+        </div>
+        <div class="field-error">Please select your level.</div>
+      </div>
+
+      <div class="field" data-required data-group="location">
+        <label class="field-label">Preferred Locations <span class="req">*</span><span class="opt">(select all that apply)</span></label>
+        <div class="options">
+          <label class="pill"><input type="checkbox" name="location" value="Potomac"><span class="pill-label">Potomac</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Bethesda"><span class="pill-label">Bethesda</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Rockville"><span class="pill-label">Rockville</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Silver Spring"><span class="pill-label">Silver Spring</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Georgetown"><span class="pill-label">Georgetown</span></label>
+          <label class="pill"><input type="checkbox" name="location" value="Other"><span class="pill-label">Other</span></label>
+        </div>
+        <div class="field-error">Pick at least one location.</div>
+      </div>
+
+      <div class="field" data-required data-group="availability">
+        <label class="field-label">Preferred Availability <span class="req">*</span><span class="opt">(select all)</span></label>
+        <div class="options">
+          <label class="pill"><input type="checkbox" name="availability" value="Weekday evenings"><span class="pill-label">Weekday evenings</span></label>
+          <label class="pill"><input type="checkbox" name="availability" value="Weekend mornings"><span class="pill-label">Weekend mornings</span></label>
+          <label class="pill"><input type="checkbox" name="availability" value="Weekend afternoons"><span class="pill-label">Weekend afternoons</span></label>
+        </div>
+        <div class="field-error">Pick at least one window.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="fvNotes">Anything else? <span class="opt">(optional)</span></label>
+        <textarea class="field-textarea" id="fvNotes" name="notes" placeholder="Past sessions you've joined, who introduced you, schedule notes, etc."></textarea>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="submit-btn" id="fvSubmit">Apply to Join &rarr;</button>
+        <p class="form-trust">Limited spots available. We'll contact you within 24 hours.</p>
+      </div>
+    </form>
+  </div>
+
+  <!-- ════ Footer ════ -->
+  <footer class="footer">
+    <a class="footer-link" href="https://instagram.com/jogaplustraining" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.21-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.21 2.16 12c0-3.2.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zM12 16a4 4 0 110-8 4 4 0 010 8zm6.41-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+      @jogaplustraining
+    </a>
+    <a class="footer-link" href="https://jogaplusacademy.com">
+      <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      jogaplusacademy.com
+    </a>
+  </footer>
+</div>
+
+<script src="js/joga-leads.js"></script>
+<script>
+  (function () {
+    const form    = document.getElementById('fvForm');
+    const submit  = document.getElementById('fvSubmit');
+    const original = submit.textContent;
+
+    function validate() {
+      let ok = true;
+      let firstBad = null;
+      form.querySelectorAll('.field').forEach(field => {
+        field.classList.remove('error');
+        if (!field.hasAttribute('data-required')) return;
+        const type = field.dataset.validate;
+        const isGroup = !!field.dataset.group;
+        let bad = false;
+        if (isGroup) {
+          bad = field.querySelectorAll('input:checked').length === 0;
+        } else {
+          const input = field.querySelector('input, textarea');
+          const v = (input.value || '').trim();
+          if (!v) bad = true;
+          else if (type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) bad = true;
+          else if (type === 'phone' && v.replace(/\D/g, '').length < 7) bad = true;
+        }
+        if (bad) { field.classList.add('error'); ok = false; if (!firstBad) firstBad = field; }
+      });
+      if (!ok && firstBad) firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return ok;
+    }
+
+    form.addEventListener('input', e => {
+      const f = e.target.closest('.field'); if (f) f.classList.remove('error');
+    });
+    form.addEventListener('change', e => {
+      const f = e.target.closest('.field'); if (f) f.classList.remove('error');
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate()) return;
+      submit.disabled = true; submit.textContent = 'Sending…';
+      const fd = new FormData(form);
+      const data = {
+        formType:    'footvolley_apply',
+        name:        fd.get('name'),
+        phone:       fd.get('phone'),
+        email:       fd.get('email'),
+        playedBefore: fd.get('playedBefore'),
+        skillLevel:   fd.get('skillLevel'),
+        location:    fd.getAll('location').join(', '),
+        availability: fd.getAll('availability'),
+        notes:       fd.get('notes') || '',
+        website:     fd.get('website') || '',
+      };
+      const result = await JogaSubmit(data);
+      if (result.ok) {
+        window.location.href = 'thank-you-footvolley.html';
+      } else {
+        submit.disabled = false; submit.textContent = original;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
