@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Free 7-Day Ball Mastery Challenge — Joga+ Academy</title>
+<meta name="description" content="A free 7-day ball mastery challenge for youth soccer players. Help your child improve control, coordination, and confidence in just 10 minutes a day." />
+<meta name="keywords" content="free soccer training guide, ball mastery for kids, youth soccer drills at home, joga+ free guide" />
+<link rel="canonical" href="https://jogaplusacademy.com/free-ball-mastery-guide">
+<meta property="og:title" content="Free 7-Day Ball Mastery Challenge — Joga+ Academy">
+<meta property="og:description" content="Help your child improve control, coordination, and confidence in just 10 minutes a day.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jogaplusacademy.com/free-ball-mastery-guide">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Joga+">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23000'/><path d='M44 22h12v22h22v12H56v22H44V56H22V44h22z' fill='%23C5F73A'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000;
+    --bg-elev: #0a0a0a;
+    --bg-card: #111;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.18);
+    --text: #fff;
+    --text-muted: rgba(255,255,255,0.55);
+    --text-dim: rgba(255,255,255,0.35);
+    --neon: #C5F73A;
+    --neon-glow: rgba(197,247,58,0.45);
+    --error: #ff4d4d;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --transition: 320ms cubic-bezier(0.22,1,0.36,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(197,247,58,0.1), transparent 60%),
+      radial-gradient(900px 500px at -10% 100%, rgba(197,247,58,0.05), transparent 60%),
+      var(--bg);
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .shell { max-width: 760px; margin: 0 auto; padding: 28px 22px 80px; }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 56px;
+  }
+  .brand img {
+    height: 38px;
+    width: auto;
+    filter: drop-shadow(0 0 18px rgba(255,255,255,0.35));
+  }
+  .nav-back {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color var(--transition);
+  }
+  .nav-back:hover { color: var(--neon); }
+
+  /* ── Hero ── */
+  .hero { text-align: left; max-width: 620px; margin-bottom: 64px; }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #000;
+    background: var(--neon);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 22px;
+    font-weight: 700;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(36px, 7vw, 60px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    margin-bottom: 18px;
+  }
+  h1 em { font-style: normal; color: var(--neon); }
+  .lede {
+    font-size: 17px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── Section frame ── */
+  .section { margin-bottom: 64px; }
+  .section-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  h2 em { font-style: normal; color: var(--neon); }
+
+  /* ── Benefits ── */
+  .benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .benefit {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 18px 18px 52px;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    position: relative;
+    transition: border-color var(--transition);
+  }
+  .benefit:hover { border-color: rgba(197,247,58,0.3); }
+  .benefit::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(197,247,58,0.12);
+    border: 1px solid var(--neon);
+  }
+  .benefit::after {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: calc(50% - 5px);
+    width: 11px;
+    height: 5px;
+    border-left: 2px solid var(--neon);
+    border-bottom: 2px solid var(--neon);
+    transform: rotate(-45deg);
+  }
+
+  /* ── Form ── */
+  .form-card {
+    background: linear-gradient(135deg, rgba(197,247,58,0.08), rgba(197,247,58,0.02));
+    border: 1px solid rgba(197,247,58,0.4);
+    border-radius: 24px;
+    padding: clamp(2rem, 5vw, 3rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .form-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(700px 240px at 50% 0%, rgba(197,247,58,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .form-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 12px;
+  }
+  .form-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(22px, 4vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+  .field { margin-bottom: 20px; }
+  .field-label {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .field-label .req { color: var(--neon); margin-left: 4px; }
+  .field-input,
+  .field-select {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 16px;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  }
+  .field-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23ffffff' stroke-width='1.5'%3E%3Cpolyline points='1 1 6 6 11 1'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; background-size: 12px; padding-right: 44px; }
+  .field-input::placeholder { color: var(--text-dim); }
+  .field-input:focus, .field-select:focus {
+    outline: none;
+    border-color: var(--neon);
+    background: rgba(197,247,58,0.04);
+    box-shadow: 0 0 0 4px rgba(197,247,58,0.12);
+  }
+  .field.error .field-input,
+  .field.error .field-select { border-color: var(--error); }
+  .field-error { display: none; color: var(--error); font-size: 12px; margin-top: 8px; }
+  .field.error .field-error { display: block; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 540px) { .row { grid-template-columns: 1fr; } }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 18px 24px;
+    border-radius: 100px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--neon);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(197,247,58,0.3); }
+  .submit-btn[disabled] { opacity: 0.55; cursor: not-allowed; transform: none; }
+  .form-trust {
+    margin-top: 14px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* ── Confirmation (shown after submit) ── */
+  .confirm {
+    display: none;
+    text-align: center;
+    padding: 16px 0 4px;
+  }
+  .confirm.active { display: block; animation: fadeUp 460ms cubic-bezier(0.22,1,0.36,1); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .confirm-check {
+    width: 72px; height: 72px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: rgba(197,247,58,0.1);
+    border: 1px solid rgba(197,247,58,0.45);
+    display: grid;
+    place-items: center;
+    color: var(--neon);
+    box-shadow: 0 0 50px rgba(197,247,58,0.3);
+  }
+  .confirm h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .confirm p {
+    color: var(--text-muted);
+    margin: 0 auto 22px;
+    max-width: 460px;
+  }
+
+  /* ── Trust ── */
+  .trust-line {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    font-style: italic;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 64px;
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    text-align: center;
+    padding: 24px 0;
+  }
+  .final-cta h2 { margin-bottom: 18px; }
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 32px;
+    border-radius: 100px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--neon);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .btn-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(197,247,58,0.3); }
+  .btn-arrow { transition: transform var(--transition); display: inline-block; }
+  .btn-cta:hover .btn-arrow { transform: translateX(4px); }
+
+  @media (max-width: 540px) {
+    .header { margin-bottom: 36px; }
+    .hero { margin-bottom: 48px; }
+    .section { margin-bottom: 48px; }
+    .form-card { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="brand" aria-label="Joga+">
+      <img src="images/joga-plus-logo.png" alt="Joga+" />
+    </a>
+    <a href="index.html" class="nav-back">&larr; Home</a>
+  </header>
+
+  <!-- 1. Hero -->
+  <section class="hero">
+    <span class="eyebrow">Free Download</span>
+    <h1>Free 7-Day <em>Ball Mastery</em> Challenge.</h1>
+    <p class="lede">Help your child improve control, coordination, and confidence in just 10 minutes a day. A simple, structured 7-day program built by Joga+ coaches &mdash; no experience required.</p>
+  </section>
+
+  <!-- 2. Benefits -->
+  <section class="section">
+    <div class="section-eyebrow">Why Parents Love It</div>
+    <h2>Built for <em>real</em> families.</h2>
+    <ul class="benefits">
+      <li class="benefit">Easy to follow &mdash; clear written and visual instructions</li>
+      <li class="benefit">No experience needed &mdash; works for total beginners</li>
+      <li class="benefit">Can be done at home &mdash; backyard, garage, hallway</li>
+      <li class="benefit">Designed by professional coaches with pro &amp; D1 backgrounds</li>
+    </ul>
+  </section>
+
+  <!-- 3. Form -->
+  <section class="section" id="form-section">
+    <!-- Replace with Google Form embed or email integration if you'd rather use one;
+         the native form below already routes leads into the JOGA+ Apps Script
+         pipeline (Free Guide Downloads tab + All Leads master). -->
+    <div class="form-card">
+      <div class="form-eyebrow">Get the Guide</div>
+      <h3 class="form-title">Tell us where to send the PDF.</h3>
+
+      <form id="freeGuideForm" novalidate>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
+
+        <div class="row">
+          <div class="field" data-required>
+            <label class="field-label" for="fgParent">Parent Name <span class="req">*</span></label>
+            <input class="field-input" id="fgParent" name="parentName" type="text" placeholder="Your full name" autocomplete="name">
+            <div class="field-error">Please enter your name.</div>
+          </div>
+          <div class="field" data-required data-validate="email">
+            <label class="field-label" for="fgEmail">Email <span class="req">*</span></label>
+            <input class="field-input" id="fgEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email">
+            <div class="field-error">Please enter a valid email.</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field" data-required data-validate="age">
+            <label class="field-label" for="fgAge">Player Age <span class="req">*</span></label>
+            <input class="field-input" id="fgAge" name="playerAge" type="number" min="4" max="18" placeholder="e.g. 10">
+            <div class="field-error">Please enter a valid age (4&ndash;18).</div>
+          </div>
+          <div class="field" data-required>
+            <label class="field-label" for="fgLevel">Skill Level <span class="req">*</span></label>
+            <select class="field-select" id="fgLevel" name="skillLevel">
+              <option value="" disabled selected>Select a level</option>
+              <option value="Beginner">Beginner &mdash; just starting</option>
+              <option value="Intermediate">Intermediate &mdash; some experience</option>
+              <option value="Advanced">Advanced &mdash; competitive / travel team</option>
+            </select>
+            <div class="field-error">Please pick a level.</div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="fgSubmit">Get Free Guide &rarr;</button>
+        <p class="form-trust">No spam. Unsubscribe anytime. Your guide arrives within minutes.</p>
+      </form>
+
+      <!-- Confirmation state, revealed after successful submit -->
+      <div class="confirm" id="fgConfirm" aria-live="polite">
+        <div class="confirm-check" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h3>Check your email!</h3>
+        <p>Your free 7-Day Ball Mastery Challenge is on its way. Look for a message from <b>jogaplusacademy@gmail.com</b> &mdash; check spam if you don't see it within a few minutes.</p>
+        <a href="https://wa.me/15745361983?text=Hi%20Joga%2B%20%E2%80%94%20I%20just%20requested%20the%20free%20Ball%20Mastery%20guide.%20Excited%20to%20get%20started!" target="_blank" rel="noopener noreferrer" class="btn-cta">Message us on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Trust -->
+  <p class="trust-line">Trusted by players and parents across the Joga+ community.</p>
+
+  <!-- 5. Final CTA -->
+  <section class="final-cta">
+    <h2>Get Started <em>Today.</em></h2>
+    <a href="#form-section" class="btn-cta">Get Free Guide <span class="btn-arrow">&rarr;</span></a>
+  </section>
+</div>
+
+<script src="js/joga-leads.js"></script>
+<script>
+  (function () {
+    const form    = document.getElementById('freeGuideForm');
+    const submit  = document.getElementById('fgSubmit');
+    const confirmEl = document.getElementById('fgConfirm');
+    const original = submit.textContent;
+
+    function validate() {
+      let ok = true;
+      let firstBad = null;
+      form.querySelectorAll('.field').forEach(field => {
+        field.classList.remove('error');
+        if (!field.hasAttribute('data-required')) return;
+        const type = field.dataset.validate;
+        const input = field.querySelector('input, select');
+        const v = (input.value || '').trim();
+        let bad = false;
+        if (!v) bad = true;
+        else if (type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) bad = true;
+        else if (type === 'age') {
+          const n = parseInt(v, 10);
+          if (!Number.isFinite(n) || n < 4 || n > 18) bad = true;
+        }
+        if (bad) { field.classList.add('error'); ok = false; if (!firstBad) firstBad = field; }
+      });
+      if (!ok && firstBad) firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return ok;
+    }
+
+    form.addEventListener('input', e => {
+      const f = e.target.closest('.field'); if (f) f.classList.remove('error');
+    });
+    form.addEventListener('change', e => {
+      const f = e.target.closest('.field'); if (f) f.classList.remove('error');
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate()) return;
+      submit.disabled = true; submit.textContent = 'Sending…';
+
+      const fd = new FormData(form);
+      const data = {
+        formType:   'free_guide',
+        parentName: fd.get('parentName'),
+        email:      fd.get('email'),
+        playerAge:  fd.get('playerAge'),
+        skillLevel: fd.get('skillLevel'),
+        website:    fd.get('website') || '',
+      };
+      const result = await JogaSubmit(data);
+      if (result.ok || result.mode === 'mailto') {
+        form.style.display = 'none';
+        confirmEl.classList.add('active');
+        confirmEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        submit.disabled = false;
+        submit.textContent = original;
+      }
+    });
+  })();
+</script>
+</body>
+</html>

@@ -132,6 +132,28 @@ const FORM_TYPES = {
     }),
   },
 
+  free_guide: {
+    sheet: 'Free Guide Downloads',
+    headers: [
+      'Submitted At', 'Parent Name', 'Email', 'Player Age', 'Skill Level',
+      'Source', 'Referrer', 'UTM',
+    ],
+    row: (d, t) => [
+      t, d.parentName || d.name || '', d.email || '', d.playerAge || '',
+      d.skillLevel || '', d.source || '', d.referrer || '', d.utm || '',
+    ],
+    subject: d => `New Free Guide Download — ${d.parentName || d.name || 'Lead'}${d.playerAge ? ' (player age ' + d.playerAge + ')' : ''}`,
+    master: d => ({
+      name: d.parentName || d.name || '',
+      sport: 'Soccer',
+      level: d.skillLevel || '',
+      goal: 'Free Ball Mastery Guide download',
+      location: '',
+      availability: '',
+      notes: d.playerAge ? `Player age: ${d.playerAge}` : '',
+    }),
+  },
+
   footvolley_apply: {
     sheet: 'Footvolley Apply',
     headers: [
