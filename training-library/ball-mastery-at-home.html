@@ -524,6 +524,17 @@
   </footer>
 
   <script>
+    // Fade-up scroll reveal — matches the rest of the site
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.getElementById('mobileMenu');
     if (menuToggle && mobileMenu) {
