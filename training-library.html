@@ -54,6 +54,13 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 0 80px rgba(197,247,58,0.08) inset;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+    }
+    @media (max-width: 720px) {
+      .featured-free { grid-template-columns: 1fr; gap: 2rem; }
     }
     .featured-free::before {
       content: 'FREE';
@@ -68,6 +75,7 @@
       letter-spacing: 0.18em;
       padding: 6px 14px;
       border-radius: 100px;
+      z-index: 2;
     }
     .featured-free h2 {
       font-family: 'Space Grotesk', sans-serif;
@@ -76,15 +84,124 @@
       letter-spacing: -0.02em;
       line-height: 1.1;
       margin-bottom: 1rem;
-      max-width: 540px;
     }
     .featured-free h2 .accent { color: #C5F73A; }
     .featured-free p {
-      max-width: 560px;
       color: rgba(255,255,255,0.65);
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
       font-size: 1rem;
     }
+    .featured-free-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.75rem;
+      display: grid;
+      gap: 8px;
+    }
+    .featured-free-bullets li {
+      position: relative;
+      padding-left: 28px;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.9375rem;
+    }
+    .featured-free-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(197,247,58,0.15);
+      border: 1px solid #C5F73A;
+    }
+    .featured-free-bullets li::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: calc(50% - 3px);
+      width: 9px;
+      height: 4px;
+      border-left: 2px solid #C5F73A;
+      border-bottom: 2px solid #C5F73A;
+      transform: rotate(-45deg);
+    }
+
+    /* Ebook cover mockup */
+    .ebook-mockup {
+      perspective: 1200px;
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+    .ebook-cover {
+      width: 100%;
+      max-width: 260px;
+      aspect-ratio: 3 / 4;
+      background:
+        linear-gradient(135deg, #0a0a0a, #1a1a1a 60%, #0a0a0a);
+      border-radius: 6px 14px 14px 6px;
+      box-shadow:
+        0 30px 70px rgba(0,0,0,0.6),
+        0 0 80px rgba(197,247,58,0.18),
+        -8px 0 0 0 rgba(0,0,0,0.35);
+      transform: rotateY(-14deg) rotateX(2deg);
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .ebook-cover:hover { transform: rotateY(-6deg) rotateX(0deg) translateY(-4px); }
+    .ebook-cover::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #C5F73A, transparent 60%);
+    }
+    .ebook-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(300px 200px at 30% 20%, rgba(197,247,58,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .ebook-eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C5F73A;
+      font-weight: 700;
+    }
+    .ebook-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: #fff;
+    }
+    .ebook-title small {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+    .ebook-footer {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .ebook-footer span { color: #C5F73A; }
 
     .tl-card-tag {
       display: inline-block;
@@ -113,35 +230,67 @@
     }
 
     .bundle-card {
-      background: #0e0e0e;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: clamp(2rem, 5vw, 3.5rem);
+      background:
+        radial-gradient(900px 400px at 50% 0%, rgba(197,247,58,0.08), transparent 65%),
+        linear-gradient(180deg, #0f0f0f, #050505);
+      border: 1px solid rgba(197,247,58,0.25);
+      border-radius: 28px;
+      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.75rem, 5vw, 3.5rem);
       text-align: center;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.5), 0 0 80px rgba(197,247,58,0.06);
     }
-    .bundle-card::before {
+    .bundle-card::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(700px 280px at 50% 0%, rgba(197,247,58,0.06), transparent 70%);
-      pointer-events: none;
+      top: -1px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C5F73A, transparent);
+      opacity: 0.6;
     }
     .bundle-card h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(28px, 4.5vw, 40px);
+      font-size: clamp(32px, 5vw, 48px);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
       margin-bottom: 1rem;
     }
     .bundle-card h2 .accent { color: #C5F73A; }
     .bundle-card p {
       max-width: 560px;
-      margin: 0 auto 1.75rem;
-      color: rgba(255,255,255,0.6);
-      font-size: 1rem;
+      margin: 0 auto 2rem;
+      color: rgba(255,255,255,0.65);
+      font-size: 1.0625rem;
+    }
+    .bundle-sports {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 0 auto 2.25rem;
+    }
+    .bundle-sport {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      background: rgba(255,255,255,0.02);
+      color: #fff;
+    }
+    .bundle-sport::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #C5F73A;
+      box-shadow: 0 0 12px #C5F73A;
     }
 
     .testimonial-grid {
@@ -187,19 +336,89 @@
       margin-top: 2px;
     }
 
+    /* FAQ accordion */
+    .faq-accordion {
+      max-width: 760px;
+      margin: 2.5rem auto 0;
+      display: grid;
+      gap: 12px;
+    }
+    .faq-item {
+      background: #0e0e0e;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .faq-item[open] {
+      border-color: rgba(197,247,58,0.35);
+      background: rgba(197,247,58,0.03);
+    }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      color: #fff;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '';
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
+        linear-gradient(currentColor, currentColor) center / 1.5px 12px no-repeat;
+      color: rgba(255,255,255,0.6);
+      transition: transform 0.25s, color 0.25s, border-color 0.25s, background-color 0.25s;
+    }
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+      color: #000;
+      background-color: #C5F73A;
+      border-color: #C5F73A;
+    }
+    .faq-item .faq-answer {
+      padding: 0 22px 20px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
     .final-cta-tl {
       text-align: center;
-      padding: 5rem 0;
-      background: linear-gradient(180deg, transparent, rgba(197,247,58,0.04));
+      padding: clamp(5rem, 10vw, 8rem) 0;
+      background:
+        radial-gradient(700px 350px at 50% 50%, rgba(197,247,58,0.08), transparent 70%),
+        linear-gradient(180deg, transparent, rgba(197,247,58,0.04));
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
     .final-cta-tl h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: clamp(40px, 7vw, 72px);
       font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.75rem;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      margin-bottom: 1rem;
     }
     .final-cta-tl h2 .accent { color: #C5F73A; }
+    .final-cta-tl .final-cta-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      margin: 0 auto 2.25rem;
+      max-width: 540px;
+    }
 
     @media (max-width: 540px) {
       .tl-hero { padding: 6rem 0 3.5rem; }
@@ -263,10 +482,30 @@
   <section style="padding: 2rem 0 5rem;">
     <div class="container">
       <div class="featured-free fade-up">
-        <span class="tl-card-tag">Free Download</span>
-        <h2>Free 7-Day <span class="accent">Ball Mastery</span> Challenge</h2>
-        <p>A simple program to help players improve control, coordination, and confidence in just 10 minutes a day. Drills, daily goals, and a progress tracker &mdash; sent straight to your inbox.</p>
-        <a href="/free-ball-mastery-guide" class="btn btn-primary">Get Free Guide</a>
+        <div>
+          <span class="tl-card-tag">Free Download</span>
+          <h2>Free 7-Day <span class="accent">Ball Mastery</span> Challenge</h2>
+          <p>A simple daily program designed to help players improve control, coordination, confidence, and consistency in just 10 minutes per day.</p>
+          <ul class="featured-free-bullets">
+            <li>Beginner friendly</li>
+            <li>Home training</li>
+            <li>Parent approved</li>
+            <li>No expensive equipment needed</li>
+          </ul>
+          <a href="/free-ball-mastery-guide" class="btn btn-primary">Get Free Guide</a>
+        </div>
+        <div class="ebook-mockup" aria-hidden="true">
+          <div class="ebook-cover">
+            <div>
+              <div class="ebook-eyebrow">Joga+ &middot; Free Guide</div>
+              <div class="ebook-title" style="margin-top: 1rem;">
+                7-Day<br>Ball Mastery<br>Challenge
+                <small>Ages 8&ndash;14 &middot; 10 min / day</small>
+              </div>
+            </div>
+            <div class="ebook-footer">Built by Joga+ <span>&divide;</span> coaches</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -309,6 +548,15 @@
           <span class="btn btn-sm btn-disabled">Coming Soon</span>
         </div>
 
+        <!-- Card 4: Coming soon -->
+        <div class="program-card fade-up">
+          <div class="program-number">04</div>
+          <span class="tl-card-tag muted">Coming Soon</span>
+          <h3>Tennis Footwork &amp; Solo Training</h3>
+          <p>Build the footwork and reaction speed that separate solid juniors from competitive players. Court-based drills you can run alone with a wall or hopper.</p>
+          <span class="btn btn-sm btn-disabled">Coming Soon</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -319,7 +567,12 @@
       <div class="bundle-card fade-up">
         <span class="tl-card-tag">Best Value</span>
         <h2>Complete <span class="accent">Joga+ Training</span> Pack</h2>
-        <p>Combine multiple guides to build a full development routine. Ball mastery + speed work + cross-training across surfaces &mdash; one library, one cohesive plan.</p>
+        <p>Combine soccer, footvolley, and tennis training systems into one complete athlete development package.</p>
+        <div class="bundle-sports">
+          <span class="bundle-sport">Soccer</span>
+          <span class="bundle-sport">Footvolley</span>
+          <span class="bundle-sport">Tennis</span>
+        </div>
         <span class="btn btn-disabled">Coming Soon</span>
       </div>
     </div>
@@ -363,23 +616,23 @@
         <h2 class="section-title">Common <span class="accent">Questions.</span></h2>
       </div>
 
-      <div class="faq-grid faq-grid-expanded">
-        <div class="faq-card fade-up">
-          <h3>Who are these guides for?</h3>
-          <p>Youth athletes ages 8&ndash;18 (and motivated adults). Whether you&rsquo;re new to a sport or playing competitively, the guides scale to your level. Parents can follow along too &mdash; many do.</p>
-        </div>
-        <div class="faq-card fade-up">
-          <h3>Do I need special equipment?</h3>
-          <p>No. A ball, sneakers, and a small space are enough for most drills. Anything optional (cones, agility ladder, wall) is called out clearly so you can substitute household items.</p>
-        </div>
-        <div class="faq-card fade-up">
-          <h3>Can parents follow this?</h3>
-          <p>Yes &mdash; the guides are written in plain language with step-by-step demos. Parents who&rsquo;ve never coached have used them to run sessions with their kids.</p>
-        </div>
-        <div class="faq-card fade-up">
-          <h3>How do I receive the ebook?</h3>
-          <p>Instantly. After checkout you&rsquo;ll get a PDF download link by email plus access to any video drill demos. Read on phone, tablet, laptop, or print it.</p>
-        </div>
+      <div class="faq-accordion">
+        <details class="faq-item fade-up">
+          <summary>Who are these guides for?</summary>
+          <div class="faq-answer">Youth athletes ages 8&ndash;18 (and motivated adults). Whether you&rsquo;re new to a sport or playing competitively, the guides scale to your level. Parents can follow along too &mdash; many do.</div>
+        </details>
+        <details class="faq-item fade-up">
+          <summary>Do I need special equipment?</summary>
+          <div class="faq-answer">No. A ball, sneakers, and a small space are enough for most drills. Anything optional (cones, agility ladder, wall) is called out clearly so you can substitute household items.</div>
+        </details>
+        <details class="faq-item fade-up">
+          <summary>Can parents follow this?</summary>
+          <div class="faq-answer">Yes &mdash; the guides are written in plain language with step-by-step demos. Parents who&rsquo;ve never coached have used them to run sessions with their kids.</div>
+        </details>
+        <details class="faq-item fade-up">
+          <summary>How do I receive the ebook?</summary>
+          <div class="faq-answer">Instantly. After checkout you&rsquo;ll get a PDF download link by email plus access to any video drill demos. Read on phone, tablet, laptop, or print it.</div>
+        </details>
       </div>
     </div>
   </section>
@@ -388,7 +641,8 @@
   <section class="final-cta-tl">
     <div class="container">
       <h2 class="fade-up">Start Training <span class="accent">Smarter</span> Today.</h2>
-      <a href="#products" class="btn btn-primary fade-up">Get Your First Guide</a>
+      <p class="final-cta-sub fade-up">Train with purpose. Improve with structure.</p>
+      <a href="#products" class="btn btn-primary fade-up">Explore Guides</a>
     </div>
   </section>
 
