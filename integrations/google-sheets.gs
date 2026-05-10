@@ -22,6 +22,17 @@
 
 const NOTIFY_EMAIL = 'jogaplusacademy@gmail.com';
 
+// Master "All Leads" tab — every submission, regardless of which form, also lands here
+// with normalized columns so the owner sees one unified pipeline. Status is a dropdown.
+const LEADS_MASTER_TAB = 'All Leads';
+const LEADS_HEADERS = [
+  'Submitted At', 'Name', 'Phone', 'Email',
+  'Sport', 'Level', 'Goal', 'Location', 'Availability',
+  'Source Form', 'Page', 'Referrer', 'UTM',
+  'Notes', 'Status', 'Last Contact',
+];
+const LEADS_STATUS_OPTIONS = ['New', 'Contacted', 'Trial Booked', 'Joined', 'Lost'];
+
 // Sessions tab — drives the live pickup schedule on /pickup-booking-*.html.
 // Owner edits this tab in the sheet; pages fetch via doGet({action:'sessions',audience:...}).
 const SESSIONS_TAB = 'Sessions';
@@ -57,6 +68,15 @@ const FORM_TYPES = {
       d.consent ? 'Yes' : 'No', d.source || '', d.referrer || '', d.utm || '',
     ],
     subject: d => `New JOGA+ application — ${d.athleteName || 'Athlete'} (${d.sport || 'sport TBD'})`,
+    master: d => ({
+      name: d.athleteName || '',
+      sport: d.sport || '',
+      level: d.level || '',
+      goal: (d.goals || []).join(', '),
+      location: d.location || '',
+      availability: (d.availability || []).join(', '),
+      notes: d.notes || '',
+    }),
   },
 
   training_plan: {
@@ -70,6 +90,15 @@ const FORM_TYPES = {
       d.goal || '', d.phone || '', d.source || '', d.referrer || '',
     ],
     subject: d => `New Training Plan Request — ${d.name || 'Lead'} (${d.sport || 'sport TBD'})`,
+    master: d => ({
+      name: d.name || '',
+      sport: d.sport || '',
+      level: d.skill_level || '',
+      goal: d.goal || '',
+      location: '',
+      availability: '',
+      notes: d.athlete_age ? `Athlete age: ${d.athlete_age}` : '',
+    }),
   },
 
   booking: {
@@ -89,6 +118,18 @@ const FORM_TYPES = {
       d.goal || '', d.type || '', d.notes || '', d.source || '',
     ],
     subject: d => `New Booking — ${d.full_name || d.athlete_name || 'Lead'} (${d.program || 'program TBD'})`,
+    master: d => ({
+      name: d.athlete_name || d.full_name || '',
+      sport: d.program || '',
+      level: d.level || '',
+      goal: d.goal || d.tennis_goal || '',
+      location: '',
+      availability: '',
+      notes: [d.notes, d.position && `Position: ${d.position}`, d.team && `Team: ${d.team}`,
+              d.footvolley_experience && `FV exp: ${d.footvolley_experience}`,
+              d.tennis_experience && `Tennis exp: ${d.tennis_experience}`,
+              d.type && `Type: ${d.type}`].filter(Boolean).join(' | '),
+    }),
   },
 
   footvolley_apply: {
@@ -106,6 +147,15 @@ const FORM_TYPES = {
       d.notes || '', d.source || '', d.referrer || '', d.utm || '',
     ],
     subject: d => `New Footvolley Apply — ${d.name || 'Lead'}${d.skillLevel ? ' (' + d.skillLevel + ')' : ''}`,
+    master: d => ({
+      name: d.name || '',
+      sport: 'Footvolley',
+      level: d.skillLevel || '',
+      goal: d.playedBefore ? `Footvolley flyer (played before: ${d.playedBefore})` : 'Footvolley flyer',
+      location: d.location || '',
+      availability: (d.availability || []).join(', '),
+      notes: d.notes || '',
+    }),
   },
 
   pickup: {
@@ -143,6 +193,21 @@ const FORM_TYPES = {
       const when = [d.sessionDate, d.sessionTime].filter(Boolean).join(' ');
       return `New Pickup Reservation — ${who} (${d.sessionSport || d.sportSelected || 'sport TBD'}${when ? ', ' + when : ''})`;
     },
+    master: d => {
+      const isKids = d.flow === 'kids';
+      const first  = isKids ? d.childFirst : d.firstName;
+      const last   = isKids ? d.childLast  : d.lastName;
+      const name   = [first, last].filter(Boolean).join(' ');
+      return {
+        name: name + (isKids && d.parentFirst ? ` (parent: ${d.parentFirst} ${d.parentLast || ''})` : ''),
+        sport: d.sessionSport || d.sportSelected || '',
+        level: d.level || '',
+        goal: 'Pickup session',
+        location: d.sessionLocation || '',
+        availability: [d.sessionDate, d.sessionTime].filter(Boolean).join(' · '),
+        notes: d.notes || '',
+      };
+    },
   },
 };
 
@@ -165,6 +230,7 @@ function doPost(e) {
     const sheet = getOrCreateSheet_(meta.sheet, meta.headers);
     sheet.appendRow(meta.row(data, submittedAt));
 
+    appendToMasterLeads_(formType, meta, data, submittedAt);
     sendOwnerAlert_(meta, data, submittedAt);
 
     return jsonOut_({ ok: true, formType: formType });
@@ -230,6 +296,50 @@ function sendOwnerAlert_(meta, data, submittedAt) {
   } catch (err) {
     console.error('Email alert failed: ' + err);
   }
+}
+
+function appendToMasterLeads_(formType, meta, data, submittedAt) {
+  try {
+    const m = meta.master ? meta.master(data) : {};
+    const phone = data.phone || data.parentPhone || '';
+    const email = data.email || data.parentEmail || '';
+    const sheet = getOrCreateLeadsMasterSheet_();
+    sheet.appendRow([
+      submittedAt,
+      m.name || '', phone, email,
+      m.sport || '', m.level || '', m.goal || '',
+      m.location || '', m.availability || '',
+      formType, data.source || '', data.referrer || '', data.utm || '',
+      m.notes || '', 'New', '',
+    ]);
+  } catch (err) {
+    console.error('Master leads append failed: ' + err);
+  }
+}
+
+function getOrCreateLeadsMasterSheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(LEADS_MASTER_TAB);
+  if (!sheet) {
+    sheet = ss.insertSheet(LEADS_MASTER_TAB, 0);  // pinned as the leftmost (first) tab
+    sheet.appendRow(LEADS_HEADERS);
+    sheet.getRange(1, 1, 1, LEADS_HEADERS.length)
+      .setFontWeight('bold')
+      .setBackground('#000000')
+      .setFontColor('#C5F73A');
+    sheet.setFrozenRows(1);
+    sheet.setColumnWidths(1, LEADS_HEADERS.length, 150);
+
+    // Status dropdown for the next 1000 rows
+    const statusCol = LEADS_HEADERS.indexOf('Status') + 1;
+    const range = sheet.getRange(2, statusCol, 1000, 1);
+    const rule = SpreadsheetApp.newDataValidation()
+      .requireValueInList(LEADS_STATUS_OPTIONS, true)
+      .setAllowInvalid(false)
+      .build();
+    range.setDataValidation(rule);
+  }
+  return sheet;
 }
 
 function getOrCreateSheet_(name, headers) {
