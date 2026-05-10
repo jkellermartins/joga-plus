@@ -396,28 +396,126 @@
       line-height: 1.6;
     }
 
+    /* Cinematic final CTA */
     .final-cta-tl {
       text-align: center;
-      padding: clamp(5rem, 10vw, 8rem) 0;
-      background:
-        radial-gradient(700px 350px at 50% 50%, rgba(197,247,58,0.08), transparent 70%),
-        linear-gradient(180deg, transparent, rgba(197,247,58,0.04));
+      padding: clamp(6rem, 12vw, 10rem) 1.5rem;
+      position: relative;
+      overflow: hidden;
       border-top: 1px solid rgba(255,255,255,0.06);
+      background: #000;
+    }
+    .final-cta-tl::before {
+      content: '';
+      position: absolute;
+      inset: -10%;
+      background:
+        radial-gradient(600px 320px at 30% 40%, rgba(197,247,58,0.16), transparent 65%),
+        radial-gradient(700px 360px at 70% 60%, rgba(197,247,58,0.10), transparent 65%);
+      filter: blur(20px);
+      animation: ctaPulse 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .final-cta-tl::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 4px);
+      pointer-events: none;
+    }
+    @keyframes ctaPulse {
+      0%   { transform: scale(1)    translateY(0); opacity: 0.85; }
+      100% { transform: scale(1.06) translateY(-12px); opacity: 1; }
+    }
+    .final-cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .final-cta-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #C5F73A;
+      margin-bottom: 1.75rem;
+      font-weight: 600;
+    }
+    .final-cta-eyebrow::before,
+    .final-cta-eyebrow::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C5F73A, transparent);
     }
     .final-cta-tl h2 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(40px, 7vw, 72px);
+      font-size: clamp(48px, 11vw, 124px);
       font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1;
-      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 30px rgba(197,247,58,0.15),
+        0 0 80px rgba(197,247,58,0.08);
     }
     .final-cta-tl h2 .accent { color: #C5F73A; }
     .final-cta-tl .final-cta-sub {
-      color: rgba(255,255,255,0.6);
-      font-size: clamp(1rem, 1.6vw, 1.125rem);
-      margin: 0 auto 2.25rem;
-      max-width: 540px;
+      color: rgba(255,255,255,0.7);
+      font-size: clamp(1rem, 1.7vw, 1.25rem);
+      margin: 0 auto 2.75rem;
+      max-width: 560px;
+      line-height: 1.55;
+    }
+    .final-cta-actions {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .final-cta-actions .btn {
+      padding: 18px 32px;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.35s cubic-bezier(0.22,1,0.36,1),
+                  background 0.25s,
+                  color 0.25s,
+                  border-color 0.25s;
+    }
+    .final-cta-actions .btn-primary {
+      background: #C5F73A;
+      color: #000;
+      border: 1px solid #C5F73A;
+      box-shadow: 0 0 0 0 rgba(197,247,58,0);
+    }
+    .final-cta-actions .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(197,247,58,0.35), 0 0 60px rgba(197,247,58,0.2);
+    }
+    .final-cta-actions .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .final-cta-actions .btn-outline:hover {
+      transform: translateY(-3px);
+      border-color: #C5F73A;
+      color: #C5F73A;
+      background: rgba(197,247,58,0.06);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.5);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .final-cta-tl::before { animation: none; }
+      .final-cta-actions .btn { transition: none; }
+      .final-cta-actions .btn:hover { transform: none; }
     }
 
     @media (max-width: 540px) {
@@ -618,20 +716,20 @@
 
       <div class="faq-accordion">
         <details class="faq-item fade-up">
-          <summary>Who are these guides for?</summary>
-          <div class="faq-answer">Youth athletes ages 8&ndash;18 (and motivated adults). Whether you&rsquo;re new to a sport or playing competitively, the guides scale to your level. Parents can follow along too &mdash; many do.</div>
+          <summary>Who are these training guides for?</summary>
+          <div class="faq-answer">Designed for youth athletes, beginners, intermediate players, and parents looking for structured development outside of team practice.</div>
         </details>
         <details class="faq-item fade-up">
-          <summary>Do I need special equipment?</summary>
-          <div class="faq-answer">No. A ball, sneakers, and a small space are enough for most drills. Anything optional (cones, agility ladder, wall) is called out clearly so you can substitute household items.</div>
+          <summary>Do players need expensive equipment?</summary>
+          <div class="faq-answer">No. Most drills only require a ball, a few cones (or household objects), and a small training space.</div>
         </details>
         <details class="faq-item fade-up">
-          <summary>Can parents follow this?</summary>
-          <div class="faq-answer">Yes &mdash; the guides are written in plain language with step-by-step demos. Parents who&rsquo;ve never coached have used them to run sessions with their kids.</div>
+          <summary>Can parents follow the program with their kids?</summary>
+          <div class="faq-answer">Yes. The guides are written in simple language so parents can easily support and encourage players during training.</div>
         </details>
         <details class="faq-item fade-up">
           <summary>How do I receive the ebook?</summary>
-          <div class="faq-answer">Instantly. After checkout you&rsquo;ll get a PDF download link by email plus access to any video drill demos. Read on phone, tablet, laptop, or print it.</div>
+          <div class="faq-answer">After purchase, players receive instant access to download the guide digitally.</div>
         </details>
       </div>
     </div>
@@ -639,10 +737,14 @@
 
   <!-- ════ FINAL CTA ════ -->
   <section class="final-cta-tl">
-    <div class="container">
-      <h2 class="fade-up">Start Training <span class="accent">Smarter</span> Today.</h2>
-      <p class="final-cta-sub fade-up">Train with purpose. Improve with structure.</p>
-      <a href="#products" class="btn btn-primary fade-up">Explore Guides</a>
+    <div class="final-cta-inner">
+      <div class="final-cta-eyebrow fade-up">The Joga+ Library</div>
+      <h2 class="fade-up">Train with <span class="accent">Purpose.</span></h2>
+      <p class="final-cta-sub fade-up">Structured development systems built to help players improve with confidence, consistency, and creativity.</p>
+      <div class="final-cta-actions fade-up">
+        <a href="#products" class="btn btn-primary">Explore Guides</a>
+        <a href="apply.html" class="btn btn-outline">Apply for Training</a>
+      </div>
     </div>
   </section>
 
