@@ -91,6 +91,23 @@ const FORM_TYPES = {
     subject: d => `New Booking — ${d.full_name || d.athlete_name || 'Lead'} (${d.program || 'program TBD'})`,
   },
 
+  footvolley_apply: {
+    sheet: 'Footvolley Apply',
+    headers: [
+      'Submitted At', 'Name', 'Phone', 'Email',
+      'Played Before', 'Skill Level',
+      'Preferred Location', 'Availability',
+      'Notes', 'Source', 'Referrer', 'UTM',
+    ],
+    row: (d, t) => [
+      t, d.name || '', d.phone || '', d.email || '',
+      d.playedBefore || '', d.skillLevel || '',
+      d.location || '', (d.availability || []).join(', '),
+      d.notes || '', d.source || '', d.referrer || '', d.utm || '',
+    ],
+    subject: d => `New Footvolley Apply — ${d.name || 'Lead'}${d.skillLevel ? ' (' + d.skillLevel + ')' : ''}`,
+  },
+
   pickup: {
     sheet: 'Pickups',
     headers: [
