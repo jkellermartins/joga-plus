@@ -22,6 +22,11 @@
 
 const NOTIFY_EMAIL = 'jogaplusacademy@gmail.com';
 
+// Replace with the Google Drive shareable link for the free PDF.
+// 1. Upload the PDF to Drive → right-click → Share → "Anyone with the link" → Viewer
+// 2. Copy the link and paste below (anything starting with https://drive.google.com/...)
+const FREE_GUIDE_DOWNLOAD_URL = 'https://drive.google.com/REPLACE_WITH_YOUR_PDF_LINK';
+
 // Master "All Leads" tab — every submission, regardless of which form, also lands here
 // with normalized columns so the owner sees one unified pipeline. Status is a dropdown.
 const LEADS_MASTER_TAB = 'All Leads';
@@ -152,6 +157,32 @@ const FORM_TYPES = {
       availability: '',
       notes: d.playerAge ? `Player age: ${d.playerAge}` : '',
     }),
+    autoReply: d => {
+      if (!d.email) return null;
+      const firstName = (d.parentName || '').split(' ')[0] || 'there';
+      return {
+        to: d.email,
+        subject: 'Your Joga+ 7-Day Ball Mastery Challenge is here',
+        body: [
+          'Hi ' + firstName + ',',
+          '',
+          "Thanks for joining the Joga+ 7-Day Ball Mastery Challenge — your guide is ready.",
+          '',
+          'Download it here: ' + FREE_GUIDE_DOWNLOAD_URL,
+          '',
+          'A few tips to get the most out of it:',
+          '  • 10 minutes a day beats 2 hours once a week — show up daily',
+          '  • Same ball, same routine, same time of day if possible',
+          '  • Day 7 is a benchmark check — celebrate the wins',
+          '',
+          "Questions? Just reply to this email or message us on WhatsApp at +1 (574) 536-1983.",
+          '',
+          'Train hard.',
+          'Joga+ Academy',
+          'jogaplusacademy.com',
+        ].join('\n'),
+      };
+    },
   },
 
   footvolley_apply: {
@@ -254,6 +285,7 @@ function doPost(e) {
 
     appendToMasterLeads_(formType, meta, data, submittedAt);
     sendOwnerAlert_(meta, data, submittedAt);
+    sendAutoReply_(meta, data);
 
     return jsonOut_({ ok: true, formType: formType });
   } catch (err) {
@@ -317,6 +349,23 @@ function sendOwnerAlert_(meta, data, submittedAt) {
     MailApp.sendEmail({ to: NOTIFY_EMAIL, subject: subject, body: lines.join('\n') });
   } catch (err) {
     console.error('Email alert failed: ' + err);
+  }
+}
+
+function sendAutoReply_(meta, data) {
+  if (!meta.autoReply) return;
+  try {
+    const reply = meta.autoReply(data);
+    if (!reply || !reply.to) return;
+    MailApp.sendEmail({
+      to: reply.to,
+      subject: reply.subject,
+      body: reply.body,
+      name: 'Joga+ Academy',
+      replyTo: NOTIFY_EMAIL,
+    });
+  } catch (err) {
+    console.error('Auto-reply failed: ' + err);
   }
 }
 
