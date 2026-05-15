@@ -175,7 +175,7 @@ const FORM_TYPES = {
           '  • Same ball, same routine, same time of day if possible',
           '  • Day 7 is a benchmark check — celebrate the wins',
           '',
-          "Questions? Just reply to this email or message us on WhatsApp at +1 (574) 536-1983.",
+          "Questions? Just reply to this email or message us on WhatsApp at +1 (301) 818-1797.",
           '',
           'Train hard.',
           'Joga+ Academy',

@@ -11,7 +11,7 @@ A static website for **JOGA+ Academy**, a premium youth sports training program 
 - **GitHub repo:** `jkellermartins/joga-plus`
 - **Local repo:** `/Users/jorgeakeller/Projects/joga-plus`
 - **Owner email:** `jogaplusacademy@gmail.com`
-- **WhatsApp number used in code:** `+1 (574) 536-1983`
+- **WhatsApp number used in code:** `+1 (301) 818-1797`
 
 ## Brand system
 
