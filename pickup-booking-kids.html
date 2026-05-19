@@ -287,7 +287,7 @@
           <p>Private soccer training, footvolley lessons, and tennis coaching for youth athletes in Washington DC, Virginia, and Maryland. Trusted by 500+ athletes and families in the DMV.</p>
           <div class="footer-contact-line"><a href="tel:+13018181797">(301) 818-1797</a></div>
           <div class="footer-contact-line"><a href="mailto:info@jogaplus.com">info@jogaplus.com</a></div>
-          <div class="footer-contact-line"><a href="https://wa.me/13018181797" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+          <div class="footer-contact-line"><a href="https://wa.me/12403508760?text=Hi%20Joga%2B%2C%20I%20have%20a%20question%20about%20your%20training%20and%20pickup%20sessions." target="_blank" rel="noopener noreferrer" aria-label="Message Joga+ on WhatsApp">WhatsApp</a></div>
         </div>
         <div class="footer-col">
           <h4>Training Programs</h4>
@@ -344,7 +344,7 @@
 
     function renderSessions() {
       if (!SESSIONS.length) {
-        sessionsEl.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--gray-300);padding:2rem;">No upcoming kids&rsquo; pickups right now &mdash; new sessions are added each week. <a href="https://wa.me/13018181797" target="_blank" rel="noopener" style="color:var(--lime);">Message us on WhatsApp</a> and we&rsquo;ll let you know first.</p>`;
+        sessionsEl.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--gray-300);padding:2rem;">No upcoming kids&rsquo; pickups right now &mdash; new sessions are added each week. <a href="https://wa.me/12403508760?text=Hi%20Joga%2B%2C%20I%20have%20a%20question%20about%20your%20training%20and%20pickup%20sessions." target="_blank" rel="noopener noreferrer" aria-label="Message Joga+ on WhatsApp" style="color:var(--lime);">Message us on WhatsApp</a> and we&rsquo;ll let you know first.</p>`;
         return;
       }
       sessionsEl.innerHTML = SESSIONS.map((s) => {
@@ -466,7 +466,7 @@
 
       // WhatsApp CTA
       const waMsg = `Hi Joga+ — I just reserved the ${selectedSession.sport} pickup for my kid in ${selectedSession.location} on ${selectedSession.day}, ${selectedSession.date} at ${selectedSession.time}. Parent: ${document.getElementById("parentFirst").value} ${document.getElementById("parentLast").value}. Athlete: ${document.getElementById("childFirst").value}.`;
-      document.getElementById("pbWaConfirm").href = "https://wa.me/13018181797?text=" + encodeURIComponent(waMsg);
+      document.getElementById("pbWaConfirm").href = "https://wa.me/12403508760?text=" + encodeURIComponent(waMsg);
 
       document.getElementById("pbSummaryText3").textContent =
         `${selectedSession.sport} · ${selectedSession.location} · ${selectedSession.day} ${selectedSession.date}`;
