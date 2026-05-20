@@ -20,7 +20,7 @@
  * That's deliberate — it skips the CORS preflight Apps Script Web Apps reject.
  */
 
-const NOTIFY_EMAIL = 'jogaplusacademy@gmail.com';
+const NOTIFY_EMAIL = 'Operations@jogaplusacademy.com';
 
 // Replace with the Google Drive shareable link for the free PDF.
 // 1. Upload the PDF to Drive → right-click → Share → "Anyone with the link" → Viewer

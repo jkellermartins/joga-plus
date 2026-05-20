@@ -13,7 +13,7 @@
  */
 (function () {
   const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyAeH6UsViMaJF42DrZnR_ebT4vgjhx0xAVX-KIsAji4LdpVj9aM-nGWipS2KRpb3XL/exec';
-  const LEADS_EMAIL = 'jogaplusacademy@gmail.com';
+  const LEADS_EMAIL = 'Operations@jogaplusacademy.com';
   const ARCHIVE_KEY = 'joga_apply_submissions';
 
   function archive(payload) {

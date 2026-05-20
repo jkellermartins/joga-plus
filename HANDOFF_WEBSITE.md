@@ -16,7 +16,7 @@ You're picking up the JOGA+ Academy lead-capture system. The lead form is built 
 ## What's already done
 
 - `apply.html` — premium 4-step application form, brand-styled (black + lime `#C5F73A`, Space Grotesk + Inter), mobile-first, multi-sport (Soccer / Footvolley / Tennis / Multi-sport)
-- `integrations/google-sheets.gs` — Apps Script webhook, **deployed and live**, with email alerts to `jogaplusacademy@gmail.com` on every submission and a honeypot field for spam protection
+- `integrations/google-sheets.gs` — Apps Script webhook, **deployed and live**, with email alerts to `Operations@jogaplusacademy.com` on every submission and a honeypot field for spam protection
 - Webhook URL is wired into `apply.html` → `CONFIG.submitEndpoint` (Google Apps Script `/exec` endpoint)
 - First test submission lands a row in the "JOGA+ Applications" Google Sheet → Applications tab ✅
 - Logo: `images/joga-plus-logo.png`
@@ -47,7 +47,7 @@ The site `jogaplusacademy.com` is **hosted on Vercel** with auto-deploy from the
 
 6. **Verify the live site:**
    - `https://jogaplusacademy.com/apply` loads correctly
-   - Submit a real test — confirm a row lands in the Google Sheet AND an email alert arrives at `jogaplusacademy@gmail.com`
+   - Submit a real test — confirm a row lands in the Google Sheet AND an email alert arrives at `Operations@jogaplusacademy.com`
    - Test on mobile (most users will arrive via WhatsApp link)
 
 7. **Generate a QR code image** pointing at `https://jogaplusacademy.com/apply` and save it to `images/qr-apply.png`. The user wants it for printed flyers and IG stories. Use any reliable method — `qrencode` CLI if available (`brew install qrencode`), or Python's `qrcode` lib.

@@ -10,7 +10,7 @@ A static website for **JOGA+ Academy**, a premium youth sports training program 
 - **Host:** Vercel (auto-deploys from GitHub `main` branch)
 - **GitHub repo:** `jkellermartins/joga-plus`
 - **Local repo:** `/Users/jorgeakeller/Projects/joga-plus`
-- **Owner email:** `jogaplusacademy@gmail.com`
+- **Owner email:** `Operations@jogaplusacademy.com`
 - **WhatsApp number used in code:** `+1 (301) 818-1797`
 
 ## Brand system
@@ -49,7 +49,7 @@ apply.html  ──POST(JSON, text/plain)──▶  Google Apps Script Web App  �
 - **Webhook URL** (set in `apply.html` → `CONFIG.submitEndpoint`):
   `https://script.google.com/macros/s/AKfycbyAeH6UsViMaJF42DrZnR_ebT4vgjhx0xAVX-KIsAji4LdpVj9aM-nGWipS2KRpb3XL/exec`
 - **Why `text/plain`:** Apps Script Web Apps reject the CORS preflight that `application/json` triggers. The script reads `e.postData.contents` as the JSON body either way. Don't change this.
-- **Mailto fallback:** `apply.html` opens a pre-filled `mailto:info@jogaplus.com` if the endpoint fails.
+- **Mailto fallback:** `apply.html` opens a pre-filled `mailto:Operations@jogaplusacademy.com` if the endpoint fails.
 - **Local archive:** Each submission also stored in `localStorage` (rolling last 50) under key `joga_apply_submissions` — viewable via `admin-leads.html`.
 
 ### Form field schema (source of truth: `apply.html`)

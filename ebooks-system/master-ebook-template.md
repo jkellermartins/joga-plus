@@ -298,7 +298,7 @@ You did that. Now do it again. Sharper. Faster. With more intention.
 
 Follow: **@jogaplusacademy**
 Web: **jogaplusacademy.com**
-Contact: **jogaplusacademy@gmail.com**
+Contact: **Operations@jogaplusacademy.com**
 
 ---
 
